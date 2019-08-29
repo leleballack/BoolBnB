@@ -19,7 +19,6 @@ class CreateMessagesTable extends Migration
             $table->string('email', 255); 
             $table->text('message_content', 2000); 
             $table->timestamps();
-            // commento
             $table->foreign('apart_id')->references('id')->on('apartaments')->onDelete('cascade'); 
         });
     }

@@ -18,7 +18,8 @@ class CreateSponsortypesTable extends Migration
             $table->string('description', 255);
             $table->string('price', 10);
             // numero di ore della sponsorizzazione 
-            $table->tinyInteger('time_length');
+            $table->string('time_length');
+            $table->timestamps();
         });
     }
 

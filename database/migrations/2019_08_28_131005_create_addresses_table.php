@@ -13,7 +13,7 @@ class CreateAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('addresses', function (Blueprint $table) {
+        Schema::create('addresses', function (Blueprint $table) { 
             $table->bigIncrements('id');
             $table->string('street_name', 255);
             $table->string('street_number', 10); 
