@@ -14,6 +14,9 @@
                         </div>
                     @endif
 
+                    <a href='{{ route('admin.index') }}'>Ciao a tutti</a>
+
+
                     You are logged in!
                 </div>
             </div>

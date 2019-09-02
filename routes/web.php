@@ -20,3 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/apartaments', 'ApartamentController');
 
+Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')->group(function(){
+  Route::get('/userapt', 'ApartamentController@index')->name('index');
+  Route::get('/newapt', 'ApartamentController@create')->name('create');
+
+});
