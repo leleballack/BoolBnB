@@ -1,3 +1,3 @@
 @php
-    dd($apartaments); 
+    dd($new_apt);
 @endphp

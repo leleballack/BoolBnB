@@ -5,17 +5,14 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Apartament;
 use App\Service;
 
 
 class ApartamentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
       $user_id = Auth::user()->id;
@@ -25,69 +22,54 @@ class ApartamentController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
+      $services = Service::all();
       return view('admin.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $new_apt = new Apartament();
+        $new_apt->title = $data["title"];
+        $new_apt->total_rooms = $data["rooms"];
+        $new_apt->total_beds = $data["beds"];
+        $new_apt->total_baths = $data["baths"];
+        $new_apt->square_meters = $data["square_mt"];
+        $new_apt->user_id = Auth::user()->id;
+        $new_apt->visible = 1;
+        $photo = Storage::put("apt_pic", $data["apt_pic"]);
+        $new_apt->image_url = $photo;
+        $new_apt->save();
+
+
+
+
+
+        return dd($data);
+
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
     }
+
 }

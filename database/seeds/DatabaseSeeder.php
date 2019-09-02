@@ -17,6 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ServicesTableSeeder::class);
         $this->call(ApartamentServiceTableSeeder::class);
         $this->call(SponsortypesTableSeeder::class);
-        $this->call(AddressesTableSeeder::class);
+        // $this->call(AddressesTableSeeder::class);
     }
 }
