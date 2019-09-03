@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Apartament;
+use App\Service;
+use App\Message;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class ApartamentController extends Controller
@@ -14,9 +17,9 @@ class ApartamentController extends Controller
      */
     public function index()
     {
-        $apartaments = Apartament::all(); 
-        // return view('welcome', compact('apartments'));  
-        return view('apartaments.index')->with('apartaments', $apartaments); 
+        $apartaments = Apartament::all();
+        // return view('welcome', compact('apartments'));
+        return view('apartaments.index')->with('apartaments', $apartaments);
     }
 
     /**
@@ -46,9 +49,12 @@ class ApartamentController extends Controller
      * @param  \App\Apartament  $apartament
      * @return \Illuminate\Http\Response
      */
-    public function show(Apartament $apartament)
+    public function show($id)
     {
-        //
+        $apartament = Apartament::findOrFail($id);
+        $services  = Service::all();
+        
+        return view('apartaments.show', compact('apartament', 'services'));
     }
 
     /**
@@ -62,13 +68,7 @@ class ApartamentController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Apartament  $apartament
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Apartament $apartament)
     {
         //
