@@ -29,7 +29,7 @@ class Apartament extends Model
 
     public function services()
     {
-        return $this->belongsToMany('Service');
+        return $this->belongsToMany('App\Service');
     }
 
     public function sponsors()

@@ -94,6 +94,9 @@
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
 
+                {{-- @php
+                    dd( Auth::user() );
+                @endphp --}}
             </div>
         </div>
     </body>

@@ -9,6 +9,6 @@ class Service extends Model
 {
     public function apartaments()
     {
-        return $this->belongsToMany('Apartament');
+        return $this->belongsToMany('App\Apartament');
     }
 }
