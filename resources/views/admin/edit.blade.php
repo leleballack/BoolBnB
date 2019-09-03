@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@section('scripts')
+  <!-- Scripts -->
+  <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-js/4.47.6/examples/sdk/map.css'/>
+  <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-js/4.47.6/examples/elements.css'/>
+  <script src='https://api.tomtom.com/maps-sdk-js/4.47.6/examples/js/form.js'></script>
+  <script src='https://api.tomtom.com/maps-sdk-js/4.47.6/examples/sdk/tomtom.min.js'></script>
+  <script src="{{ asset('js/editAptMap.js') }}" defer></script>
+@endsection
+
 @section ('content')
 
 <div class="container">
