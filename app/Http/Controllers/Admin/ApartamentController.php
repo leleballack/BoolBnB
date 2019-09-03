@@ -40,21 +40,24 @@ class ApartamentController extends Controller
         $new_apt->square_meters = $data["square_mt"];
         $new_apt->visible = 1;
         $photo = Storage::put("apt_pic", $data["apt_pic"]);
-        $new_apt->image_url = $photo; 
-        $new_apt->address = $data["address"]; 
-        $new_apt->long = $data["long"]; 
-        $new_apt->lat = $data["lat"]; 
+        $new_apt->image_url = $photo;
+        $new_apt->address = $data["address"];
+        $new_apt->long = $data["long"];
+        $new_apt->lat = $data["lat"];
+
 
         $new_apt->save();
 
+        $new_apt->services()->sync( $data['services'] );
+
         // return dd($new_apt->services());
-        $new_apt->services()->sync( $data['services'] ); 
 
 
 
 
 
-        return dd($data);
+
+        return dd($new_apt);
 
 
     }
@@ -66,8 +69,8 @@ class ApartamentController extends Controller
 
     public function edit($id)
     {
-        $apartament = Apartament::find($id); 
-        $services = Service::all(); 
+        $apartament = Apartament::find($id);
+        $services = Service::all();
         return view('admin.edit', compact('apartament', 'services'));
     }
 
@@ -84,19 +87,19 @@ class ApartamentController extends Controller
         $upd_apt->square_meters = $data["square_mt"];
         $upd_apt->visible = 1;
         $photo = Storage::put("apt_pic", $data["apt_pic"]);
-        $upd_apt->image_url = $photo; 
-        $upd_apt->address = $data["address"]; 
-        $upd_apt->long = $data["long"]; 
-        $upd_apt->lat = $data["lat"]; 
+        $upd_apt->image_url = $photo;
+        $upd_apt->address = $data["address"];
+        $upd_apt->long = $data["long"];
+        $upd_apt->lat = $data["lat"];
 
         $upd_apt->update();
 
-        $upd_apt->services()->sync( $data['services'] ); 
+        $upd_apt->services()->sync( $data['services'] );
     }
 
     public function destroy($id)
     {
-        $aptToDelete = Apartament::find($id)->delete(); 
+        $aptToDelete = Apartament::find($id)->delete();
         return redirect()->route('admin.apt.index');
     }
 
