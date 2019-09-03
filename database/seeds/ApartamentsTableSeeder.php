@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Faker\Factory as Faker; 
-use Illuminate\Support\Str; 
+use Faker\Factory as Faker;
+use Illuminate\Support\Str;
 use App\Apartament;
 
 class ApartamentsTableSeeder extends Seeder
@@ -14,12 +14,12 @@ class ApartamentsTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create(); 
+        $faker = Faker::create();
 
         for ( $i = 0; $i < 30; $i++ ) {
             $apart = new Apartament();
-            
-            $apart->title = $faker->sentence(7); 
+
+            $apart->title = $faker->sentence(7);
             $apart->total_rooms = rand(1, 4);
             $apart->total_beds = rand(2, 8);
             $apart->total_baths = rand(1, 2);

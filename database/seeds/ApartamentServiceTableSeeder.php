@@ -22,7 +22,7 @@ class ApartamentServiceTableSeeder extends Seeder
         for($i=1; $i <= 30; $i++) {
 
             DB::table('apartament_service')->insert([
-                'apart_id' => $faker->randomElement($apart_ids),
+                'apartament_id' => $faker->randomElement($apart_ids),
                 'service_id' => $faker->randomElement($service_ids)
             ]);
 

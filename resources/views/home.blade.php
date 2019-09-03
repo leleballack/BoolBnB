@@ -14,6 +14,10 @@
                         </div>
                     @endif
 
+                    <a href='{{ route('admin.apt.index') }}'>Vedi appartamenti</a>
+
+
+
                     You are logged in!
                 </div>
             </div>
