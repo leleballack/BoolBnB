@@ -11,8 +11,11 @@ const mix = require("laravel-mix");
  |
  */
 
-mix.js("resources/js/app.js", "public/js/app.js");
-// mix.js("resources/js/mappacreate.js", "public/js/mappacreate.js");
+mix.js("resources/js/editAptMap.js", "public/js/editAptMap.js").js(
+    "resources/js/createAptMap.js",
+    "public/js/createAptMap.js"
+);
+
 mix.sass("resources/sass/app.scss", "public/css");
 
 mix.browserSync({

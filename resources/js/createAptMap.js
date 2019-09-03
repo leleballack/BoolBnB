@@ -1,50 +1,24 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require("./bootstrap");
-
-window.Vue = require("vue");
-
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-
-Vue.component(
-    "example-component",
-    require("./components/ExampleComponent.vue").default
-);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-const app = new Vue({
-    el: "#app"
-});
 
 // mappa
 
 (function(tomtom, document) {
     // Setting TomTom keys
     tomtom.searchKey("z4n3yxl4X8bvK1BA6YlSAaYcV7OTbkZc");
+
     // Creating map
     var map = tomtom.L.map("map", {
         key: "z4n3yxl4X8bvK1BA6YlSAaYcV7OTbkZc",
         source: "vector",
-        basePath: "https://api.tomtom.com/maps-sdk-js/4.47.6/examples/sdk"
+        basePath: "https://api.tomtom.com/maps-sdk-js/4.47.6/examples/sdk",
+        vector: {
+            fallback: "raster"
+        },
+        center: [41.894802, 12.485338], // Rome coords as center
+        zoom: 6,
+        language: "it-IT"
     });
+
     var controlPanel = tomtom
         .controlPanel({
             position: "bottomright",
@@ -64,7 +38,8 @@ const app = new Vue({
         .searchBox({
             position: "topright",
             imperialDistance: unitSelector.value === "imperial", // FALSE by default
-            serviceOptions: { unwrapBbox: true }
+            serviceOptions: { unwrapBbox: true },
+            language: "it-IT"
         })
         .addTo(map);
 
@@ -76,12 +51,9 @@ const app = new Vue({
         var lon = document.querySelector("#long");
         var addr = document.querySelector("#address");
 
-        // console.log(lat.value);
         lat.value = eventObject.data.position.lat;
         lon.value = eventObject.data.position.lon;
         addr.value = eventObject.data.address.freeformAddress;
-
-        // console.log(eventObject.data.address.freeformAddress);
     });
 
     // Marker layer to indicate the center of the search
@@ -111,6 +83,7 @@ const app = new Vue({
             map.fitBounds(markersLayer.getBounds());
         }
     });
+
     // Draw a marker at the center of the map
     function drawSearchCenter() {
         var currentLocation = map.getCenter();
@@ -121,7 +94,8 @@ const app = new Vue({
                 "\nLongitude: " +
                 currentLocation.lng,
             icon: tomtom.L.icon({
-                iconUrl: "<your-tomtom-sdk-base-path>/../img/center_marker.svg",
+                iconUrl:
+                    "https://api.tomtom.com/maps-sdk-js/4.47.6/examples/sdk/../img/center_marker.svg",
                 iconSize: [24, 24],
                 iconAnchor: [12, 12]
             })
