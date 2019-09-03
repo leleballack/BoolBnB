@@ -5,17 +5,14 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Apartament;
 use App\Service;
 
 
 class ApartamentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
       $user_id = Auth::user()->id;
@@ -25,69 +22,85 @@ class ApartamentController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-      return view('admin.create');
+      $services = Service::all();
+      return view('admin.create', compact('services'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $new_apt = new Apartament();
+        $new_apt->user_id = Auth::user()->id;
+        $new_apt->title = $data["title"];
+        $new_apt->total_rooms = $data["rooms"];
+        $new_apt->total_beds = $data["beds"];
+        $new_apt->total_baths = $data["baths"];
+        $new_apt->square_meters = $data["square_mt"];
+        $new_apt->visible = 1;
+        $photo = Storage::put("apt_pic", $data["apt_pic"]);
+        $new_apt->image_url = $photo;
+        $new_apt->address = $data["address"];
+        $new_apt->long = $data["long"];
+        $new_apt->lat = $data["lat"];
+
+
+        $new_apt->save();
+
+        $new_apt->services()->sync( $data['services'] );
+
+        // return dd($new_apt->services());
+
+
+
+
+
+
+        return dd($new_apt);
+
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $apartament = Apartament::find($id);
+        $services = Service::all();
+        return view('admin.edit', compact('apartament', 'services'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $upd_apt = Apartament::find($id);
+
+        $upd_apt->user_id = Auth::user()->id;
+        $upd_apt->title = $data["title"];
+        $upd_apt->total_rooms = $data["rooms"];
+        $upd_apt->total_beds = $data["beds"];
+        $upd_apt->total_baths = $data["baths"];
+        $upd_apt->square_meters = $data["square_mt"];
+        $upd_apt->visible = 1;
+        $photo = Storage::put("apt_pic", $data["apt_pic"]);
+        $upd_apt->image_url = $photo;
+        $upd_apt->address = $data["address"];
+        $upd_apt->long = $data["long"];
+        $upd_apt->lat = $data["lat"];
+
+        $upd_apt->update();
+
+        $upd_apt->services()->sync( $data['services'] );
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $aptToDelete = Apartament::find($id)->delete();
+        return redirect()->route('admin.apt.index');
     }
+
 }

@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Faker\Factory as Faker; 
-use Illuminate\Support\Str; 
+use Faker\Factory as Faker;
+use Illuminate\Support\Str;
 use App\Message;
 
 class MessagesTableSeeder extends Seeder
@@ -14,14 +14,14 @@ class MessagesTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create(); 
+        $faker = Faker::create();
 
         for ( $i = 0; $i < 20; $i++ ) {
             $message = new Message();
-            
-            $message->email = $faker->email(); 
+
+            $message->email = $faker->email();
             $message->message_content = $faker->text(500);
-            $message->apart_id = rand(1, 30);
+            $message->apartament_id = rand(1, 30);
 
             $message->save();
         }

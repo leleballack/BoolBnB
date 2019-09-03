@@ -17,19 +17,19 @@ class Apartament extends Model
         return $this->belongsTo('User');
     }
 
-    public function messages() 
+    public function messages()
     {
         return $this->hasMany('Message');
     }
 
-    public function address()
-    {
-        return $this->hasOne('Address'); 
-    }
+    // public function address()
+    // {
+    //     return $this->hasOne('Address');
+    // }
 
     public function services()
     {
-        return $this->belongsToMany('Service');
+        return $this->belongsToMany('App\Service');
     }
 
     public function sponsors()

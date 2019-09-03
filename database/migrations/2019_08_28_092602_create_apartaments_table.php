@@ -15,17 +15,20 @@ class CreateApartamentsTable extends Migration
     {
         Schema::create('apartaments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id')->unsigned(); 
+            $table->bigInteger('user_id')->unsigned();
             $table->string('title', 255);
             $table->tinyInteger('total_rooms');
             $table->tinyInteger('total_beds');
             $table->tinyInteger('total_baths');
             $table->integer('square_meters');
             $table->string('image_url', 255)->nullable();
+            $table->string('address', 255)->nullable();
+            $table->decimal('long', 11, 8)->nullable();
+            $table->decimal('lat', 11, 8)->nullable();
             $table->boolean('visible');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
