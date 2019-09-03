@@ -1,5 +1,3 @@
-require("./bootstrap");
-
 // mappa
 
 (function(tomtom, document) {

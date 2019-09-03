@@ -1,6 +1,5 @@
-require("./bootstrap");
-
 // mappa
+
 $(document).ready(showPositionOnMap);
 
 var queryString = $("#address").val();
