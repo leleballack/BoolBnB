@@ -14,7 +14,8 @@ const mix = require("laravel-mix");
 mix.js("resources/js/editAptMap.js", "public/js/editAptMap.js")
     .js("resources/js/createAptMap.js", "public/js/createAptMap.js")
     .js("resources/js/app.js", "public/js/app.js")
-    .js("resources/js/publicShowAptMap.js", "public/js/publicShowAptMap.js");
+    .js("resources/js/publicShowAptMap.js", "public/js/publicShowAptMap.js")
+    .js("resources/js/aptSearch.js", "public/js/aptSearch.js");
 
 mix.sass("resources/sass/app.scss", "public/css");
 
