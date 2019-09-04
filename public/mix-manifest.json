@@ -1,8 +1,8 @@
 {
     "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
     "/js/aptSearch.js": "/js/aptSearch.js",
     "/js/createAptMap.js": "/js/createAptMap.js",
     "/js/editAptMap.js": "/js/editAptMap.js",
-    "/css/app.css": "/css/app.css",
     "/js/publicShowAptMap.js": "/js/publicShowAptMap.js"
 }

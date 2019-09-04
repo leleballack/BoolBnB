@@ -6,6 +6,7 @@
   <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-js/4.47.6/examples/elements.css'/>
   <script src='https://api.tomtom.com/maps-sdk-js/4.47.6/examples/js/form.js'></script>
   <script src='https://api.tomtom.com/maps-sdk-js/4.47.6/examples/sdk/tomtom.min.js'></script>
+  <script src="{{ asset('js/app.js') }}" defer></script>
   <script src="{{ asset('js/editAptMap.js') }}" defer></script>
 @endsection
 
