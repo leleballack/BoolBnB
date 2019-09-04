@@ -53,7 +53,13 @@
           @csrf
           <div class="form-group">
             <label for="email">Email:</label>
-            <input class="form-control" type="email" name="email" value="" placeholder="Inserisci la tua email">
+
+            @if (Auth::user() !== null)
+              <input class="form-control" type="email" name="email" value="{{ Auth::user()->email }}" placeholder="Inserisci la tua email">
+            @else
+              <input class="form-control" type="email" name="email" value="" placeholder="Inserisci la tua email">
+            @endif
+
           </div>
           <div class="form-group">
             <label for="content">Messaggio:</label>
@@ -61,7 +67,6 @@
           </div>
           <div class="form-group">
             <input type="hidden" name="id" value="{{$apartament->id}}">
-            {{-- <textarea name="id" rows="1" cols="1" readonly>{{$apartament->id}}</textarea> --}}
           </div>
           <input type="submit" name="" value="Invia Messaggio" class="btn btn-danger">
         </form>
