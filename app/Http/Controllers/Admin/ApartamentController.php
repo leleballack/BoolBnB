@@ -30,6 +30,19 @@ class ApartamentController extends Controller
 
     public function store(Request $request)
     {
+      $validator = $request->validate([
+        "title" => "required|unique:apartaments|bail|max:255",
+        "rooms" => "required|numeric|min:1",
+        "beds" => "required|numeric|min:1",
+        "baths" => "required|numeric|min:1",
+        "square_mt" => "required|numeric|min:10",
+        "apt_pic" => "required|image|max:255",
+        "address" => "required|max:255",
+        "long" => "required|numeric",
+        "lat" => "required|numeric",
+      ]);
+
+
         $data = $request->all();
         $new_apt = new Apartament();
         $new_apt->user_id = Auth::user()->id;
@@ -50,15 +63,7 @@ class ApartamentController extends Controller
 
         $new_apt->services()->sync( $data['services'] );
 
-        // return dd($new_apt->services());
-
-
-
-
-
-
-        return dd($new_apt);
-
+        return redirect()->route("admin.apt.index");
 
     }
 
@@ -76,6 +81,18 @@ class ApartamentController extends Controller
 
     public function update(Request $request, $id)
     {
+
+      $validator = $request->validate([
+        "title" => "required|max:255",
+        "rooms" => "required|numeric|min:1",
+        "beds" => "required|numeric|min:1",
+        "baths" => "required|numeric|min:1",
+        "square_mt" => "required|numeric|min:10",
+        "address" => "required|max:255",
+        "long" => "required|numeric",
+        "lat" => "required|numeric",
+      ]);
+
         $data = $request->all();
         $upd_apt = Apartament::find($id);
 
@@ -86,8 +103,10 @@ class ApartamentController extends Controller
         $upd_apt->total_baths = $data["baths"];
         $upd_apt->square_meters = $data["square_mt"];
         $upd_apt->visible = 1;
-        $photo = Storage::put("apt_pic", $data["apt_pic"]);
-        $upd_apt->image_url = $photo;
+        if(!empty($data["apt_pic"])) {
+          $photo = Storage::put("apt_pic", $data["apt_pic"]);
+          $upd_apt->image_url = $photo;
+        }
         $upd_apt->address = $data["address"];
         $upd_apt->long = $data["long"];
         $upd_apt->lat = $data["lat"];
@@ -95,6 +114,8 @@ class ApartamentController extends Controller
         $upd_apt->update();
 
         $upd_apt->services()->sync( $data['services'] );
+
+        return redirect()->route("admin.apt.index");
     }
 
     public function destroy($id)

@@ -13,6 +13,17 @@
 @section ('content')
 
 <div class="container">
+
+  @if ($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+  @endif
+
   <form action="{{ route("admin.apt.update", $apartament->id) }}" method="post" enctype="multipart/form-data">
     @method('PUT')
     @csrf
@@ -45,15 +56,15 @@
             @php
                 $array = ($apartament->services)->pluck('id')->toArray();
             @endphp
-          <input 
-            id="{{ $service['id'] }}" 
-            name="services[]" 
+          <input
+            id="{{ $service['id'] }}"
+            name="services[]"
             value="{{ $service->id }}"
-            {{ ( in_array($service->id, old('services', $array)) ) ? 'checked ' : '' }} 
-            type="checkbox"> 
-          {{ $service['description'] }} 
+            {{ ( in_array($service->id, old('services', $array)) ) ? 'checked ' : '' }}
+            type="checkbox">
+          {{ $service['description'] }}
         </label>
-      @endforeach 
+      @endforeach
     </div>
 
     <div class="row mt-3 mb-3">
