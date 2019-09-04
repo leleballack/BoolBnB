@@ -19,7 +19,20 @@
     </div>
 
 
-    <div class="container">
+    <div class="container-fluid search">
+        <div class="searchboxes search__checkbox">
+            @foreach ($services as $service)
+                
+            <label class="form-check-label search__checkbox--label" for="{{ $service['id'] }}">
+                  <input 
+                    id="{{ $service['id'] }}" 
+                    name="services[]" 
+                    value="{{ $service->id }}"
+                    type="checkbox"> 
+                  {{ $service['description'] }} 
+                </label>
+            @endforeach
+        </div>
         <div id="search">
             {{-- Vue manages the code in here --}}
         </div>
