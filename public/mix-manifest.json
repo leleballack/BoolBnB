@@ -2,5 +2,6 @@
     "/js/app.js": "/js/app.js",
     "/js/createAptMap.js": "/js/createAptMap.js",
     "/js/editAptMap.js": "/js/editAptMap.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/js/publicShowAptMap.js": "/js/publicShowAptMap.js"
 }
