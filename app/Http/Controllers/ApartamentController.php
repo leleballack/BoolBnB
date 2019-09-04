@@ -84,4 +84,10 @@ class ApartamentController extends Controller
     {
         //
     }
+
+    public function showSearchPage()
+    {
+        return view('apartaments.search'); 
+    }
+
 }

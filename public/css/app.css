@@ -1,7 +1,26 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
-#map {
+.intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 500px;
+  background-image: url("https://cdn.pixabay.com/photo/2019/03/30/21/03/space-4092053_1280.jpg");
+  width: 100vw;
+}
+
+.intro__text {
+  color: white;
+  font-size: 40px;
+}
+
+.intro__select {
+  width: 400px;
+  display: block;
+  color: darkred;
+  font-size: 16px;
+  align-items: center;
+  margin-top: 40px;
 }
 
 /*!
