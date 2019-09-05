@@ -1,5 +1,18 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar,
+.footer {
+  background-color: beige;
+}
+
 #map {
   height: 500px;
 }
@@ -9,8 +22,9 @@
   align-items: center;
   justify-content: center;
   height: 500px;
-  background-image: url("https://cdn.pixabay.com/photo/2019/03/30/21/03/space-4092053_1280.jpg");
-  width: 100vw;
+  background-image: linear-gradient(#3838383a, #3838383a), url("https://cdn.pixabay.com/photo/2018/05/02/21/29/travel-3369746_1280.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .intro__text {
@@ -25,6 +39,83 @@
   font-size: 16px;
   align-items: center;
   margin-top: 40px;
+}
+
+.search {
+  background-color: beige;
+}
+
+.search__container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 20px;
+}
+
+.search__checkbox--quad {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: relative;
+  top: 7.33333px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  transition: all 0.15s ease-out 0s;
+  background: #965c00;
+  border: none;
+  color: beige;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 0.5rem;
+  outline: none;
+  position: relative;
+  z-index: 1000;
+}
+
+.search__checkbox--quad:hover {
+  background: #a76600;
+}
+
+.search__checkbox--quad:checked {
+  background: #965c00;
+}
+
+.search__checkbox--quad:checked::before {
+  height: 10px;
+  width: 10px;
+  position: absolute;
+  content: "\2714";
+  display: inline-block;
+  font-size: 26.66667px;
+  text-align: center;
+  line-height: 25px;
+}
+
+.search__checkbox--quad--label {
+  display: flex;
+  line-height: 15px;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.search__select {
+  width: 200px;
+}
+
+.apartament {
+  border: 1px solid darkred;
+  padding: 10px 20px;
+  margin: 15px 0 15px;
+}
+
+.apartament__title {
+  font-size: 30px;
 }
 
 /*!

@@ -1,0 +1,9 @@
+.apartament {
+    border: 1px solid darkred;
+    padding: 10px 20px;
+    margin: 15px 0 15px;
+
+    &__title {
+        font-size: 30px;
+    }
+}
