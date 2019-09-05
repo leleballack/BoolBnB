@@ -28,3 +28,6 @@ Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')->
   Route::resource('/apt', 'ApartamentController');
 
 });
+//payment route
+Route::get('edit/{id}/payment', 'PaymentsController@paymentOne')->name('paymentOne');
+Route::post('/checkout', 'PaymentsController@paymentTwo');

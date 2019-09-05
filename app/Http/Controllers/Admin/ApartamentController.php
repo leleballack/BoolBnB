@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Apartament;
 use App\Service;
+use App\Sponsor;
+use Carbon\Carbon;
 
 
 class ApartamentController extends Controller
@@ -17,6 +19,7 @@ class ApartamentController extends Controller
     {
       $user_id = Auth::user()->id;
       $apartaments = Apartament::where('user_id', $user_id)->get();
+
       return view('admin.index', compact('apartaments'));
 
 
@@ -75,8 +78,10 @@ class ApartamentController extends Controller
     public function edit($id)
     {
         $apartament = Apartament::find($id);
+        $sponsor =
+        Sponsor::where('apartament_id',$apartament->id)->get();
         $services = Service::all();
-        return view('admin.edit', compact('apartament', 'services'));
+        return view('admin.edit', compact('apartament', 'services','sponsor'));
     }
 
     public function update(Request $request, $id)
