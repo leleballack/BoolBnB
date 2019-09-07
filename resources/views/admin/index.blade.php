@@ -20,10 +20,11 @@
               <input class="btn btn-danger mb-10" type="submit" value="Cancella">
             </form>
 
+
               @if (in_array($apartament->id, $arr))
-                 <a  class="btn btn-success disabled" href="{{route('paymentOne', $apartament->id)}}">Sponsorizza Appartamento</a>
+                <a  class="btn btn-success sponsor_date disabled" href="{{route('paymentOne', $apartament->id)}}">Sponsorizza Appartamento</a>
                 @foreach ($arr_2 as $a)
-                  @if (($a['cur_id'] === $apartament->id) and ($a['cur_date'] > $now))
+                  @if (($a['cur_id'] === $apartament->id) && ($a['cur_date'] > $now))
 
                     Il tuo appartamento è sposnosrizzato fino al {{$a['cur_date']}}
                   @endif

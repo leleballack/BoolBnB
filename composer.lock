@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e5bc2562a0c4224f2fc1756e48a7df2b",
+    "content-hash": "cb5f4b436445e808f6e9dec33141f9d1",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -122,16 +122,16 @@
         },
         {
             "name": "braintree/braintree_php",
-            "version": "4.3.0",
+            "version": "3.40.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/braintree/braintree_php.git",
-                "reference": "089fe179cdd8dd74b547570d11c135ddee28f7c8"
+                "reference": "840fc6ebf8d96756fed475cce94565fef178187d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/braintree/braintree_php/zipball/089fe179cdd8dd74b547570d11c135ddee28f7c8",
-                "reference": "089fe179cdd8dd74b547570d11c135ddee28f7c8",
+                "url": "https://api.github.com/repos/braintree/braintree_php/zipball/840fc6ebf8d96756fed475cce94565fef178187d",
+                "reference": "840fc6ebf8d96756fed475cce94565fef178187d",
                 "shasum": ""
             },
             "require": {
@@ -140,10 +140,10 @@
                 "ext-hash": "*",
                 "ext-openssl": "*",
                 "ext-xmlwriter": "*",
-                "php": ">=7.2.0"
+                "php": ">=5.4.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^7.5"
+                "phpunit/phpunit": "3.7.*"
             },
             "type": "library",
             "autoload": {
@@ -165,7 +165,7 @@
                 }
             ],
             "description": "Braintree PHP Client Library",
-            "time": "2019-08-09T21:16:36+00:00"
+            "time": "2019-03-28T23:16:53+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",

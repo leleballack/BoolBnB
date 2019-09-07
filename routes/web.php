@@ -23,17 +23,20 @@ Route::get('/search', 'ApartamentController@showSearchPage');
 Route::resource('/apartaments', 'ApartamentController');
 Route::resource('/message', 'MessageController');
 
-Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')->group(function(){
-
-Route::resource('/apt', 'ApartamentController');
-
-
-
-});
-
- Route::get('show/{id}/payment', 'PaymentsController@paymentOne')->name('paymentOne');
-// Route::get('admin/apt/payment', 'PaymentsController@paymentOne')->name('paymentOne');
-Route::post('/checkout', 'PaymentsController@paymentTwo');
+Route::middleware('auth')
+  ->prefix('admin')
+  ->namespace('Admin')
+  ->name('admin.')
+  ->group(function(){
+  
+    // Admin apartaments resource 
+    Route::resource('/apt', 'ApartamentController');
+        
+  });
+  
+  // Payment manager route
+  Route::middleware('auth')->get('show/{id}/payment', 'PaymentsController@paymentOne')->name('paymentOne');
+  Route::post('/checkout', 'PaymentsController@paymentTwo');
 
 
 

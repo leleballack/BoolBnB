@@ -18,31 +18,35 @@ class ApartamentController extends Controller
     {
       $user_id = Auth::user()->id;
       $apartaments = Apartament::where('user_id', $user_id)->get();
-      // dd($apartaments);
+
       $arr = [];
       $arr_2 = [];
-    foreach ($apartaments as $apartament) {
-      $apart_id = $apartament->id;
-      $sponsor = Sponsor::where('apartament_id', $apart_id)->get();
+      foreach ($apartaments as $apartament) {
+        $apart_id = $apartament->id;
+        $sponsor = Sponsor::where('apartament_id', $apart_id)->get();
 
-      foreach ($sponsor as $s) {
-        $variabile = Carbon::parse($s['end_date']);
+        foreach ($sponsor as $s) {
+          $variabile = Carbon::parse($s['end_date']);
+          $now = Carbon::now();
 
+          if( $variabile  > Carbon::now() ) {
 
-          $cur_id = $s['apartament_id'];
-          $cur_date = $s['end_date'];
+            $cur_id = $s['apartament_id'];
+            $cur_date = $s['end_date'];
+    
+            // arr_2
+            $cur_dt = [
+              'cur_id' => $cur_id,
+              'cur_date' => $variabile
+            ];
+            array_push($arr, $cur_id);
+            array_push($arr_2, $cur_dt);
 
-          $cur_dt = [
-            'cur_id' => $cur_id,
-            'cur_date' => $variabile
-          ];
-        $now = Carbon::now();
-        array_push($arr, $cur_id);
-        array_push($arr_2, $cur_dt);
-        // var_dump($arr);
-
+            dump($arr);
+            dump($arr_2);
+          }
+        }
       }
-    }
 
       return view('admin.index', compact('apartaments','sponsor','arr','arr_2','now'));
     }
@@ -124,7 +128,7 @@ class ApartamentController extends Controller
         "title" => "required|max:255",
         "rooms" => "required|numeric|min:1",
         "beds" => "required|numeric|min:1",
-        "baths" => "required|numeric|min:1",
+        "baths" => "required|numeric|min:1", 
         "square_mt" => "required|numeric|min:10",
         "address" => "required|max:255",
         "long" => "required|numeric",

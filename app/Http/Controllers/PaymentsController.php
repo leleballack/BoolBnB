@@ -26,11 +26,6 @@ class PaymentsController extends Controller
 
 
 
-
-    // if(($sponsor->end_date)->greaterThan($now)){
-    //   return 'Il tuo appartamento è ancora sponsorizzato fino al ' . $sponsor->end_date;
-    // }
-
     $token = $gateway->ClientToken()->generate();
 
     return view('payment', [
@@ -43,15 +38,6 @@ class PaymentsController extends Controller
 
   public function paymentTwo(Request $request){
     $data = $request->all();
-
-
-    foreach ($sponsor as $s) {
-      $variabile = Carbon::parse($data['end_date']);
-      if(($variabile)->greaterThan($now)){
-        $messaggio = 'Il tuo appartamento è ancora sponsorizzato fino al ' . $s->end_date;
-      }
-    }
-
 
       $gateway = new Braintree\Gateway([
           'environment' => config('services.braintree.environment'),
@@ -107,6 +93,8 @@ class PaymentsController extends Controller
            $new_sponsor->end_date = $dt->addHours($value);
            $new_sponsor->save();
            return dd($data);
+
+           
    //        return redirect()->route('admin.apt.index')->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
    //    } else {
    //        $errorString = "";
