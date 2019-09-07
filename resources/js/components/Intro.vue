@@ -10,6 +10,7 @@
         name="city_select"
         id="selectedCity"
       >
+        <option value="Seleziona citta" disabled selected="selected">- Seleziona città -</option>
         <option value="Milano">Milano</option>
         <option value="Bologna">Bologna</option>
         <option value="Firenze">Firenze</option>
