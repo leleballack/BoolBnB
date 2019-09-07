@@ -8541,6 +8541,7 @@ if (inBrowser) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../aptSearch.js */ "./resources/js/aptSearch.js");
 //
 //
 //
@@ -8576,42 +8577,105 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       apartamentList: [],
       pagination: {},
-      apiKey: "z4n3yxl4X8bvK1BA6YlSAaYcV7OTbkZc"
+      apiKey: "z4n3yxl4X8bvK1BA6YlSAaYcV7OTbkZc",
+      currentSelectedCity: "",
+      selectedServices: [],
+      cur_selected_city_lat: "",
+      cur_selected_city_long: "",
+      currentRadius: ""
     };
   },
+  created: function created() {
+    var _this = this;
+
+    _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$on("cityWasChanged", function (data) {
+      _this.currentSelectedCity = data;
+
+      _this.fetchFromDb();
+    });
+    _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$on("servicesArrayWasChanged", function (data) {
+      _this.selectedServices = data;
+
+      _this.fetchFromDb();
+    });
+    _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$on("radiusChanged", function (data) {
+      _this.currentRadius = data;
+
+      _this.fetchFromDb();
+    });
+  },
   mounted: function mounted() {
-    this.fetchApartaments();
+    this.fetchFromDb();
   },
   methods: {
-    fetchApartaments: function fetchApartaments(page) {
-      var _this = this;
+    fetchAndTransformFromTomtom: function fetchAndTransformFromTomtom() {
+      var _this2 = this;
 
-      page = page || "http://127.0.0.1:8000/api/apartaments";
-      axios.get(page).then(function (res) {
-        var parameters = {
-          currentPage: res.data.current_page,
-          lastPage: res.data.last_page,
-          prevPage: res.data.prev_page_url,
-          nextPage: res.data.next_page_url
-        };
-        console.log(res);
-        _this.pagination = parameters;
-        _this.apartamentList = res.data.data;
+      axios.get("https://api.tomtom.com/search/2/search/".concat(this.currentSelectedCity, ".json?countrySet=ITA&key=").concat(this.apiKey)).then(function (res) {
+        _this2.cur_selected_city_lat = res.data.results[0].position.lat;
+        _this2.cur_selected_city_long = res.data.results[0].position.lon;
       })["catch"](function (err) {
         return console.log(err);
       });
     },
-    fetchAndTransformFromTomtom: function fetchAndTransformFromTomtom() {
-      axios.get("https://api.tomtom.com/search/2/search/Milano.json?countrySet=ITA&key=".concat(this.apiKey)).then(function (res) {
-        console.log(res);
+    filterOnDbWithCity: function filterOnDbWithCity(page) {
+      var _this3 = this;
+
+      page = page || "/api/filtered";
+      axios.get("https://api.tomtom.com/search/2/search/".concat(this.currentSelectedCity, ".json?countrySet=ITA&key=").concat(this.apiKey)).then(function (res) {
+        _this3.cur_selected_city_lat = res.data.results[0].position.lat;
+        _this3.cur_selected_city_long = res.data.results[0].position.lon;
+        return axios.get(page, {
+          params: {
+            lat: _this3.cur_selected_city_lat,
+            "long": _this3.cur_selected_city_long,
+            radius: _this3.currentRadius,
+            services: _this3.selectedServices
+          }
+        }).then(function (res) {
+          res.data.data !== undefined ? _this3.apartamentList = res.data.data : _this3.apartamentList = res.data;
+          var parameters = {
+            currentPage: res.data.current_page || 1,
+            lastPage: res.data.last_page || 1,
+            prevPage: res.data.prev_page_url,
+            nextPage: res.data.next_page_url
+          };
+          _this3.pagination = parameters;
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+      });
+    },
+    filterOnDbWithoutCity: function filterOnDbWithoutCity(page) {
+      var _this4 = this;
+
+      page = page || "/api/filtered";
+      axios.get(page, {
+        params: {
+          services: this.selectedServices
+        }
+      }).then(function (res) {
+        res.data.data !== undefined ? _this4.apartamentList = res.data.data : _this4.apartamentList = res.data;
+        var parameters = {
+          currentPage: res.data.current_page || 1,
+          lastPage: res.data.last_page || 1,
+          prevPage: res.data.prev_page_url,
+          nextPage: res.data.next_page_url
+        };
+        _this4.pagination = parameters;
       })["catch"](function (err) {
         return console.log(err);
       });
+    },
+    fetchFromDb: function fetchFromDb(page) {
+      this.currentSelectedCity !== "" ? this.filterOnDbWithCity(page) : this.filterOnDbWithoutCity(page);
     }
   }
 });
@@ -8627,6 +8691,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../aptSearch.js */ "./resources/js/aptSearch.js");
 //
 //
 //
@@ -8659,24 +8724,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       services: [],
       selectedServices: [],
+      selectedCity: "",
       selected: ""
     };
   },
-  mounted: function mounted() {
+  created: function created() {
+    var _this = this;
+
+    _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$on("cityWasChanged", function (data) {
+      _this.selectedCity = data;
+    });
     this.fetchServices();
   },
   methods: {
+    servicesArrayWasChanged: function servicesArrayWasChanged() {
+      _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$emit("servicesArrayWasChanged", this.selectedServices);
+    },
+    radiusChanged: function radiusChanged() {
+      _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$emit("radiusChanged", this.selected);
+    },
     fetchServices: function fetchServices() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get("/api/services").then(function (res) {
-        _this.services = res.data;
-        console.log(_this.services);
+        _this2.services = res.data;
+        console.log(_this2.services);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -8695,6 +8774,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../aptSearch.js */ "./resources/js/aptSearch.js");
 //
 //
 //
@@ -8710,11 +8790,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       selectedCity: " "
     };
+  },
+  methods: {
+    cityWasChanged: function cityWasChanged() {
+      _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$emit("cityWasChanged", this.selectedCity);
+    }
   }
 });
 
@@ -9240,86 +9333,97 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [
-      _vm._l(_vm.apartamentList, function(apartament) {
-        return _c("div", { key: apartament.id, staticClass: "apartament" }, [
-          _c("span", { staticClass: "apartament__title" }, [
-            _vm._v(_vm._s(apartament.title))
-          ]),
-          _vm._v(" "),
-          _c("p", [_vm._v("Numero stanze: " + _vm._s(apartament.total_rooms))]),
-          _vm._v(" "),
-          _c("p", [_vm._v("Numero letti: " + _vm._s(apartament.total_beds))]),
-          _vm._v(" "),
-          _c("p", [_vm._v("Numero bagni: " + _vm._s(apartament.total_baths))])
-        ])
-      }),
-      _vm._v(" "),
-      _c("nav", [
-        _c("ul", { staticClass: "pagination" }, [
-          _c(
-            "li",
-            {
-              staticClass: "page-item",
-              class: [{ disabled: !_vm.pagination.prevPage }]
-            },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "page-link",
-                  attrs: { href: "#search_start_point", tabindex: "-1" },
-                  on: {
-                    click: function($event) {
-                      return _vm.fetchApartaments(_vm.pagination.prevPage)
-                    }
-                  }
-                },
-                [_vm._v("Prec")]
+  return _c("div", { staticClass: "container" }, [
+    _vm.apartamentList.length > 0
+      ? _c(
+          "div",
+          [
+            _vm._l(_vm.apartamentList, function(apartament) {
+              return _c(
+                "div",
+                { key: apartament.id, staticClass: "apartament" },
+                [
+                  _c("span", { staticClass: "apartament__title" }, [
+                    _vm._v(_vm._s(apartament.title))
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v("Numero stanze: " + _vm._s(apartament.total_rooms))
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v("Numero letti: " + _vm._s(apartament.total_beds))
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v("Numero bagni: " + _vm._s(apartament.total_baths))
+                  ])
+                ]
               )
-            ]
-          ),
-          _vm._v(" "),
-          _c("li", { staticClass: "page-item" }, [
-            _c("p", { staticClass: "page-link" }, [
-              _vm._v(
-                _vm._s(_vm.pagination.currentPage) +
-                  " di " +
-                  _vm._s(_vm.pagination.lastPage)
-              )
+            }),
+            _vm._v(" "),
+            _c("nav", [
+              _c("ul", { staticClass: "pagination" }, [
+                _c(
+                  "li",
+                  {
+                    staticClass: "page-item",
+                    class: [{ disabled: !_vm.pagination.prevPage }]
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "page-link",
+                        attrs: { href: "#search_start_point", tabindex: "-1" },
+                        on: { click: _vm.fetchFromDb }
+                      },
+                      [_vm._v("Prec")]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("li", { staticClass: "page-item" }, [
+                  _c("p", { staticClass: "page-link" }, [
+                    _vm._v(
+                      _vm._s(_vm.pagination.currentPage) +
+                        " di " +
+                        _vm._s(_vm.pagination.lastPage)
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  {
+                    staticClass: "page-item",
+                    class: [{ disabled: !_vm.pagination.nextPage }]
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "page-link",
+                        attrs: { href: "#search_start_point" },
+                        on: {
+                          click: function($event) {
+                            return _vm.fetchFromDb(_vm.pagination.nextPage)
+                          }
+                        }
+                      },
+                      [_vm._v("Succ")]
+                    )
+                  ]
+                )
+              ])
             ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "li",
-            {
-              staticClass: "page-item",
-              class: [{ disabled: !_vm.pagination.nextPage }]
-            },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "page-link",
-                  attrs: { href: "#search_start_point" },
-                  on: {
-                    click: function($event) {
-                      return _vm.fetchApartaments(_vm.pagination.nextPage)
-                    }
-                  }
-                },
-                [_vm._v("Succ")]
-              )
-            ]
-          )
+          ],
+          2
+        )
+      : _c("div", [
+          _c("h3", [_vm._v("Non ci sono risultati per i filtri applicati!")])
         ])
-      ])
-    ],
-    2
-  )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -9377,25 +9481,28 @@ var render = function() {
                   : _vm.selectedServices
               },
               on: {
-                change: function($event) {
-                  var $$a = _vm.selectedServices,
-                    $$el = $event.target,
-                    $$c = $$el.checked ? true : false
-                  if (Array.isArray($$a)) {
-                    var $$v = service.id,
-                      $$i = _vm._i($$a, $$v)
-                    if ($$el.checked) {
-                      $$i < 0 && (_vm.selectedServices = $$a.concat([$$v]))
+                change: [
+                  function($event) {
+                    var $$a = _vm.selectedServices,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = service.id,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.selectedServices = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.selectedServices = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
                     } else {
-                      $$i > -1 &&
-                        (_vm.selectedServices = $$a
-                          .slice(0, $$i)
-                          .concat($$a.slice($$i + 1)))
+                      _vm.selectedServices = $$c
                     }
-                  } else {
-                    _vm.selectedServices = $$c
-                  }
-                }
+                  },
+                  _vm.servicesArrayWasChanged
+                ]
               }
             }),
             _vm._v("\n      " + _vm._s(service.description) + "\n    ")
@@ -9405,48 +9512,53 @@ var render = function() {
       0
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "row search__container" }, [
-      _c(
-        "select",
-        {
-          directives: [
+    _vm.selectedCity !== ""
+      ? _c("div", { staticClass: "row search__container" }, [
+          _c(
+            "select",
             {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.selected,
-              expression: "selected"
-            }
-          ],
-          staticClass: "search__select",
-          on: {
-            change: function($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function(o) {
-                  return o.selected
-                })
-                .map(function(o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.selected = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
-            }
-          }
-        },
-        [
-          _c("option", { attrs: { value: "20" } }, [_vm._v("20km")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "40" } }, [_vm._v("40km")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "60" } }, [_vm._v("60km")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "80" } }, [_vm._v("80km")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "100" } }, [_vm._v("100km")])
-        ]
-      )
-    ])
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.selected,
+                  expression: "selected"
+                }
+              ],
+              staticClass: "search__select",
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.selected = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  _vm.radiusChanged
+                ]
+              }
+            },
+            [
+              _c("option", { attrs: { value: "20" } }, [_vm._v("20km")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "40" } }, [_vm._v("40km")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "60" } }, [_vm._v("60km")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "80" } }, [_vm._v("80km")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "100" } }, [_vm._v("100km")])
+            ]
+          )
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -9491,22 +9603,37 @@ var render = function() {
           staticClass: "intro__select",
           attrs: { name: "city_select", id: "selectedCity" },
           on: {
-            change: function($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function(o) {
-                  return o.selected
-                })
-                .map(function(o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.selectedCity = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
-            }
+            change: [
+              function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.selectedCity = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              },
+              _vm.cityWasChanged
+            ]
           }
         },
         [
+          _c(
+            "option",
+            {
+              attrs: {
+                value: "Seleziona citta",
+                disabled: "",
+                selected: "selected"
+              }
+            },
+            [_vm._v("- Seleziona città -")]
+          ),
+          _vm._v(" "),
           _c("option", { attrs: { value: "Milano" } }, [_vm._v("Milano")]),
           _vm._v(" "),
           _c("option", { attrs: { value: "Bologna" } }, [_vm._v("Bologna")]),
@@ -9702,18 +9829,33 @@ module.exports = g;
 /*!***********************************!*\
   !*** ./resources/js/aptSearch.js ***!
   \***********************************/
-/*! no exports provided */
+/*! exports provided: eventBus */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "eventBus", function() { return eventBus; });
 /* harmony import */ var Vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Vue */ "./node_modules/Vue/dist/vue.runtime.esm.js");
 /* harmony import */ var _components_Search__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Search */ "./resources/js/components/Search.vue");
 
- // $(document).ready(function() {
-//     $(".search__select, .intro__select").select2();
-// });
 
+var eventBus = new Vue__WEBPACK_IMPORTED_MODULE_0__["default"]({// data: {
+  //     apiKey: "z4n3yxl4X8bvK1BA6YlSAaYcV7OTbkZc",
+  //     selectedCity: ""
+  // },
+  // methods: {
+  //     fetchAndTransformFromTomtom() {
+  //         axios
+  //             .get(
+  //                 `https://api.tomtom.com/search/2/search/Milano.json?countrySet=ITA&key=${this.apiKey}`
+  //             )
+  //             .then(res => {
+  //                 console.log(res);
+  //             })
+  //             .catch(err => console.log(err));
+  //     }
+  // }
+});
 new Vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
   el: "#search",
   render: function render(h) {

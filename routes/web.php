@@ -30,6 +30,11 @@ Route::resource('/apt', 'ApartamentController');
 
 
 });
+
  Route::get('show/{id}/payment', 'PaymentsController@paymentOne')->name('paymentOne');
 // Route::get('admin/apt/payment', 'PaymentsController@paymentOne')->name('paymentOne');
 Route::post('/checkout', 'PaymentsController@paymentTwo');
+
+
+
+
