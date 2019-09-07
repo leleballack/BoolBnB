@@ -18,8 +18,8 @@
         {{ service.description }}
       </label>
     </div>
-    {{ selectedServices }}
-    <div class="row search__container">
+
+    <div class="row search__container" v-if="selectedCity !== ''">
       <select @change="radiusChanged" v-model="selected" class="search__select">
         <option value="20">20km</option>
         <option value="40">40km</option>
@@ -39,11 +39,16 @@ export default {
     return {
       services: [],
       selectedServices: [],
+      selectedCity: "",
       selected: ""
     };
   },
 
-  mounted() {
+  created() {
+    eventBus.$on("cityWasChanged", data => {
+      this.selectedCity = data;
+    });
+
     this.fetchServices();
   },
 

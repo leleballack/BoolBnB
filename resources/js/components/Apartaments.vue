@@ -7,40 +7,34 @@
         <p>Numero letti: {{ apartament.total_beds }}</p>
         <p>Numero bagni: {{ apartament.total_baths }}</p>
       </div>
+
+      <nav>
+        <ul class="pagination">
+          <li :class="[{ disabled: !pagination.prevPage }]" class="page-item">
+            <a @click="fetchFromDb" class="page-link" href="#search_start_point" tabindex="-1">Prec</a>
+          </li>
+          <li class="page-item">
+            <p class="page-link">{{ pagination.currentPage }} di {{ pagination.lastPage }}</p>
+          </li>
+
+          <li :class="[{ disabled: !pagination.nextPage }]" class="page-item">
+            <a
+              @click="fetchFromDb(pagination.nextPage)"
+              class="page-link"
+              href="#search_start_point"
+            >Succ</a>
+          </li>
+        </ul>
+      </nav>
     </div>
 
     <div v-else>
       <h3>Non ci sono risultati per i filtri applicati!</h3>
     </div>
-
-    <nav>
-      <ul class="pagination">
-        <li :class="[{ disabled: !pagination.prevPage }]" class="page-item">
-          <a
-            @click="fetchApartaments(pagination.prevPage)"
-            class="page-link"
-            href="#search_start_point"
-            tabindex="-1"
-          >Prec</a>
-        </li>
-        <li class="page-item">
-          <p class="page-link">{{ pagination.currentPage }} di {{ pagination.lastPage }}</p>
-        </li>
-
-        <li :class="[{ disabled: !pagination.nextPage }]" class="page-item">
-          <a
-            @click="fetchApartaments(pagination.nextPage)"
-            class="page-link"
-            href="#search_start_point"
-          >Succ</a>
-        </li>
-      </ul>
-    </nav>
   </div>
 </template>
 
 <script>
-import Qs from "qs";
 import { eventBus } from "../aptSearch.js";
 export default {
   data() {
@@ -59,49 +53,24 @@ export default {
   created() {
     eventBus.$on("cityWasChanged", data => {
       this.currentSelectedCity = data;
-
-      this.filterOnDbWithCity();
+      this.fetchFromDb();
     });
     eventBus.$on("servicesArrayWasChanged", data => {
       this.selectedServices = data;
-      if (this.currentSelectedCity !== "") {
-        this.filterOnDbWithCity();
-      } else {
-        this.filterOnDbWithoutCity();
-      }
+      this.fetchFromDb();
     });
 
     eventBus.$on("radiusChanged", data => {
       this.currentRadius = data;
-      this.filterOnDbWithCity();
+      this.fetchFromDb();
     });
   },
 
   mounted() {
-    this.fetchApartaments();
+    this.fetchFromDb();
   },
 
   methods: {
-    fetchApartaments(page) {
-      page = page || "/api/apartaments";
-      axios
-        .get(page)
-        .then(res => {
-          let parameters = {
-            currentPage: res.data.current_page,
-            lastPage: res.data.last_page,
-            prevPage: res.data.prev_page_url,
-            nextPage: res.data.next_page_url
-          };
-
-          console.log(res);
-
-          this.pagination = parameters;
-          this.apartamentList = res.data.data;
-        })
-        .catch(err => console.log(err));
-    },
-
     fetchAndTransformFromTomtom() {
       axios
         .get(
@@ -114,7 +83,9 @@ export default {
         .catch(err => console.log(err));
     },
 
-    filterOnDbWithCity() {
+    filterOnDbWithCity(page) {
+      page = page || "/api/filtered";
+
       axios
         .get(
           `https://api.tomtom.com/search/2/search/${this.currentSelectedCity}.json?countrySet=ITA&key=${this.apiKey}`
@@ -124,7 +95,7 @@ export default {
           this.cur_selected_city_long = res.data.results[0].position.lon;
 
           return axios
-            .get(`api/filtered`, {
+            .get(page, {
               params: {
                 lat: this.cur_selected_city_lat,
                 long: this.cur_selected_city_long,
@@ -133,35 +104,53 @@ export default {
               }
             })
             .then(res => {
-              if (res.data.data !== undefined) {
-                this.apartamentList = res.data.data;
-              } else {
-                this.apartamentList = res.data;
-              }
+              res.data.data !== undefined
+                ? (this.apartamentList = res.data.data)
+                : (this.apartamentList = res.data);
 
-              console.log(this.apartamentList);
+              let parameters = {
+                currentPage: res.data.current_page || 1,
+                lastPage: res.data.last_page || 1,
+                prevPage: res.data.prev_page_url,
+                nextPage: res.data.next_page_url
+              };
+
+              this.pagination = parameters;
             })
             .catch(err => console.log(err));
         });
     },
 
-    filterOnDbWithoutCity() {
+    filterOnDbWithoutCity(page) {
+      page = page || "/api/filtered";
+
       axios
-        .get(`api/filtered`, {
+        .get(page, {
           params: {
             services: this.selectedServices
           }
         })
         .then(res => {
-          if (res.data.data !== undefined) {
-            this.apartamentList = res.data.data;
-          } else {
-            this.apartamentList = res.data;
-          }
+          res.data.data !== undefined
+            ? (this.apartamentList = res.data.data)
+            : (this.apartamentList = res.data);
 
-          console.log(this.apartamentList);
+          let parameters = {
+            currentPage: res.data.current_page || 1,
+            lastPage: res.data.last_page || 1,
+            prevPage: res.data.prev_page_url,
+            nextPage: res.data.next_page_url
+          };
+
+          this.pagination = parameters;
         })
         .catch(err => console.log(err));
+    },
+
+    fetchFromDb(page) {
+      this.currentSelectedCity !== ""
+        ? this.filterOnDbWithCity(page)
+        : this.filterOnDbWithoutCity(page);
     }
   }
 };

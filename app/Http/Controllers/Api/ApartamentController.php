@@ -10,16 +10,11 @@ use Illuminate\Http\Request;
 
 class ApartamentController extends Controller
 {
-    public function index()
-    {
-        $apartaments = Apartament::paginate(6);
-
-        return response()->json($apartaments); 
-    }
 
     public function filter(Request $request) 
     {
-        if( count($request->all()) === 0 ) {
+        // se non ci sono parametri passati (o c'è solo la paginazione) => ritorna tutto paginato
+        if( count($request->all()) === 0 || $request->has('page') ) {
             return response()->json(Apartament::paginate(6)); 
         }
 
@@ -55,14 +50,7 @@ class ApartamentController extends Controller
             }, '=', count($services));
         }
 
-        if( count($apartaments) > 6 ) {
-            return response()->json($apartaments->paginate());
-        } else {
-            return response()->json($apartaments->get()); 
-        }
-
-        // return response()->json($apartaments->paginate(6));
-
+        return count($apartaments->get()) > 6 ? response()->json($apartaments->paginate(6)) : response()->json($apartaments->get());
     }
 
 
