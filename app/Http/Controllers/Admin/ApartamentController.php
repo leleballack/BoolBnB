@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Apartament;
 use App\Service;
-
+use App\Sponsor;
+use Carbon\Carbon;
 
 class ApartamentController extends Controller
 {
@@ -17,9 +18,33 @@ class ApartamentController extends Controller
     {
       $user_id = Auth::user()->id;
       $apartaments = Apartament::where('user_id', $user_id)->get();
-      return view('admin.index', compact('apartaments'));
+      // dd($apartaments);
+      $arr = [];
+      $arr_2 = [];
+    foreach ($apartaments as $apartament) {
+      $apart_id = $apartament->id;
+      $sponsor = Sponsor::where('apartament_id', $apart_id)->get();
+
+      foreach ($sponsor as $s) {
+        $variabile = Carbon::parse($s['end_date']);
 
 
+          $cur_id = $s['apartament_id'];
+          $cur_date = $s['end_date'];
+
+          $cur_dt = [
+            'cur_id' => $cur_id,
+            'cur_date' => $variabile
+          ];
+        $now = Carbon::now();
+        array_push($arr, $cur_id);
+        array_push($arr_2, $cur_dt);
+        // var_dump($arr);
+
+      }
+    }
+
+      return view('admin.index', compact('apartaments','sponsor','arr','arr_2','now'));
     }
 
     public function create()
@@ -75,8 +100,21 @@ class ApartamentController extends Controller
     public function edit($id)
     {
         $apartament = Apartament::find($id);
+        $sponsor =
+        Sponsor::where('apartament_id',$apartament->id)->get();
         $services = Service::all();
-        return view('admin.edit', compact('apartament', 'services'));
+        $now = Carbon::now();
+
+        foreach ($sponsor as $s) {
+          $variabile = Carbon::parse($s->end_date);
+          if(($variabile)->greaterThan($now)){
+            $bool = true;
+          }
+          else{
+            $bool = false;
+          }
+        }
+        return view('admin.edit', compact('apartament', 'services','sponsor', 'bool'));
     }
 
     public function update(Request $request, $id)
