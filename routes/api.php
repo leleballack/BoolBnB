@@ -20,4 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('Api')->group(function() {
     Route::get('/apartaments', 'ApartamentController@index');
     Route::get('/services', 'ApartamentController@getServicesList');
+
+    Route::get('/filtered', 'ApartamentController@filter'); 
 });

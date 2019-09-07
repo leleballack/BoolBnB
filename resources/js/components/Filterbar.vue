@@ -8,6 +8,7 @@
         class="form-check-label search__checkbox--label"
       >
         <input
+          @change="servicesArrayWasChanged"
           type="checkbox"
           :id="service.id"
           :value="service.id"
@@ -17,9 +18,9 @@
         {{ service.description }}
       </label>
     </div>
-
+    {{ selectedServices }}
     <div class="row search__container">
-      <select v-model="selected" class="search__select">
+      <select @change="radiusChanged" v-model="selected" class="search__select">
         <option value="20">20km</option>
         <option value="40">40km</option>
         <option value="60">60km</option>
@@ -31,6 +32,8 @@
 </template>
 
 <script>
+import { eventBus } from "../aptSearch.js";
+
 export default {
   data() {
     return {
@@ -45,6 +48,14 @@ export default {
   },
 
   methods: {
+    servicesArrayWasChanged() {
+      eventBus.$emit("servicesArrayWasChanged", this.selectedServices);
+    },
+
+    radiusChanged() {
+      eventBus.$emit("radiusChanged", this.selected);
+    },
+
     fetchServices() {
       axios
         .get("/api/services")

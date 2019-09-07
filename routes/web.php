@@ -28,3 +28,7 @@ Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')->
   Route::resource('/apt', 'ApartamentController');
 
 });
+
+
+// rotta di prova
+Route::get('/distance', 'ApartamentController@queryApts'); 
