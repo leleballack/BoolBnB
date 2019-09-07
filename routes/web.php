@@ -25,9 +25,11 @@ Route::resource('/message', 'MessageController');
 
 Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')->group(function(){
 
-  Route::resource('/apt', 'ApartamentController');
+Route::resource('/apt', 'ApartamentController');
+
+
 
 });
-//payment route
-Route::get('edit/{id}/payment', 'PaymentsController@paymentOne')->name('paymentOne');
+ Route::get('show/{id}/payment', 'PaymentsController@paymentOne')->name('paymentOne');
+// Route::get('admin/apt/payment', 'PaymentsController@paymentOne')->name('paymentOne');
 Route::post('/checkout', 'PaymentsController@paymentTwo');

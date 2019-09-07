@@ -45,12 +45,12 @@ class PaymentsController extends Controller
     $data = $request->all();
 
 
-    // foreach ($sponsor as $s) {
-    //   $variabile = Carbon::parse($data['end_date']);
-    //   if(($variabile)->greaterThan($now)){
-    //     $messaggio = 'Il tuo appartamento è ancora sponsorizzato fino al ' . $s->end_date;
-    //   }
-    // }
+    foreach ($sponsor as $s) {
+      $variabile = Carbon::parse($data['end_date']);
+      if(($variabile)->greaterThan($now)){
+        $messaggio = 'Il tuo appartamento è ancora sponsorizzato fino al ' . $s->end_date;
+      }
+    }
 
 
       $gateway = new Braintree\Gateway([

@@ -19,11 +19,24 @@
               @csrf
               <input class="btn btn-danger mb-10" type="submit" value="Cancella">
             </form>
-            {{-- <a href="{{ route('admin.apt.destroy', $apartament->id) }}" class="button btn btn-danger">Cancella</a> --}}
-          </div>
 
+              @if (in_array($apartament->id, $arr))
+                 <a  class="btn btn-success disabled" href="{{route('paymentOne', $apartament->id)}}">Sponsorizza Appartamento</a>
+                @foreach ($arr_2 as $a)
+                  @if (($a['cur_id'] === $apartament->id) and ($a['cur_date'] > $now))
+
+                    Il tuo appartamento è sposnosrizzato fino al {{$a['cur_date']}}
+                  @endif
+                @endforeach
+              @else
+                 <a class="btn btn-success" href="{{route('paymentOne', $apartament->id)}}">Sponsorizza Appartamento</a>
+              @endif
+
+          </div>
         </div>
+
       @endforeach
+
     </div>
   @else
     <a href="{{ route('admin.apt.create') }}" class="button">Registra appartamento</a>
