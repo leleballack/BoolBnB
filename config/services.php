@@ -43,5 +43,11 @@ return [
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
         ],
     ],
+    'braintree' => [
+      'environment' => 'sandbox',
+      'merchantId' => 'wtj3qjz3kjk7k8cc',
+      'publicKey' => 'b3zm2zpw2rgnq726',
+      'privateKey' => '1adf7d66fcf4edf0c21419600d49b3f2',
+    ],
 
 ];

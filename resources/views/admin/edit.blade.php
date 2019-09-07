@@ -13,6 +13,11 @@
 @section ('content')
 
 <div class="container">
+  @if ($sponsor->isNotEmpty())
+    <a style="display:none;" class="btn btn-success" href="{{route('paymentOne', $apartament->id)}}">Sponsorizza Appartamento</a>
+    @else
+      <a class="btn btn-success" href="{{route('paymentOne', $apartament->id)}}">Sponsorizza Appartamento</a>
+  @endif
 
   @if ($errors->any())
       <div class="alert alert-danger">

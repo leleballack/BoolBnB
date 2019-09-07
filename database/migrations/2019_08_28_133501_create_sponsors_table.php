@@ -15,13 +15,13 @@ class CreateSponsorsTable extends Migration
     {
         Schema::create('sponsors', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('apart_id')->unsigned();
+            $table->bigInteger('apartament_id')->unsigned();
             $table->bigInteger('sponsortype_id')->unsigned();
             $table->dateTime('start_date');
             $table->dateTime('end_date');
-
-            $table->foreign('apart_id')->references('id')->on('apartaments')->onDelete('cascade');
-            $table->foreign('sponsortype_id')->references('id')->on('sponsortypes')->onDelete('cascade');        
+            $table->timestamps();
+            $table->foreign('apartament_id')->references('id')->on('apartaments')->onDelete('cascade');
+            $table->foreign('sponsortype_id')->references('id')->on('sponsortypes')->onDelete('cascade');
         });
     }
 
