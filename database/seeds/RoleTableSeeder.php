@@ -61,50 +61,5 @@ class RoleTableSeeder extends Seeder
 
     $upra->attachPermissions(array($createApt, $editApt, $deleteApt, $seeMsg, $createAd));
 
-
-
-
-
-
-
-  //   $role =
-  //   [
-  //       [
-  //           'name' => 'UPR',
-  //           'display_name' => 'Utente Reg',
-  //           'description' => 'Apt Create Permission'
-  //       ],
-  //       [
-  //           'name' => 'UPRA',
-  //           'display_name' => 'Utente Reg Con Apt',
-  //           'description' => 'Full Permission'
-  //       ],
-  //   ];
-  //
-  //   foreach ($role as $key => $value) {
-  //       Role::create($value);
-  //   }
-  //
-  //
-  //   $permission = Permission::get();
-  //
-  //
-  //   $user =
-  //   [
-  //       [
-  //         'name' => 'Pippo',
-  //         'email' => 'utente1@test.com',
-  //         'password' => Hash::make('password')
-  //       ],
-  //       [
-  //         'name' => 'Pluto',
-  //         'email' => 'utente2@test.com',
-  //         'password' => Hash::make('password')
-  //       ],
-  //   ];
-  //
-  //   foreach ($user as $key => $value) {
-  //     $user = User::create($user);
-  //     $user->attachRole($role);
   }
 }
