@@ -9,6 +9,7 @@
       @foreach ($apartaments as $apartament)
         <div class="row">
           <div class="col-lg-6">
+            <h2>{{$apartament->title}}</h2>
             <img src="{{ asset('storage/' . $apartament->image_url) }}" alt="" width="300" height="300">
           </div>
           <div class="col-lg-6">

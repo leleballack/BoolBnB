@@ -14,56 +14,55 @@ class UsersTableSeeder extends Seeder
     {
         $users = [
             [
-                'email' => 'pluto@test.com',
-                'password' => 'password',
+                'email' => 'utente1@test.com',
+                'password' => Hash::make('password'),
                 'nome' => 'pluto',
                 'cognome' => 'pluto',
             ],
             [
-                'email' => 'pinco@test.com',
-                'password' => 'password',
+                'email' => 'utente2@test.com',
+                'password' => Hash::make('password'),
                 'nome' => 'pinco',
                 'cognome' => 'pallo',
             ],
             [
-                'email' => 'radu@test.com',
-                'password' => 'password',
+                'email' => 'utente3@test.com',
+                'password' => Hash::make('password'),
                 'nome' => 'radu',
                 'cognome' => 'schirliu',
             ],
             [
-                'email' => 'emanuele@test.com',
-                'password' => 'password',
+                'email' => 'utente4@test.com',
+                'password' => Hash::make('password'),
                 'nome' => 'emanuele',
                 'cognome' => 'ballacci',
             ],
             [
-                'email' => 'andrea@test.com',
-                'password' => 'password',
-                'nome' => 'andrea',
+                'email' => 'utente5@test.com',
+                'password' => Hash::make('password'),
                 'cognome' => 'baldocchi',
             ],
             [
-                'email' => 'antonio@test.com',
-                'password' => 'password',
+                'email' => 'utente6@test.com',
+                'password' => Hash::make('password'),
                 'nome' => 'antonio',
                 'cognome' => 'medugno',
             ],
             [
-                'email' => 'mario@test.com',
-                'password' => 'password',
+                'email' => 'utente7@test.com',
+                'password' => Hash::make('password'),
                 'nome' => 'mario',
                 'cognome' => 'rossi',
             ],
             [
-                'email' => 'giuseppe@test.com',
-                'password' => 'password',
+                'email' => 'utente8@test.com',
+                'password' => Hash::make('password'),
                 'nome' => 'giuseppe',
                 'cognome' => 'verdi',
             ],
             [
-                'email' => 'donato@test.com',
-                'password' => 'password',
+                'email' => 'utente9@test.com',
+                'password' => Hash::make('password'),
                 'nome' => 'donato',
                 'cognome' => 'ciao',
             ]
@@ -79,4 +78,3 @@ class UsersTableSeeder extends Seeder
         }
     }
 }
-
