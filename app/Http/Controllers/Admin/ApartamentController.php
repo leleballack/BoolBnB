@@ -15,6 +15,12 @@ use Carbon\Carbon;
 
 class ApartamentController extends Controller
 {
+
+  public function __construct() {
+
+  $this->middleware('role:UPRA', ['only' => ['edit', 'delete']]);
+  }
+
     public function index()
     {
       $user_id = Auth::user()->id;
@@ -93,7 +99,6 @@ class ApartamentController extends Controller
         $new_apt->long = $data["long"];
         $new_apt->lat = $data["lat"];
 
-
         $new_apt->save();
 
         if(isset($data['services'])) {
@@ -111,9 +116,9 @@ class ApartamentController extends Controller
 
     public function edit($id)
     {
-        $apartament = Apartament::find($id);
-        $sponsor =
-        Sponsor::where('apartament_id',$apartament->id)->get();
+        $apartament = Apartament::where('user_id', Auth::id())->findOrFail($id);
+
+        $sponsor = Sponsor::where('apartament_id',$apartament->id)->get();
         $services = Service::all();
         $now = Carbon::now();
 
@@ -126,7 +131,9 @@ class ApartamentController extends Controller
             $bool = false;
           }
         }
-        return view('admin.edit', compact('apartament', 'services','sponsor', 'bool'));
+
+        return view('admin.edit', compact('apartament', 'services','sponsor', 'bool', 'owner'));
+
     }
 
     public function update(Request $request, $id)

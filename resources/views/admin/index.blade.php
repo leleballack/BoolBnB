@@ -13,6 +13,7 @@
             <img src="{{ asset('storage/' . $apartament->image_url) }}" alt="" width="300" height="300">
           </div>
           <div class="col-lg-6">
+
             <a href="{{ route('admin.apt.edit', $apartament->id) }}" class="button btn btn-primary">Modifica</a>
 
             <form action="{{ route('admin.apt.destroy', $apartament->id) }}" method="post">
@@ -43,7 +44,5 @@
   @else
     <a href="{{ route('admin.apt.create') }}" class="button">Registra appartamento</a>
   @endif
-
-
 
 @endsection
