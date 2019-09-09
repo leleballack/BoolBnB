@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Braintree;
 use App\Apartament;
 use App\Sponsor;
@@ -11,7 +12,7 @@ use Carbon\Carbon;
 class PaymentsController extends Controller
 {
   public function paymentOne($id){
-    $apartament = Apartament::find($id);
+    $apartament = Apartament::where('user_id', Auth::id())->findOrFail($id);
     $sponsortypes = Sponsortype::all();
     $sponsor = Sponsor::where('apartament_id',$apartament->id)->get();
 
@@ -94,7 +95,7 @@ class PaymentsController extends Controller
            $new_sponsor->save();
            return dd($data);
 
-           
+
    //        return redirect()->route('admin.apt.index')->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
    //    } else {
    //        $errorString = "";
