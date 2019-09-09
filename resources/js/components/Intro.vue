@@ -10,7 +10,7 @@
         name="city_select"
         id="selectedCity"
       >
-        <option value="Seleziona citta" disabled selected="selected">- Seleziona città -</option>
+        <option value disabled>- Seleziona città -</option>
         <option value="Milano">Milano</option>
         <option value="Bologna">Bologna</option>
         <option value="Firenze">Firenze</option>
@@ -26,8 +26,15 @@ import { eventBus } from "../aptSearch.js";
 export default {
   data() {
     return {
-      selectedCity: " "
+      selectedCity: ""
     };
+  },
+
+  created() {
+    //////////
+    eventBus.$on("filterReset", data => {
+      this.selectedCity = data.selectedCity;
+    });
   },
 
   methods: {

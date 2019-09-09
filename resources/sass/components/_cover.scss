@@ -1,0 +1,33 @@
+.cover {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url("https://cdn.pixabay.com/photo/2016/06/24/10/47/architecture-1477041_1280.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    &__text {
+        text-align: center;
+        background-color: rgba($main-black-color, 0.7);
+        padding: 5rem;
+        color: white;
+    }
+
+    &__title {
+        font-size: 6rem;
+        letter-spacing: 2px;
+    }
+
+    &__description {
+        display: block;
+        font-size: 3rem;
+        letter-spacing: 1px;
+    }
+
+    &__cta {
+        margin-top: 3rem;
+    }
+}

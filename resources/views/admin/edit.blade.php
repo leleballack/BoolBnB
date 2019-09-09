@@ -95,7 +95,24 @@
     {{-- lat e long hidden --}}
     <input type="hidden" id="lat" name="lat" value="{{ old('lat', $apartament->lat) }}">
     <input type="hidden" id="long" name="long" value="{{ old('long', $apartament->long) }}">
-    {{-- --- --}}
+
+    {{-- visibility --}}
+    <div class="mt-3 mb-3">
+      <p>Vuoi che questo appartamento sia visibile al pubblico?</p>
+      <div class="form-check form-check-inline">
+        <label for="radio1">
+          <input name="visibility" type="radio" id="radio1" value="1" {{($apartament->visible === 1) ? 'checked' : ''}}>
+          Visibile
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <label for="radio2">
+          <input name="visibility" type="radio" id="radio2" value="0" {{($apartament->visible === 0) ? 'checked' : ''}}>
+          Nascosto
+        </label>
+      </div>
+    </div>
+
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>

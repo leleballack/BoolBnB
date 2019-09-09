@@ -85,10 +85,4 @@ class ApartamentController extends Controller
         //
     }
 
-    public function showSearchPage()
-    {
-        $services = Service::all(); 
-        return view('apartaments.search', compact('services')); 
-    }
-
 }

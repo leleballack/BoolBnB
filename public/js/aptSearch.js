@@ -8542,6 +8542,13 @@ if (inBrowser) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../aptSearch.js */ "./resources/js/aptSearch.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
 //
 //
 //
@@ -8600,7 +8607,9 @@ __webpack_require__.r(__webpack_exports__);
       cur_selected_city_lat: "",
       cur_selected_city_long: "",
       currentRadius: "",
-      sponsored: []
+      sponsored: [],
+      roomsNumber: "",
+      bedsNumber: ""
     };
   },
   created: function created() {
@@ -8620,6 +8629,25 @@ __webpack_require__.r(__webpack_exports__);
       _this.currentRadius = data;
 
       _this.fetchFromDb();
+    });
+    _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$on("roomsNumberChanged", function (data) {
+      _this.roomsNumber = data;
+
+      _this.fetchFromDb();
+    });
+    _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$on("bedsNumberChanged", function (data) {
+      _this.bedsNumber = data;
+
+      _this.fetchFromDb();
+    });
+    _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$on("filterReset", function (data) {
+      _this.currentSelectedCity = data.selectedCity;
+      _this.selectedServices = data.selectedServices;
+      _this.currentRadius = data.selectedRadius;
+      _this.roomsNumber = data.selectedRoomsNumber;
+      _this.bedsNumber = data.selectedBedsNumber;
+
+      _this.fetchFromDb();
     }); // fetches everything when component is created( first page load )
 
     this.fetchFromDb();
@@ -8629,17 +8657,20 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       page = page || "/api/filtered";
-      console.log(page);
       axios.get("https://api.tomtom.com/search/2/search/".concat(this.currentSelectedCity, ".json?countrySet=ITA&key=").concat(this.apiKey)).then(function (res) {
         _this2.cur_selected_city_lat = res.data.results[0].position.lat;
         _this2.cur_selected_city_long = res.data.results[0].position.lon;
         return axios.get(page, {
-          params: {
+          params: _objectSpread({
             lat: _this2.cur_selected_city_lat,
             "long": _this2.cur_selected_city_long,
             radius: _this2.currentRadius,
             services: _this2.selectedServices
-          }
+          }, _this2.bedsNumber ? {
+            beds: _this2.bedsNumber
+          } : "", {}, _this2.roomsNumber ? {
+            rooms: _this2.roomsNumber
+          } : "")
         }).then(function (res) {
           res.data.data !== undefined ? _this2.apartamentList = res.data.data : _this2.apartamentList = res.data;
           var parameters = {
@@ -8660,9 +8691,13 @@ __webpack_require__.r(__webpack_exports__);
 
       page = page || "/api/filtered";
       axios.get(page, {
-        params: {
+        params: _objectSpread({
           services: this.selectedServices
-        }
+        }, this.bedsNumber ? {
+          beds: this.bedsNumber
+        } : "", {}, this.roomsNumber ? {
+          rooms: this.roomsNumber
+        } : "")
       }).then(function (res) {
         res.data.data !== undefined ? _this3.apartamentList = res.data.data : _this3.apartamentList = res.data;
         var parameters = {
@@ -8671,7 +8706,6 @@ __webpack_require__.r(__webpack_exports__);
           prevPage: res.data.prev_page_url,
           nextPage: res.data.next_page_url
         };
-        console.log(res.data);
         _this3.pagination = parameters;
       })["catch"](function (err) {
         return console.log(err);
@@ -8741,6 +8775,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -8748,7 +8817,9 @@ __webpack_require__.r(__webpack_exports__);
       services: [],
       selectedServices: [],
       selectedCity: "",
-      selected: ""
+      selectedRadius: "",
+      selectedRoomsNumber: "",
+      selectedBedsNumber: ""
     };
   },
   created: function created() {
@@ -8764,7 +8835,28 @@ __webpack_require__.r(__webpack_exports__);
       _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$emit("servicesArrayWasChanged", this.selectedServices);
     },
     radiusChanged: function radiusChanged() {
-      _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$emit("radiusChanged", this.selected);
+      _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$emit("radiusChanged", this.selectedRadius);
+    },
+    roomsNumberChanged: function roomsNumberChanged() {
+      _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$emit("roomsNumberChanged", this.selectedRoomsNumber);
+    },
+    bedsNumberChanged: function bedsNumberChanged() {
+      _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$emit("bedsNumberChanged", this.selectedBedsNumber);
+    },
+    filterReset: function filterReset() {
+      this.selectedServices = [];
+      this.selectedCity = "";
+      this.selectedRadius = "";
+      this.selectedRoomsNumber = "";
+      this.selectedBedsNumber = "";
+      var changedData = {
+        selectedServices: this.selectedServices,
+        selectedCity: this.selectedCity,
+        selectedRadius: this.selectedRadius,
+        selectedRoomsNumber: this.selectedRoomsNumber,
+        selectedBedsNumber: this.selectedBedsNumber
+      };
+      _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$emit("filterReset", changedData);
     },
     fetchServices: function fetchServices() {
       var _this2 = this;
@@ -8816,8 +8908,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      selectedCity: " "
+      selectedCity: ""
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    //////////
+    _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$on("filterReset", function (data) {
+      _this.selectedCity = data.selectedCity;
+    });
   },
   methods: {
     cityWasChanged: function cityWasChanged() {
@@ -9374,6 +9474,15 @@ var render = function() {
                     _vm._v("Numero bagni: " + _vm._s(apartament.total_baths))
                   ]),
                   _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { href: "/apartaments/" + apartament.id }
+                    },
+                    [_vm._v("Dettagli")]
+                  ),
+                  _vm._v(" "),
                   _vm.sponsored.includes(apartament.id)
                     ? _c(
                         "span",
@@ -9539,59 +9648,198 @@ var render = function() {
       0
     ),
     _vm._v(" "),
-    _vm.selectedCity !== ""
-      ? _c("div", { staticClass: "row search__container" }, [
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.selected,
-                  expression: "selected"
-                }
-              ],
-              staticClass: "search__select",
-              on: {
-                change: [
-                  function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.selected = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  },
-                  _vm.radiusChanged
-                ]
+    _c("div", { staticClass: "row search__container" }, [
+      _c("div", { staticClass: "col-lg-auto" }, [
+        _c("p", { staticClass: "search__select--title" }, [
+          _vm._v("N° min. stanze")
+        ]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.selectedRoomsNumber,
+                expression: "selectedRoomsNumber"
               }
+            ],
+            staticClass: "search__select",
+            on: {
+              change: [
+                function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.selectedRoomsNumber = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+                _vm.roomsNumberChanged
+              ]
+            }
+          },
+          [
+            _c("option", { attrs: { value: "", disabled: "" } }, [
+              _vm._v("-------")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "1" } }, [_vm._v("1")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "2" } }, [_vm._v("2")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "3" } }, [_vm._v("3")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "4" } }, [_vm._v("4")])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _vm.selectedCity !== ""
+        ? _c("div", { staticClass: "col-lg-auto" }, [
+            _c("p", { staticClass: "search__select--title" }, [
+              _vm._v("Radius")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.selectedRadius,
+                    expression: "selectedRadius"
+                  }
+                ],
+                staticClass: "search__select",
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.selectedRadius = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    _vm.radiusChanged
+                  ]
+                }
+              },
+              [
+                _c("option", { attrs: { value: "", disabled: "" } }, [
+                  _vm._v("-------")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "20" } }, [_vm._v("20km")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "40" } }, [_vm._v("40km")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "60" } }, [_vm._v("60km")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "80" } }, [_vm._v("80km")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "100" } }, [_vm._v("100km")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "120" } }, [_vm._v("120km")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "200" } }, [_vm._v("200km")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "500" } }, [_vm._v("500km")])
+              ]
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-auto" }, [
+        _c("p", { staticClass: "search__select--title" }, [
+          _vm._v("N° min. posti letto")
+        ]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.selectedBedsNumber,
+                expression: "selectedBedsNumber"
+              }
+            ],
+            staticClass: "search__select",
+            on: {
+              change: [
+                function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.selectedBedsNumber = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+                _vm.bedsNumberChanged
+              ]
+            }
+          },
+          [
+            _c("option", { attrs: { value: "", disabled: "" } }, [
+              _vm._v("-------")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "1" } }, [_vm._v("1")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "2" } }, [_vm._v("2")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "3" } }, [_vm._v("3")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "4" } }, [_vm._v("4")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "5" } }, [_vm._v("5")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "6" } }, [_vm._v("6")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "7" } }, [_vm._v("7")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "8" } }, [_vm._v("8")])
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "container" }, [
+      _c(
+        "div",
+        { staticClass: "row search__resetbtn justify-content-center" },
+        [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-danger mb-2",
+              on: { click: _vm.filterReset }
             },
-            [
-              _c("option", { attrs: { value: "20" } }, [_vm._v("20km")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "40" } }, [_vm._v("40km")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "60" } }, [_vm._v("60km")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "80" } }, [_vm._v("80km")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "100" } }, [_vm._v("100km")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "120" } }, [_vm._v("120km")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "200" } }, [_vm._v("200km")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "500" } }, [_vm._v("500km")])
-            ]
+            [_vm._v("Resetta filtri")]
           )
-        ])
-      : _vm._e()
+        ]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -9655,17 +9903,9 @@ var render = function() {
           }
         },
         [
-          _c(
-            "option",
-            {
-              attrs: {
-                value: "Seleziona citta",
-                disabled: "",
-                selected: "selected"
-              }
-            },
-            [_vm._v("- Seleziona città -")]
-          ),
+          _c("option", { attrs: { value: "", disabled: "" } }, [
+            _vm._v("- Seleziona città -")
+          ]),
           _vm._v(" "),
           _c("option", { attrs: { value: "Milano" } }, [_vm._v("Milano")]),
           _vm._v(" "),

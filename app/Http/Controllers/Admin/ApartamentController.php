@@ -31,20 +31,15 @@ class ApartamentController extends Controller
           $now = Carbon::now();
 
           if( $variabile  > Carbon::now() ) {
-
             $cur_id = $s['apartament_id'];
             $cur_date = $s['end_date'];
     
-            // arr_2
             $cur_dt = [
               'cur_id' => $cur_id,
               'cur_date' => $variabile
             ];
             array_push($arr, $cur_id);
             array_push($arr_2, $cur_dt);
-
-            dump($arr);
-            dump($arr_2);
           }
         }
       }
@@ -60,6 +55,7 @@ class ApartamentController extends Controller
 
     public function store(Request $request)
     {
+
       $validator = $request->validate([
         "title" => "required|unique:apartaments|bail|max:255",
         "rooms" => "required|numeric|min:1",
@@ -69,7 +65,7 @@ class ApartamentController extends Controller
         "apt_pic" => "required|image|max:255",
         "address" => "required|max:255",
         "long" => "required|numeric",
-        "lat" => "required|numeric",
+        "lat" => "required|numeric"
       ]);
 
 
@@ -87,7 +83,7 @@ class ApartamentController extends Controller
         $new_apt->address = $data["address"];
         $new_apt->long = $data["long"];
         $new_apt->lat = $data["lat"];
-
+        $new_apt->visible = $data['visibility']; 
 
         $new_apt->save();
 
@@ -155,6 +151,7 @@ class ApartamentController extends Controller
         $upd_apt->address = $data["address"];
         $upd_apt->long = $data["long"];
         $upd_apt->lat = $data["lat"];
+        $upd_apt->visible = $data['visibility'];
 
         $upd_apt->update();
 
