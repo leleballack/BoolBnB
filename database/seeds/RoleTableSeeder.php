@@ -11,21 +11,21 @@ class RoleTableSeeder extends Seeder
   {
     $upr = new Role();
     $upr->name = 'UPR';
-    $upr->display_name = 'UPR'; // optional
-    $upr->description = 'Apt Create Permission'; // optional
+    $upr->display_name = 'UPR';
+    $upr->description = 'Apt Create Permission';
     $upr->save();
 
     $upra = new Role();
     $upra->name = 'UPRA';
-    $upra->display_name = 'UPRA'; // optional
-    $upra->description = 'Full Permission'; // optional
+    $upra->display_name = 'UPRA'; 
+    $upra->description = 'Full Permission';
     $upra->save();
 
-    $user = User::where('email', '=', 'utente1@test.com')->first();
-    $user->attachRole($upr);
-
-    $user = User::where('email', '=', 'pippo@pippo.it')->first();
-    $user->attachRole($upra);
+    // $user = User::where('email', '=', 'utente1@test.com')->first();
+    // $user->attachRole($upr);
+    //
+    // $user = User::where('email', '=', 'utente2@test.com')->first();
+    // $user->attachRole($upra);
 
     $createApt = new Permission();
     $createApt->name = 'create-apt';
