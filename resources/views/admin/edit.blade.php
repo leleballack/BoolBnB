@@ -36,23 +36,38 @@
     <div class="form-group">
       <label>Title</label>
       <input name="title" type="text" value="{{ old('title', $apartament->title) }}" class="form-control" placeholder="Title">
+      @error('title')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
     <div class="form-group">
       <label>Rooms</label>
       <input name="rooms" type="number" class="form-control" placeholder="Rooms" value="{{ old('rooms', $apartament->total_rooms) }}">
+      @error('rooms')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
     <div class="form-group">
       <label>Beds</label>
       <input name="beds" type="number" class="form-control" placeholder="Beds" value="{{ old('beds', $apartament->total_beds) }}">
+      @error('beds')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
     <div class="form-group">
       <label>Baths</label>
       <input name="baths" type="number" class="form-control" placeholder="Baths" value="{{ old('baths', $apartament->total_baths) }}">
+      @error('baths')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
 
     <div class="form-group">
       <label>Square Mt</label>
       <input name="square_mt" type="number" class="form-control" placeholder="Square Mt" value="{{ old('square_mt', $apartament->square_meters) }}">
+      @error('square_mt')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
 
     <div class="form-check">
@@ -77,6 +92,9 @@
             <div class="form-group">
                 <input name="apt_pic" type="file" class="form-control-file" name="fileToUpload" id="exampleInputFile">
                 <small id="fileHelp" class="form-text text-muted">L'immagine attuale è quella sulla destra. Se desideri cambiarla, scegli un'altro file (sotto i 2 MB).</small>
+                @error('apt_pic')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
         <div class="col-lg-3">
@@ -86,6 +104,9 @@
 
     <div class="form-group">
       <input class="form-control" type="text" id="address" placeholder="Indirizzo..." name="address" value="{{ old('address', $apartament->address) }}" readonly>
+      @error('address')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
 
     <div>

@@ -63,18 +63,35 @@ class ApartamentController extends Controller
 
     public function store(Request $request)
     {
-
-      $validator = $request->validate([
+      $rules = [
         "title" => "required|unique:apartaments|bail|max:255",
         "rooms" => "required|numeric|min:1",
         "beds" => "required|numeric|min:1",
         "baths" => "required|numeric|min:1",
         "square_mt" => "required|numeric|min:10",
-        "apt_pic" => "required|image|max:255",
-        "address" => "required|max:255",
+        "apt_pic" => "required|image",
+        "address" => "required",
         "long" => "required|numeric",
-        "lat" => "required|numeric"
-      ]);
+        "lat" => "required|numeric",
+      ];
+
+      $messages = [
+        "title.required" => "Titolo: E' necessario inserire un titolo",
+        "title.unique" => "Titolo: Il titolo è già presente. Inserirne uno nuovo",
+        "title.max" => "Titolo: Il titolo deve essere minore di 255 caratteri",
+        "rooms.required" => "Stanze: E' necessario inserire il numero di stanze totali",
+        "rooms.min" => "Stanze: E' necessario inserire un numero maggiore di zero",
+        "beds.required" => "Letti: E' necessario inserire il numero di letti totali",
+        "beds.min" => "Letti: E' necessario inserire un numero maggiore di zero",
+        "baths.required" => "Bagni: E' necessario inserire il numero di bagni totali",
+        "baths.min" => "Bagni: E' necessario inserire un numero maggiore di zero",
+        "square_mt.required" => "Metri quadrati: E' necessario inserire il numero di metri quadrati totali",
+        "square_mt.min" => "Metri Quadrati: E' necessario inserire un numero maggiore di :min",
+        "apt_pic.required" => "Immagine: E' necessario inserire un'immagine",
+        "apt_pic.image" => "Immagine: E' necessario che il file inserito sia un'immagine in formato jpeg, png, bmp, gif o svg",
+        "address.required" => "Indirizzo: E' necessario inserire un indirizzo valido",
+      ];
+      $request->validate($rules, $messages);
 
 
         $data = $request->all();
@@ -96,11 +113,11 @@ class ApartamentController extends Controller
         $new_apt->address = $data["address"];
         $new_apt->long = $data["long"];
         $new_apt->lat = $data["lat"];
-        $new_apt->visible = $data['visibility']; 
+        $new_apt->visible = $data['visibility'];
 
         $new_apt->save();
 
-        if(isset($data['services'])) 
+        if(isset($data['services']))
         {
         $new_apt->services()->sync( $data['services'] );
         }
@@ -138,17 +155,34 @@ class ApartamentController extends Controller
 
     public function update(Request $request, $id)
     {
-
-      $validator = $request->validate([
+      $rules = [
         "title" => "required|max:255",
         "rooms" => "required|numeric|min:1",
         "beds" => "required|numeric|min:1",
         "baths" => "required|numeric|min:1",
         "square_mt" => "required|numeric|min:10",
-        "address" => "required|max:255",
+        "address" => "required",
         "long" => "required|numeric",
         "lat" => "required|numeric",
-      ]);
+      ];
+
+      $messages = [
+       "title.required" => "Titolo: E' necessario inserire un titolo",
+       "title.max" => "Titolo: Il titolo deve essere minore di 255 caratteri",
+       "rooms.required" => "Stanze: E' necessario inserire il numero di stanze totali",
+       "rooms.min" => "Stanze: E' necessario inserire un numero maggiore di zero",
+       "beds.required" => "Letti: E' necessario inserire il numero di letti totali",
+       "beds.min" => "Letti: E' necessario inserire un numero maggiore di zero",
+       "baths.required" => "Bagni: E' necessario inserire il numero di bagni totali",
+       "baths.min" => "Bagni: E' necessario inserire un numero maggiore di zero",
+       "square_mt.required" => "Metri quadrati: E' necessario inserire il numero di metri quadrati totali",
+       "square_mt.min" => "Metri Quadrati: E' necessario inserire un numero maggiore di :min",
+       "apt_pic.required" => "Immagine: E' necessario inserire un'immagine",
+       "apt_pic.image" => "Immagine: E' necessario che il file inserito sia un'immagine in formato jpeg, png, bmp, gif o svg",
+       "address.required" => "Indirizzo: E' necessario inserire un indirizzo valido",
+     ];
+
+     $request->validate($rules, $messages);
 
         $data = $request->all();
         $upd_apt = Apartament::find($id);
