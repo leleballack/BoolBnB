@@ -2,12 +2,16 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 
 // Variables
-@import "generalset";
-@import "variables";
-@import "mappa";
+@import "base/variables";
+@import "base/base";
+@import "base/animations";
+
+@import "components/mappa";
+@import "components/button";
 @import "components/intro";
 @import "components/search";
 @import "components/apartament";
+@import "components/cover";
 
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";

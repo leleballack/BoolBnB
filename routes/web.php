@@ -15,10 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/', 'PageController@showHomePage');
+Route::get('/search', 'PageController@showSearchPage')->name('search');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/search', 'ApartamentController@showSearchPage');
+// Route::get('/search', 'ApartamentController@showSearchPage');
 
 Route::resource('/apartaments', 'ApartamentController');
 Route::resource('/message', 'MessageController');

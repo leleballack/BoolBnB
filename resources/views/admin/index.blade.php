@@ -4,7 +4,6 @@
 
   @if($apartaments->isNotEmpty())
     <div class="container">
-      tutti gli appartamenti <br>
       <a href="{{ route('admin.apt.create') }}" class="button btn btn-success mt-3 mb-3">Aggiungi appartamento</a>
       @foreach ($apartaments as $apartament)
         <div class="row">

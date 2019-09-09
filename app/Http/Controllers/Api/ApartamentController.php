@@ -15,6 +15,8 @@ class ApartamentController extends Controller
 
     public function filter(Request $request) 
     {
+        // dd($request->all()); 
+
         // getting all sponsored apts IDs
         $sponsoredApartaments = Apartament::whereHas('sponsors')
             ->get()
@@ -27,6 +29,7 @@ class ApartamentController extends Controller
         // se non ci sono parametri passati (o c'è solo la paginazione) => ritorna tutto paginato
         if( count($request->all()) === 0 || ( count($request->all()) === 1 && isset($request['page']) ) ) {
             $apts = $apartament
+                ->where('visible', '=', '1')
                 ->orderByRaw('FIELD (id, ' . implode(', ', $sponsoredApartaments) . ') DESC');
             return response()->json($apts->paginate(6)); 
         }
@@ -44,7 +47,19 @@ class ApartamentController extends Controller
             $apartaments =  $apartament->selectRaw("`id`, `title`, `total_rooms`, `total_beds`, `total_baths`, `square_meters`, `image_url`, `address`, `long`, `lat`, `visible`,
                 {$distance} AS distance" 
             )
-            ->whereRaw("{$distance} < ?", [$radius]); 
+            ->whereRaw("{$distance} < ?", [$radius])
+            ->orderByRaw('FIELD (id, ' . implode(', ', $sponsoredApartaments) . ') DESC')
+            ->orderByRaw('distance', 'ASC');
+        }
+
+        // filtering by room number
+        if( $request->has('rooms') && $request['rooms'] !== 'null' ) {
+            $apartaments = $apartament->where('total_rooms', '>', $request['rooms']);
+        }
+
+        // filtering by beds number
+        if( $request->has('beds') && $request['beds'] !== 'null' ) {
+            $apartaments = $apartament->where('total_beds', '>', $request['beds']);
         }
 
         // filter by services( array of elements( IDs ) )
@@ -53,12 +68,14 @@ class ApartamentController extends Controller
 
             $apartaments = $apartament->whereHas('services', function($q) use ($services)
             {
-                $q->whereIn('id', $services);
+                $q
+                    ->whereIn('id', $services);
             }, '=', count($services));
         }
 
         // return ordered results ( sponsored apartaments at the top )
         $apartaments = $apartament
+            ->where('visible', '=', '1')
             ->orderByRaw('FIELD (id, ' . implode(', ', $sponsoredApartaments) . ') DESC');
 
         return response()->json( $apartaments->paginate(6) );

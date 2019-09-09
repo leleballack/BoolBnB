@@ -6,6 +6,7 @@
         <p>Numero stanze: {{ apartament.total_rooms }}</p>
         <p>Numero letti: {{ apartament.total_beds }}</p>
         <p>Numero bagni: {{ apartament.total_baths }}</p>
+        <a class="btn btn-primary" :href="`/apartaments/${apartament.id}`">Dettagli</a>
 
         <span
           v-if="sponsored.includes(apartament.id)"
@@ -57,7 +58,9 @@ export default {
       cur_selected_city_lat: "",
       cur_selected_city_long: "",
       currentRadius: "",
-      sponsored: []
+      sponsored: [],
+      roomsNumber: "",
+      bedsNumber: ""
     };
   },
 
@@ -76,6 +79,25 @@ export default {
       this.fetchFromDb();
     });
 
+    eventBus.$on("roomsNumberChanged", data => {
+      this.roomsNumber = data;
+      this.fetchFromDb();
+    });
+
+    eventBus.$on("bedsNumberChanged", data => {
+      this.bedsNumber = data;
+      this.fetchFromDb();
+    });
+
+    eventBus.$on("filterReset", data => {
+      this.currentSelectedCity = data.selectedCity;
+      this.selectedServices = data.selectedServices;
+      this.currentRadius = data.selectedRadius;
+      this.roomsNumber = data.selectedRoomsNumber;
+      this.bedsNumber = data.selectedBedsNumber;
+      this.fetchFromDb();
+    });
+
     // fetches everything when component is created( first page load )
     this.fetchFromDb();
   },
@@ -83,8 +105,6 @@ export default {
   methods: {
     filterOnDbWithCity(page) {
       page = page || "/api/filtered";
-
-      console.log(page);
 
       axios
         .get(
@@ -100,7 +120,9 @@ export default {
                 lat: this.cur_selected_city_lat,
                 long: this.cur_selected_city_long,
                 radius: this.currentRadius,
-                services: this.selectedServices
+                services: this.selectedServices,
+                ...(this.bedsNumber ? { beds: this.bedsNumber } : ""),
+                ...(this.roomsNumber ? { rooms: this.roomsNumber } : "")
               }
             })
             .then(res => {
@@ -129,7 +151,9 @@ export default {
       axios
         .get(page, {
           params: {
-            services: this.selectedServices
+            services: this.selectedServices,
+            ...(this.bedsNumber ? { beds: this.bedsNumber } : ""),
+            ...(this.roomsNumber ? { rooms: this.roomsNumber } : "")
           }
         })
         .then(res => {
@@ -143,8 +167,6 @@ export default {
             prevPage: res.data.prev_page_url,
             nextPage: res.data.next_page_url
           };
-
-          console.log(res.data);
 
           this.pagination = parameters;
         })
