@@ -22,11 +22,6 @@ class Apartament extends Model
         return $this->hasMany('Message');
     }
 
-    // public function address()
-    // {
-    //     return $this->hasOne('Address');
-    // }
-
     public function services()
     {
         return $this->belongsToMany('App\Service');
@@ -34,6 +29,6 @@ class Apartament extends Model
 
     public function sponsors()
     {
-        return $this->hasMany('Sponsor');
+        return $this->hasMany('App\Sponsor');
     }
 }

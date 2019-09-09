@@ -26,6 +26,9 @@
         <option value="60">60km</option>
         <option value="80">80km</option>
         <option value="100">100km</option>
+        <option value="120">120km</option>
+        <option value="200">200km</option>
+        <option value="500">500km</option>
       </select>
     </div>
   </div>
@@ -64,10 +67,7 @@ export default {
     fetchServices() {
       axios
         .get("/api/services")
-        .then(res => {
-          this.services = res.data;
-          console.log(this.services);
-        })
+        .then(res => (this.services = res.data))
         .catch(err => console.log(err));
     }
   }

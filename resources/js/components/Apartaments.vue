@@ -6,12 +6,22 @@
         <p>Numero stanze: {{ apartament.total_rooms }}</p>
         <p>Numero letti: {{ apartament.total_beds }}</p>
         <p>Numero bagni: {{ apartament.total_baths }}</p>
+
+        <span
+          v-if="sponsored.includes(apartament.id)"
+          class="apartament__sponsorization"
+        >Sponsorizzato</span>
       </div>
 
       <nav>
         <ul class="pagination">
           <li :class="[{ disabled: !pagination.prevPage }]" class="page-item">
-            <a @click="fetchFromDb" class="page-link" href="#search_start_point" tabindex="-1">Prec</a>
+            <a
+              @click="fetchFromDb(pagination.prevPage)"
+              class="page-link"
+              href="#search_start_point"
+              tabindex="-1"
+            >Prec</a>
           </li>
           <li class="page-item">
             <p class="page-link">{{ pagination.currentPage }} di {{ pagination.lastPage }}</p>
@@ -46,7 +56,8 @@ export default {
       selectedServices: [],
       cur_selected_city_lat: "",
       cur_selected_city_long: "",
-      currentRadius: ""
+      currentRadius: "",
+      sponsored: []
     };
   },
 
@@ -64,27 +75,16 @@ export default {
       this.currentRadius = data;
       this.fetchFromDb();
     });
-  },
 
-  mounted() {
+    // fetches everything when component is created( first page load )
     this.fetchFromDb();
   },
 
   methods: {
-    fetchAndTransformFromTomtom() {
-      axios
-        .get(
-          `https://api.tomtom.com/search/2/search/${this.currentSelectedCity}.json?countrySet=ITA&key=${this.apiKey}`
-        )
-        .then(res => {
-          this.cur_selected_city_lat = res.data.results[0].position.lat;
-          this.cur_selected_city_long = res.data.results[0].position.lon;
-        })
-        .catch(err => console.log(err));
-    },
-
     filterOnDbWithCity(page) {
       page = page || "/api/filtered";
+
+      console.log(page);
 
       axios
         .get(
@@ -115,6 +115,8 @@ export default {
                 nextPage: res.data.next_page_url
               };
 
+              console.log(res.data);
+
               this.pagination = parameters;
             })
             .catch(err => console.log(err));
@@ -142,12 +144,22 @@ export default {
             nextPage: res.data.next_page_url
           };
 
+          console.log(res.data);
+
           this.pagination = parameters;
         })
         .catch(err => console.log(err));
     },
 
+    getSponsoredIDs() {
+      axios
+        .get("api/sponsored")
+        .then(res => (this.sponsored = res.data))
+        .catch(err => console.log(err));
+    },
+
     fetchFromDb(page) {
+      this.getSponsoredIDs();
       this.currentSelectedCity !== ""
         ? this.filterOnDbWithCity(page)
         : this.filterOnDbWithoutCity(page);
