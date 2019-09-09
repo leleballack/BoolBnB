@@ -14,8 +14,13 @@
                         </div>
                     @endif
 
+                    @role("UPRA")
                     <a href='{{ route('admin.apt.index') }}'>Vedi appartamenti</a>
+                    @endrole
 
+                    @role("UPR")
+                    <a href="{{ route('admin.apt.create') }}" class="button">Registra appartamento</a>
+                    @endrole
 
 
                     You are logged in!

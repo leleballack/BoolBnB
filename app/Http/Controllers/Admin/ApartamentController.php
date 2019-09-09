@@ -6,13 +6,21 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use App\Sponsor;
-use App\Service;
 use App\Apartament;
+use App\User;
+use App\Service;
+use App\Sponsor;
+use App\Role;
+
 use Carbon\Carbon;
 
 class ApartamentController extends Controller
 {
+
+  public function __construct() {
+
+  $this->middleware('role:UPRA', ['only' => ['edit', 'delete']]);
+  }
 
     public function index()
     {
@@ -33,7 +41,7 @@ class ApartamentController extends Controller
           if( $variabile  > Carbon::now() ) {
             $cur_id = $s['apartament_id'];
             $cur_date = $s['end_date'];
-    
+
             $cur_dt = [
               'cur_id' => $cur_id,
               'cur_date' => $variabile
@@ -72,6 +80,11 @@ class ApartamentController extends Controller
         $data = $request->all();
         $new_apt = new Apartament();
         $new_apt->user_id = Auth::user()->id;
+        if (!Auth::user()->hasRole("UPRA"))
+        {
+          Auth::user()->detachRole(Role::where('name','UPR')->first());
+          Auth::user()->attachRole(Role::where('name','UPRA')->first());
+        };
         $new_apt->title = $data["title"];
         $new_apt->total_rooms = $data["rooms"];
         $new_apt->total_beds = $data["beds"];
@@ -87,8 +100,9 @@ class ApartamentController extends Controller
 
         $new_apt->save();
 
-        if(isset($data['services'])) {
-          $new_apt->services()->sync( $data['services'] );
+        if(isset($data['services'])) 
+        {
+        $new_apt->services()->sync( $data['services'] );
         }
 
         return redirect()->route("admin.apt.index");
@@ -97,14 +111,14 @@ class ApartamentController extends Controller
 
     public function show($id)
     {
-        //
+
     }
 
     public function edit($id)
     {
-        $apartament = Apartament::find($id);
-        $sponsor =
-        Sponsor::where('apartament_id',$apartament->id)->get();
+        $apartament = Apartament::where('user_id', Auth::id())->findOrFail($id);
+
+        $sponsor = Sponsor::where('apartament_id',$apartament->id)->get();
         $services = Service::all();
         $now = Carbon::now();
 
@@ -117,7 +131,9 @@ class ApartamentController extends Controller
             $bool = false;
           }
         }
-        return view('admin.edit', compact('apartament', 'services','sponsor', 'bool'));
+
+        return view('admin.edit', compact('apartament', 'services','sponsor', 'bool', 'owner'));
+
     }
 
     public function update(Request $request, $id)
@@ -127,7 +143,7 @@ class ApartamentController extends Controller
         "title" => "required|max:255",
         "rooms" => "required|numeric|min:1",
         "beds" => "required|numeric|min:1",
-        "baths" => "required|numeric|min:1", 
+        "baths" => "required|numeric|min:1",
         "square_mt" => "required|numeric|min:10",
         "address" => "required|max:255",
         "long" => "required|numeric",
@@ -163,6 +179,14 @@ class ApartamentController extends Controller
     public function destroy($id)
     {
         $aptToDelete = Apartament::find($id)->delete();
+
+        $user_id = Auth::user()->id;
+        $apartaments = Apartament::where('user_id', $user_id)->get();
+        if ($apartaments->isEmpty()) {
+          Auth::user()->detachRole(Role::where('name','UPRA')->first());
+          Auth::user()->attachRole(Role::where('name','UPR')->first());
+        };
+
         return redirect()->route('admin.apt.index');
     }
 
