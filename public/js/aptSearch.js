@@ -8578,6 +8578,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -8589,7 +8599,8 @@ __webpack_require__.r(__webpack_exports__);
       selectedServices: [],
       cur_selected_city_lat: "",
       cur_selected_city_long: "",
-      currentRadius: ""
+      currentRadius: "",
+      sponsored: []
     };
   },
   created: function created() {
@@ -8609,52 +8620,43 @@ __webpack_require__.r(__webpack_exports__);
       _this.currentRadius = data;
 
       _this.fetchFromDb();
-    });
-  },
-  mounted: function mounted() {
+    }); // fetches everything when component is created( first page load )
+
     this.fetchFromDb();
   },
   methods: {
-    fetchAndTransformFromTomtom: function fetchAndTransformFromTomtom() {
+    filterOnDbWithCity: function filterOnDbWithCity(page) {
       var _this2 = this;
 
+      page = page || "/api/filtered";
+      console.log(page);
       axios.get("https://api.tomtom.com/search/2/search/".concat(this.currentSelectedCity, ".json?countrySet=ITA&key=").concat(this.apiKey)).then(function (res) {
         _this2.cur_selected_city_lat = res.data.results[0].position.lat;
         _this2.cur_selected_city_long = res.data.results[0].position.lon;
-      })["catch"](function (err) {
-        return console.log(err);
-      });
-    },
-    filterOnDbWithCity: function filterOnDbWithCity(page) {
-      var _this3 = this;
-
-      page = page || "/api/filtered";
-      axios.get("https://api.tomtom.com/search/2/search/".concat(this.currentSelectedCity, ".json?countrySet=ITA&key=").concat(this.apiKey)).then(function (res) {
-        _this3.cur_selected_city_lat = res.data.results[0].position.lat;
-        _this3.cur_selected_city_long = res.data.results[0].position.lon;
         return axios.get(page, {
           params: {
-            lat: _this3.cur_selected_city_lat,
-            "long": _this3.cur_selected_city_long,
-            radius: _this3.currentRadius,
-            services: _this3.selectedServices
+            lat: _this2.cur_selected_city_lat,
+            "long": _this2.cur_selected_city_long,
+            radius: _this2.currentRadius,
+            services: _this2.selectedServices
           }
         }).then(function (res) {
-          res.data.data !== undefined ? _this3.apartamentList = res.data.data : _this3.apartamentList = res.data;
+          res.data.data !== undefined ? _this2.apartamentList = res.data.data : _this2.apartamentList = res.data;
           var parameters = {
             currentPage: res.data.current_page || 1,
             lastPage: res.data.last_page || 1,
             prevPage: res.data.prev_page_url,
             nextPage: res.data.next_page_url
           };
-          _this3.pagination = parameters;
+          console.log(res.data);
+          _this2.pagination = parameters;
         })["catch"](function (err) {
           return console.log(err);
         });
       });
     },
     filterOnDbWithoutCity: function filterOnDbWithoutCity(page) {
-      var _this4 = this;
+      var _this3 = this;
 
       page = page || "/api/filtered";
       axios.get(page, {
@@ -8662,19 +8664,30 @@ __webpack_require__.r(__webpack_exports__);
           services: this.selectedServices
         }
       }).then(function (res) {
-        res.data.data !== undefined ? _this4.apartamentList = res.data.data : _this4.apartamentList = res.data;
+        res.data.data !== undefined ? _this3.apartamentList = res.data.data : _this3.apartamentList = res.data;
         var parameters = {
           currentPage: res.data.current_page || 1,
           lastPage: res.data.last_page || 1,
           prevPage: res.data.prev_page_url,
           nextPage: res.data.next_page_url
         };
-        _this4.pagination = parameters;
+        console.log(res.data);
+        _this3.pagination = parameters;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    getSponsoredIDs: function getSponsoredIDs() {
+      var _this4 = this;
+
+      axios.get("api/sponsored").then(function (res) {
+        return _this4.sponsored = res.data;
       })["catch"](function (err) {
         return console.log(err);
       });
     },
     fetchFromDb: function fetchFromDb(page) {
+      this.getSponsoredIDs();
       this.currentSelectedCity !== "" ? this.filterOnDbWithCity(page) : this.filterOnDbWithoutCity(page);
     }
   }
@@ -8692,6 +8705,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _aptSearch_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../aptSearch.js */ "./resources/js/aptSearch.js");
+//
+//
+//
 //
 //
 //
@@ -8754,8 +8770,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.get("/api/services").then(function (res) {
-        _this2.services = res.data;
-        console.log(_this2.services);
+        return _this2.services = res.data;
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -9357,7 +9372,15 @@ var render = function() {
                   _vm._v(" "),
                   _c("p", [
                     _vm._v("Numero bagni: " + _vm._s(apartament.total_baths))
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _vm.sponsored.includes(apartament.id)
+                    ? _c(
+                        "span",
+                        { staticClass: "apartament__sponsorization" },
+                        [_vm._v("Sponsorizzato")]
+                      )
+                    : _vm._e()
                 ]
               )
             }),
@@ -9376,7 +9399,11 @@ var render = function() {
                       {
                         staticClass: "page-link",
                         attrs: { href: "#search_start_point", tabindex: "-1" },
-                        on: { click: _vm.fetchFromDb }
+                        on: {
+                          click: function($event) {
+                            return _vm.fetchFromDb(_vm.pagination.prevPage)
+                          }
+                        }
                       },
                       [_vm._v("Prec")]
                     )
@@ -9554,7 +9581,13 @@ var render = function() {
               _vm._v(" "),
               _c("option", { attrs: { value: "80" } }, [_vm._v("80km")]),
               _vm._v(" "),
-              _c("option", { attrs: { value: "100" } }, [_vm._v("100km")])
+              _c("option", { attrs: { value: "100" } }, [_vm._v("100km")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "120" } }, [_vm._v("120km")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "200" } }, [_vm._v("200km")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "500" } }, [_vm._v("500km")])
             ]
           )
         ])
@@ -9839,23 +9872,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Search__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Search */ "./resources/js/components/Search.vue");
 
 
-var eventBus = new Vue__WEBPACK_IMPORTED_MODULE_0__["default"]({// data: {
-  //     apiKey: "z4n3yxl4X8bvK1BA6YlSAaYcV7OTbkZc",
-  //     selectedCity: ""
-  // },
-  // methods: {
-  //     fetchAndTransformFromTomtom() {
-  //         axios
-  //             .get(
-  //                 `https://api.tomtom.com/search/2/search/Milano.json?countrySet=ITA&key=${this.apiKey}`
-  //             )
-  //             .then(res => {
-  //                 console.log(res);
-  //             })
-  //             .catch(err => console.log(err));
-  //     }
-  // }
-});
+var eventBus = new Vue__WEBPACK_IMPORTED_MODULE_0__["default"]({});
 new Vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
   el: "#search",
   render: function render(h) {

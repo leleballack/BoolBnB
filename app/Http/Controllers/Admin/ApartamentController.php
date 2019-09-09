@@ -11,6 +11,7 @@ use App\User;
 use App\Service;
 use App\Sponsor;
 use App\Role;
+
 use Carbon\Carbon;
 
 class ApartamentController extends Controller
@@ -23,6 +24,7 @@ class ApartamentController extends Controller
 
     public function index()
     {
+
       $user_id = Auth::user()->id;
       $apartaments = Apartament::where('user_id', $user_id)->get();
 
@@ -101,7 +103,8 @@ class ApartamentController extends Controller
 
         $new_apt->save();
 
-        if(isset($data['services'])) {
+        if(isset($data['services'])) 
+        {
         $new_apt->services()->sync( $data['services'] );
         }
 
