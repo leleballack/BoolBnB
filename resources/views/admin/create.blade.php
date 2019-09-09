@@ -34,23 +34,38 @@
       <label>Title</label>
       {{-- <textarea name="title" rows="2" cols="80" class="form-control"></textarea> --}}
       <input name="title" type="text" value="{{ old('title') }}" class="form-control" placeholder="Title">
+      @error('title')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
     <div class="form-group">
       <label>Rooms</label>
       <input name="rooms" type="number" value="{{ old('rooms') }}" class="form-control" placeholder="Rooms">
+      @error('rooms')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
     <div class="form-group">
       <label>Beds</label>
       <input name="beds" type="number" value="{{ old('beds') }}" class="form-control" placeholder="Beds">
+      @error('beds')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
     <div class="form-group">
       <label>Baths</label>
       <input name="baths" type="number" value="{{ old('baths') }}" class="form-control" placeholder="Baths">
+      @error('baths')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
 
     <div class="form-group">
       <label>Square Mt</label>
       <input name="square_mt" type="number" value="{{ old('square_mt') }}" class="form-control" placeholder="Square Mt">
+      @error('square_mt')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
 
     <div class="form-check">
@@ -65,10 +80,16 @@
     <div class="form-group">
         <input name="apt_pic" type="file" class="form-control-file" name="fileToUpload" id="exampleInputFile">
         <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
+        @error('apt_pic')
+          <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
     </div>
 
     <div class="form-group">
       <input class="form-control" type="text" value="{{ old('address') }}" id="address" placeholder="Indirizzo..." name="address" value="" readonly>
+      @error('address')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
 
     <div>
