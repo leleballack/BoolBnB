@@ -4,40 +4,47 @@ namespace App\Http\Controllers\Api;
 
 use App\Apartament;
 use App\Service;
+use App\Sponsor;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ApartamentController extends Controller
 {
 
     public function filter(Request $request) 
     {
-        // se non ci sono parametri passati (o c'è solo la paginazione) => ritorna tutto paginato
-        if( count($request->all()) === 0 || $request->has('page') ) {
-            return response()->json(Apartament::paginate(6)); 
-        }
-
-        // filter by Radius: default vaue = 20 ( km )
-        $radius = $request['radius'] | 20;
+        // getting all sponsored apts IDs
+        $sponsoredApartaments = Apartament::whereHas('sponsors')
+            ->get()
+            ->pluck('id')
+            ->toArray(); 
 
         // new query instance
         $apartament = Apartament::query(); 
 
-        // filter by radius( query )
+        // se non ci sono parametri passati (o c'è solo la paginazione) => ritorna tutto paginato
+        if( count($request->all()) === 0 || ( count($request->all()) === 1 && isset($request['page']) ) ) {
+            $apts = $apartament
+                ->orderByRaw('FIELD (id, ' . implode(', ', $sponsoredApartaments) . ') DESC');
+            return response()->json($apts->paginate(6)); 
+        }
+
+        // raggio passato da frontend altrimenti di default 20km
+        $radius = (int)$request['radius'] ?: 20;
+
         if($request->has('lat') && $request['lat'] !== 'null' && $request->has('long') && $request['long'] !== 'null') {
             $startLat = $request['lat'];
             $startLong = $request['long']; 
             $earth_radius = 6371;
 
-            $apartaments =  $apartament->selectRaw('`id`, `title`, `total_rooms`, `total_beds`, `total_baths`, `square_meters`, `image_url`, `address`, `long`, `lat`, `visible`,
-                    ( (' . $earth_radius . ') * acos( cos( radians(' . $startLat . ') ) * 
-                    cos( radians( `lat` ) ) * cos( radians( `long` ) - radians(' . $startLong . ') ) + 
-                    sin( radians(' . $startLat . ') ) *
-                    sin( radians( `lat` ) ) ) )
-                 AS distance'
+            $distance = "($earth_radius * acos(cos(radians($startLat)) * cos(radians(`lat`)) * cos(radians(`long`) - radians($startLong)) + sin(radians($startLat)) * sin(radians(`lat`))))";
+
+            $apartaments =  $apartament->selectRaw("`id`, `title`, `total_rooms`, `total_beds`, `total_baths`, `square_meters`, `image_url`, `address`, `long`, `lat`, `visible`,
+                {$distance} AS distance" 
             )
-            ->havingRaw("distance < ?", [$radius]);
+            ->whereRaw("{$distance} < ?", [$radius]); 
         }
 
         // filter by services( array of elements( IDs ) )
@@ -50,7 +57,11 @@ class ApartamentController extends Controller
             }, '=', count($services));
         }
 
-        return count($apartaments->get()) > 6 ? response()->json($apartaments->paginate(6)) : response()->json($apartaments->get());
+        // return ordered results ( sponsored apartaments at the top )
+        $apartaments = $apartament
+            ->orderByRaw('FIELD (id, ' . implode(', ', $sponsoredApartaments) . ') DESC');
+
+        return response()->json( $apartaments->paginate(6) );
     }
 
 
@@ -58,6 +69,22 @@ class ApartamentController extends Controller
     {
         $services = Service::all();
         return response()->json($services); 
+    }
+
+    public function returnSponsoredIDs() {
+
+        // retrieve all sponsored apartaments IDs and send them to the frontend;
+        // check in the frontend if the current rendered apartament id is included into this array
+        // render a target with 'sponsorizzato' word on those apartaments 
+
+        $apartament = Apartament::query(); 
+
+        $sponsoredApartaments = Apartament::whereHas('sponsors')
+            ->get()
+            ->pluck('id')
+            ->toArray(); 
+
+        return response()->json($sponsoredApartaments); 
     }
 
 }

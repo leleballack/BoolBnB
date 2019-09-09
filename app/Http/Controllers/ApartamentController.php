@@ -49,8 +49,8 @@ class ApartamentController extends Controller
      * @param  \App\Apartament  $apartament
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show(Request $request, $id)
+    {    
         $apartament = Apartament::findOrFail($id);
         $services  = Service::all();
         

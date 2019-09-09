@@ -112,10 +112,20 @@
   border: 1px solid darkred;
   padding: 10px 20px;
   margin: 15px 0 15px;
+  position: relative;
 }
 
 .apartament__title {
   font-size: 30px;
+}
+
+.apartament__sponsorization {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 10px;
+  background-color: red;
+  color: white;
 }
 
 /*!
