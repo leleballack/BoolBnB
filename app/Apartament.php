@@ -7,10 +7,13 @@ use App\Message;
 use App\Address;
 use App\Service;
 use App\Sponsor;
+use CyrildeWit\EloquentViewable\Viewable;
+use CyrildeWit\EloquentViewable\Contracts\Viewable as ViewableContract;
 use Illuminate\Database\Eloquent\Model;
 
-class Apartament extends Model
+class Apartament extends Model implements ViewableContract
 {
+      use Viewable;
     // relationship
     public function user()
     {
