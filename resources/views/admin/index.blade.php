@@ -30,6 +30,7 @@
                 @endforeach
               @else
                  <a class="btn btn-success" href="{{route('paymentOne', $apartament->id)}}">Sponsorizza Appartamento</a>
+                 <a class="btn btn-danger" href="{{route('post.show',$apartament->id)}}">Vedi le richieste</a>
               @endif
 
           </div>
