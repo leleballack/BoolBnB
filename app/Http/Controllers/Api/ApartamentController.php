@@ -54,12 +54,12 @@ class ApartamentController extends Controller
 
         // filtering by room number
         if( $request->has('rooms') && $request['rooms'] !== 'null' ) {
-            $apartaments = $apartament->where('total_rooms', '>', $request['rooms']);
+            $apartaments = $apartament->where('total_rooms', '>=', $request['rooms']);
         }
 
         // filtering by beds number
         if( $request->has('beds') && $request['beds'] !== 'null' ) {
-            $apartaments = $apartament->where('total_beds', '>', $request['beds']);
+            $apartaments = $apartament->where('total_beds', '>=', $request['beds']);
         }
 
         // filter by services( array of elements( IDs ) )
@@ -102,6 +102,11 @@ class ApartamentController extends Controller
             ->toArray(); 
 
         return response()->json($sponsoredApartaments); 
+    }
+
+    public function statistics(Apartament $apartament, $id)
+    {   
+        dd($id);
     }
 
 }

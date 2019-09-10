@@ -21,4 +21,5 @@ Route::namespace('Api')->group(function() {
     Route::get('/services', 'ApartamentController@getServicesList');
     Route::get('/filtered', 'ApartamentController@filter'); 
     Route::get('/sponsored', 'ApartamentController@returnSponsoredIDs'); 
+    Route::get('/statistics/{id}', 'ApartamentController@statistics'); 
 });
