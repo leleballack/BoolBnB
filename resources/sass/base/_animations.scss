@@ -42,12 +42,20 @@
     }
 }
 
-@keyframes changeColor {
+@keyframes colorchange {
     0% {
-        background-color: $main-white-color;
+        background: $main-blue-color;
     }
-
+    25% {
+        background: lighten($color: $main-blue-color, $amount: 20);
+    }
+    50% {
+        background: lighten($color: $main-blue-color, $amount: 35);
+    }
+    75% {
+        background: lighten($color: $main-blue-color, $amount: 20);
+    }
     100% {
-        background-color: $main-blue-color;
+        background: $main-blue-color;
     }
 }

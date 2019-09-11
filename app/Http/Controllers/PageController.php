@@ -19,7 +19,7 @@ class PageController extends Controller
         $sponsoredApartaments = $apartament
             ->where('visible', '=', '1')
             ->orderByRaw('FIELD (id, ' . implode(', ', $sponsoredIDs) . ') DESC')
-            ->paginate(9);
+            ->paginate(12);
         
         return view('homepage', compact('sponsoredApartaments', 'sponsoredIDs'));
     }

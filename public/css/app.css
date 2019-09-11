@@ -1,4 +1,34 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@charset "UTF-8";
+
+/*
+
+    !!!
+
+    Due break point: 767px & 970px
+
+    Per ogni elemento che va reso responsive, vanno aggiunte sotto alle proprieta da cambiare i mixin, con il breakpoint come variabile!!
+
+    esempio:
+
+    .homepage {
+        &__heading {
+            background-image: linear-gradient(
+                to right,
+                $main-black-color,
+                lighten($color: $main-blue-color, $amount: 50)
+            );
+            margin: 8rem 0 5rem;
+            @include respond(phone) {
+                margin: 5rem 3rem;
+            }
+        }
+    }
+
+    Ogni volta che avete bisogno di rendere qualcosa responsive, fate include respond( tablet or phone, quello che vi serve ), e cambiate le proprieta che vanno cambiate! 
+
+
+
+*/
 
 *,
 *::before,
@@ -10,6 +40,12 @@
 
 html {
   font-size: 62.5%;
+}
+
+@media (max-width: 970px) {
+  html {
+    font-size: 50%;
+  }
 }
 
 .navbar,
@@ -116,31 +152,67 @@ main {
   }
 }
 
-@-webkit-keyframes changeColor {
+@-webkit-keyframes colorchange {
   0% {
-    background-color: #ffffff;
+    background: #002167;
+  }
+
+  25% {
+    background: #0042cd;
+  }
+
+  50% {
+    background: #1b64ff;
+  }
+
+  75% {
+    background: #0042cd;
   }
 
   100% {
-    background-color: #002167;
+    background: #002167;
   }
 }
 
-@keyframes changeColor {
+@keyframes colorchange {
   0% {
-    background-color: #ffffff;
+    background: #002167;
+  }
+
+  25% {
+    background: #0042cd;
+  }
+
+  50% {
+    background: #1b64ff;
+  }
+
+  75% {
+    background: #0042cd;
   }
 
   100% {
-    background-color: #002167;
+    background: #002167;
   }
 }
 
-.heading--tertiary {
+.heading--secondary {
   font-size: 3rem;
   letter-spacing: 1px;
   text-transform: uppercase;
   font-weight: 600;
+}
+
+@media (max-width: 970px) {
+  .heading--secondary {
+    font-size: 2.6rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .heading--secondary {
+    font-size: 2.2rem;
+  }
 }
 
 .heading--transparent {
@@ -310,9 +382,20 @@ main {
   width: 200px;
 }
 
+.homepage__title-container {
+  text-align: center;
+  padding: 1rem;
+}
+
 .homepage__heading {
   background-image: linear-gradient(to right, #000b23, #6798ff);
   margin: 8rem 0 5rem;
+}
+
+@media (max-width: 767px) {
+  .homepage__heading {
+    margin: 4rem 0 2.5rem;
+  }
 }
 
 .homepage__grid {
@@ -356,12 +439,14 @@ main {
 }
 
 .homepage__apartament--sponsored {
+  font-size: 1.4rem;
   position: absolute;
   top: 0;
   right: 0;
   padding: 0.5rem 1rem;
-  -webkit-animation: changeColor 2s linear infinite;
-          animation: changeColor 2s linear infinite;
+  color: #ffffff;
+  -webkit-animation: colorchange 2s linear infinite;
+          animation: colorchange 2s linear infinite;
 }
 
 .pagination {

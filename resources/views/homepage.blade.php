@@ -17,10 +17,10 @@
 
     <section class="section">
         <div class="container homepage">
-            <div class="row justify-content-center">
-                <h3 class="heading--tertiary heading--transparent homepage__heading">
+            <div class="homepage__title-container">
+                <h2 class="heading--secondary heading--transparent homepage__heading">
                     Gli appartamenti in evidenza
-                </h3>
+                </h2>
             </div>
 
             <div class="homepage__grid">
