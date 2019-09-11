@@ -26,6 +26,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "chart.js": "^2.8.0",
         "mysql-server": "^1.0.5",
         "qs": "^6.8.0"
     }

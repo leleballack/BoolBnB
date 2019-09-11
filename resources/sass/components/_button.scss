@@ -13,13 +13,14 @@
         font-size: $font-size-base;
 
         //Change for the <button> element
-        border: none;
         cursor: pointer;
     }
 
     &:hover {
+        border: 2px solid transparent;
         transform: translateY(-3px);
         box-shadow: 0 1rem 2rem rgba($main-black-color, 0.2);
+        color: $main-white-color;
 
         &::after {
             transform: scaleX(1.4) scaleY(1.6);
@@ -35,6 +36,7 @@
     }
 
     &--blue {
+        border: 2px outset lighten($color: $main-blue-color, $amount: 50);
         background-color: $main-blue-color;
         color: $main-white-color;
 

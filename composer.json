@@ -10,13 +10,13 @@
     "require": {
         "php": "^7.1.3",
         "barryvdh/laravel-cors": "^0.11.4",
-        "braintree/braintree_php": "^3.40",
+        "cyrildewit/eloquent-viewable": "^4.1",
         "fideloper/proxy": "^4.0",
         "fzaninotto/faker": "^1.8",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
-        "spatie/laravel-json-api-paginate": "^1.4",
-        "zizaco/entrust": "dev-master"
+        "zizaco/entrust": "dev-master",
+        "braintree/braintree_php": "3.40.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

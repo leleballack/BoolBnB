@@ -39,3 +39,5 @@ Route::resource('/message', 'MessageController');
   // Payment manager route
   Route::middleware('auth')->get('show/{id}/payment', 'PaymentsController@paymentOne')->name('paymentOne');
   Route::post('/checkout', 'PaymentsController@paymentTwo');
+
+  Route::middleware('auth')->get('/show-statistics/{id}', 'ApartamentController@showView')->name('post.show');

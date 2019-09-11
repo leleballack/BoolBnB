@@ -116,6 +116,41 @@ main {
   }
 }
 
+@-webkit-keyframes changeColor {
+  0% {
+    background-color: #ffffff;
+  }
+
+  100% {
+    background-color: #002167;
+  }
+}
+
+@keyframes changeColor {
+  0% {
+    background-color: #ffffff;
+  }
+
+  100% {
+    background-color: #002167;
+  }
+}
+
+.heading--tertiary {
+  font-size: 3rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.heading--transparent {
+  display: inline-block;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  padding-bottom: 0.5rem;
+}
+
 #map {
   height: 500px;
 }
@@ -132,13 +167,14 @@ main {
   position: relative;
   letter-spacing: 3px;
   font-size: 1.6rem;
-  border: none;
   cursor: pointer;
 }
 
 .button:hover {
+  border: 2px solid transparent;
   transform: translateY(-3px);
   box-shadow: 0 1rem 2rem rgba(0, 11, 35, 0.2);
+  color: #ffffff;
 }
 
 .button:hover::after {
@@ -154,6 +190,7 @@ main {
 }
 
 .button--blue {
+  border: 2px outset #6798ff;
   background-color: #002167;
   color: #ffffff;
 }
@@ -273,6 +310,67 @@ main {
   width: 200px;
 }
 
+.homepage__heading {
+  background-image: linear-gradient(to right, #000b23, #6798ff);
+  margin: 8rem 0 5rem;
+}
+
+.homepage__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 33rem);
+  grid-column-gap: 3.5rem;
+  grid-row-gap: 3.5rem;
+  align-content: center;
+  justify-content: center;
+}
+
+.homepage__apartament {
+  position: relative;
+  cursor: pointer;
+  border: 2px outset #6798ff;
+  background-color: #eff4ff;
+  transition: 0.3s transform;
+}
+
+.homepage__apartament:hover {
+  transform: scale(1.05);
+  border: 2px inset #6798ff;
+}
+
+.homepage__apartament--image-container {
+  width: 100%;
+  height: 25rem;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0px 6px 5px -4px #000b23;
+}
+
+.homepage__apartament--title-container {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.homepage__apartament--title {
+  font-size: 2rem;
+  color: #002167;
+}
+
+.homepage__apartament--sponsored {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5rem 1rem;
+  -webkit-animation: changeColor 2s linear infinite;
+          animation: changeColor 2s linear infinite;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3rem 0;
+}
+
 .apartament {
   border: 1px solid darkred;
   padding: 10px 20px;
@@ -299,13 +397,15 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url("https://cdn.pixabay.com/photo/2016/06/24/10/47/architecture-1477041_1280.jpg");
+  background-image: url("https://cdn.pixabay.com/photo/2017/06/03/10/06/house-2368389_1280.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
 .cover__text {
+  border-radius: 1rem;
   text-align: center;
   background-color: rgba(0, 11, 35, 0.7);
   padding: 5rem;
@@ -361,7 +461,7 @@ main {
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "Nunito", sans-serif;
+  --font-family-sans-serif: "Roboto", sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -393,7 +493,7 @@ section {
 
 body {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 1.6;
@@ -6466,7 +6566,7 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -6591,7 +6691,7 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "Nunito", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;

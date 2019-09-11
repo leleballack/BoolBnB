@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ac51e4e92ba198f3f5070a311dc7353",
+    "content-hash": "82752ced422e3d6cca8e1b058acc3453",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -166,6 +166,81 @@
             ],
             "description": "Braintree PHP Client Library",
             "time": "2019-03-28T23:16:53+00:00"
+        },
+        {
+            "name": "cyrildewit/eloquent-viewable",
+            "version": "v4.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cyrildewit/eloquent-viewable.git",
+                "reference": "52694cfce2dba2002a1f649dd7b3f4c6ded7a8af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cyrildewit/eloquent-viewable/zipball/52694cfce2dba2002a1f649dd7b3f4c6ded7a8af",
+                "reference": "52694cfce2dba2002a1f649dd7b3f4c6ded7a8af",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/cache": "5.5.*|5.6.*|5.7.*|5.8.*|6.0.*",
+                "illuminate/contracts": "5.5.*|5.6.*|5.7.*|5.8.*|6.0.*",
+                "illuminate/cookie": "5.5.*|5.6.*|5.7.*|5.8.*|6.0.*",
+                "illuminate/database": "5.5.*|5.6.*|5.7.*|5.8.*|6.0.*",
+                "illuminate/http": "5.5.*|5.6.*|5.7.*|5.8.*|6.0.*",
+                "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*|6.0.*",
+                "jaybizzle/crawler-detect": "^1.0",
+                "nesbot/carbon": "^1.22|^2.0",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "illuminate/config": "5.5.*|5.6.*|5.7.*|5.8.*|6.0.*",
+                "mockery/mockery": "^1.0",
+                "orchestra/database": "~3.5.0|~3.6.0|~3.7.0|^4.0",
+                "orchestra/testbench": "~3.5.0|~3.6.0|~3.7.0|^4.0",
+                "phpunit/phpunit": "^6.5|^7.0|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "CyrildeWit\\EloquentViewable\\EloquentViewableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "CyrildeWit\\EloquentViewable\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cyril de Wit",
+                    "email": "info@cyrildewit.nl",
+                    "homepage": "http://cyrildewit.nl",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple package that allows you to associate views with Eloquent models",
+            "homepage": "https://github.com/cyrildewit/eloquent-viewable",
+            "keywords": [
+                "counter",
+                "cyrildewit",
+                "eloquent",
+                "hits",
+                "laravel",
+                "viewable",
+                "views",
+                "visitable",
+                "visits"
+            ],
+            "time": "2019-09-05T13:19:18+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -676,6 +751,55 @@
             ],
             "description": "Highlight PHP code in terminal",
             "time": "2018-09-29T18:48:56+00:00"
+        },
+        {
+            "name": "jaybizzle/crawler-detect",
+            "version": "v1.2.84",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JayBizzle/Crawler-Detect.git",
+                "reference": "b7f35477a56609dd0d753c07ada912b66af3df01"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/b7f35477a56609dd0d753c07ada912b66af3df01",
+                "reference": "b7f35477a56609dd0d753c07ada912b66af3df01",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8|^5.5|^6.5",
+                "satooshi/php-coveralls": "1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jaybizzle\\CrawlerDetect\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Beech",
+                    "role": "Developer",
+                    "email": "m@rkbee.ch"
+                }
+            ],
+            "description": "CrawlerDetect is a PHP class for detecting bots/crawlers/spiders via the user agent",
+            "homepage": "https://github.com/JayBizzle/Crawler-Detect/",
+            "keywords": [
+                "crawler",
+                "crawler detect",
+                "crawler detector",
+                "crawlerdetect",
+                "php crawler detect"
+            ],
+            "time": "2019-06-14T21:10:21+00:00"
         },
         {
             "name": "laravel/framework",
@@ -1623,61 +1747,6 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
-        },
-        {
-            "name": "spatie/laravel-json-api-paginate",
-            "version": "1.4.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/laravel-json-api-paginate.git",
-                "reference": "edf26cd1407e272e2c4f11fdd079ed416b35ce06"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-json-api-paginate/zipball/edf26cd1407e272e2c4f11fdd079ed416b35ce06",
-                "reference": "edf26cd1407e272e2c4f11fdd079ed416b35ce06",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~5.4.17|~5.5.0|~5.6.0|~5.7.0|~5.8.0",
-                "php": "^7.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "~3.4.7|~3.5.0|~3.6.0|~3.7.0|~3.8.0",
-                "phpunit/phpunit": "^6.3|^7.0|^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Spatie\\JsonApiPaginate\\JsonApiPaginateServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\JsonApiPaginate\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A paginator that plays nice with the JSON API spec",
-            "homepage": "https://github.com/spatie/laravel-json-api-paginate",
-            "keywords": [
-                "laravel-json-api-paginate",
-                "spatie"
-            ],
-            "time": "2019-02-27T21:00:08+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3100,16 +3169,16 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v3.5.0",
+            "version": "v3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "95cb0fa6c025f7f0db7fc60f81e9fb231eb2d222"
+                "reference": "1bdf24f065975594f6a117f0f1f6cabf1333b156"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/95cb0fa6c025f7f0db7fc60f81e9fb231eb2d222",
-                "reference": "95cb0fa6c025f7f0db7fc60f81e9fb231eb2d222",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/1bdf24f065975594f6a117f0f1f6cabf1333b156",
+                "reference": "1bdf24f065975594f6a117f0f1f6cabf1333b156",
                 "shasum": ""
             },
             "require": {
@@ -3118,12 +3187,12 @@
                 "symfony/polyfill-ctype": "^1.9"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.35 || ^5.0 || ^6.0"
+                "phpunit/phpunit": "^4.8.35 || ^5.0 || ^6.0 || ^7.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.5-dev"
+                    "dev-master": "3.6-dev"
                 }
             },
             "autoload": {
@@ -3153,7 +3222,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2019-08-27T17:00:38+00:00"
+            "time": "2019-09-10T21:37:39+00:00"
         },
         {
             "name": "zizaco/entrust",

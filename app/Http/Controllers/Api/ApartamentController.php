@@ -6,6 +6,7 @@ use App\Apartament;
 use App\Service;
 use App\Sponsor;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -102,11 +103,6 @@ class ApartamentController extends Controller
             ->toArray(); 
 
         return response()->json($sponsoredApartaments); 
-    }
-
-    public function statistics(Apartament $apartament, $id)
-    {   
-        dd($id);
     }
 
 }
