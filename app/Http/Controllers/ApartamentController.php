@@ -12,6 +12,7 @@ use CyrildeWit\EloquentViewable\Viewable;
 use CyrildeWit\EloquentViewable\Contracts\Viewable as ViewableContract;
 use CyrildeWit\EloquentViewable\Support\Period;
 use Carbon\Carbon;
+
 class ApartamentController extends Controller
 {
     use Viewable;
@@ -89,55 +90,76 @@ class ApartamentController extends Controller
     public function showView(Apartament $apartament , $id)
     {
       $apartament = Apartament::where('user_id', Auth::id())->findOrFail($id);
-      // Dati primo grafico
-    $arr = [];
-    for ($i=1; $i < 13; $i++) {
-    $now = Carbon::now();
-    $month = '2019-'. $i . '-1 00:00:00';
+
+        $apartament = Apartament::where('user_id', Auth::id())->findOrFail($id);
+        // Dati primo grafico
+      $arr = [];
+      for ($i=1; $i < 13; $i++) {
+        $now = Carbon::now();
+        $month = '2019-'. $i . '-1 00:00:00';
 
 
-    if($i == 2){
-      $month_2 = '2019-'. $i . '-28 23:59:59';
-    }
-    else if($i==4 || $i==6 || $i==9 || $i==11){
-      $month_2 = '2019-'. $i . '-30 23:59:59';
-    }
-    else{
+          if($i == 2){
+            $month_2 = '2019-'. $i . '-28 23:59:59';
+          }
+          else if($i==4 || $i==6 || $i==9 || $i==11){
+            $month_2 = '2019-'. $i . '-30 23:59:59';
+          }
+          else{
 
-      $month_2= '2019-'. $i . '-31 23:59:59';
-    }
+            $month_2= '2019-'. $i . '-31 23:59:59';
+          }
 
-    $month = (Carbon::parse($month));
-    $month_2 = (Carbon::parse($month_2));
+          $month = (Carbon::parse($month));
+          $month_2 = (Carbon::parse($month_2));
 
-    $arr_month = [
-      'month' => $month,
-      'month_2' => $month_2
-    ];
-    array_push($arr, $arr_month);
+          $arr_month = [
+            'month' => $month,
+            'month_2' => $month_2
+          ];
+          array_push($arr, $arr_month);
 
-    }
-    // dump($arr);
-    $risultati =[];
-    $risultati_messaggi =[];
+      }
+      // dump($arr);
+        $risultati =[];
 
-    // dump(views($apartament));
-    foreach ($arr as $a) {
+      // dump(views($apartament));
+      foreach ($arr as $a) {
 
-    $numero_stats = views($apartament)->period(Period::create($a['month'], $a['month_2']))->count();
-    array_push($risultati,$numero_stats );
+        $numero_stats = views($apartament)->period(Period::create($a['month'], $a['month_2']))->count();
+        array_push($risultati,$numero_stats );
 
-    // array_push($risultati_messaggi,$message);
+      // array_push($risultati_messaggi,$message);
 
-    }
-      $message = Message::where('apartament_id' , $apartament->id)->get()->count();
-      dump($message);
-    //Dati secondo grafico
+      }
 
-    // foreach ($message as $m) {
-    //   dump($m->created_at);
-    // }
-    return view('apartaments.showStatistics', compact('apartament','risultati'));
+      $messages = Message::where('apartament_id' , $apartament->id)->get();
+      foreach ($messages as $message) {
+        // dump($message);
+        $created = (Carbon::parse($message['created_at']));
+        // dump($message_count = Message::where('apartament_id' , $apartament->id)->where('created_at', $created)->get()->count());
+         if ($a['month']->month == $created->month) {
+           $message_count = Message::where('apartament_id' , $apartament->id)->where('created_at', $created)->get()->count();
+          //  dump($message_count);
+           array_push($risultati_messaggi, $message_count);
+
+         }
+      }
+      // dump($risultati_messaggi);
+      // foreach ($arr as $a) {
+      //   // dump($a);
+      //
+      //
+      // }
+
+
+      //Dati secondo grafico
+
+
+
+
+
+      return view('apartaments.showStatistics', compact('apartament', 'risultati'));
     }
 
 

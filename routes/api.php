@@ -19,6 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::namespace('Api')->group(function() {
     Route::get('/services', 'ApartamentController@getServicesList');
-    Route::get('/filtered', 'ApartamentController@filter'); 
-    Route::get('/sponsored', 'ApartamentController@returnSponsoredIDs'); 
+    Route::get('/filtered', 'ApartamentController@filter');
+    Route::get('/sponsored', 'ApartamentController@returnSponsoredIDs');
 });
