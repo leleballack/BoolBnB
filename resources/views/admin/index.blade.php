@@ -4,7 +4,7 @@
 
   @if($apartaments->isNotEmpty())
     <div class="container">
-      <a href="{{ route('admin.apt.create') }}" class="button btn btn-success mt-3 mb-3">Aggiungi appartamento</a>
+      <a href="{{ route('admin.apt.create') }}" class="btn btn-success mt-3 mb-3">Aggiungi appartamento</a>
       @foreach ($apartaments as $apartament)
         <div class="row">
           <div class="col-lg-6">
@@ -13,7 +13,7 @@
           </div>
           <div class="col-lg-6">
 
-            <a href="{{ route('admin.apt.edit', $apartament->id) }}" class="button btn btn-primary">Modifica</a>
+            <a href="{{ route('admin.apt.edit', $apartament->id) }}" class="btn btn-primary">Modifica</a>
 
             <form action="{{ route('admin.apt.destroy', $apartament->id) }}" method="post">
               @method('DELETE')
@@ -40,7 +40,7 @@
 
     </div>
   @else
-    <a href="{{ route('admin.apt.create') }}" class="button">Registra appartamento</a>
+    <a href="{{ route('admin.apt.create') }}" class="btn btn-primary">Registra appartamento</a>
   @endif
 
 @endsection
