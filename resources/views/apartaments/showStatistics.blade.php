@@ -4,6 +4,15 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-5">
+            Totale visualizzazzioni: {{ $total_views_per_apt }}
+        </div>
+        <div class="col-lg-5">
+            Totale messaggi: {{ $totale_messaggi }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-5">
             <canvas id="myChart" width="200" height="200"></canvas>
         </div>
         <div class="col-lg-5">

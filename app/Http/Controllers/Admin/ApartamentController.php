@@ -26,6 +26,8 @@ class ApartamentController extends Controller
     {
 
       $user_id = Auth::user()->id;
+      $tutti_gli_apt = Apartament::where('user_id', $user_id)->paginate(6);
+
       $apartaments = Apartament::where('user_id', $user_id)->get();
 
       $arr = [];
@@ -52,7 +54,7 @@ class ApartamentController extends Controller
         }
       }
 
-      return view('admin.index', compact('apartaments','sponsor','arr','arr_2','now'));
+      return view('admin.index', compact('apartaments', 'tutti_gli_apt', 'sponsor','arr','arr_2','now'));
     }
 
     public function create()
