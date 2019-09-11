@@ -15,14 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', 'PageController@showHomePage');
+Route::get('/', 'PageController@showHomePage')->name('home');
 Route::get('/search', 'PageController@showSearchPage')->name('search');
 
 Auth::routes();
+//save public message
+Route::post('/message', 'MessageController@store')->name('save_msg');
 
 
 Route::resource('/apartaments', 'ApartamentController');
-Route::resource('/message', 'MessageController');
 
   Route::middleware('auth')
     ->prefix('admin')
@@ -31,6 +32,7 @@ Route::resource('/message', 'MessageController');
     ->group(function(){
 
       Route::resource('/apt', 'ApartamentController');
+      Route::resource('/message', 'MessageController');
       Route::get('/', 'PageController@showAdminHomePage')->name('home');
 
     });

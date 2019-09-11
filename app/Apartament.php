@@ -22,7 +22,7 @@ class Apartament extends Model implements ViewableContract
 
     public function messages()
     {
-        return $this->hasMany('Message');
+        return $this->hasMany('App\Message');
     }
 
     public function services()

@@ -37,7 +37,7 @@
             Superficie {{$apartament->square_meters}}(mq)
           </li>
           <li>
-            Indirizzo: <span class="apt_address">{{$apartament->address}}</span> 
+            Indirizzo: <span class="apt_address">{{$apartament->address}}</span>
           </li>
         </ul>
       </div>
@@ -49,7 +49,7 @@
 
       <div class="col-md-6">
         <h4>Per contattare il proprietario manda un messaggio</h4>
-        <form class="" action="{{route('message.store' )}}" method="post">
+        <form class="" action="{{route('save_msg')}}" method="post">
           @csrf
           <div class="form-group">
             <label for="email">Email:</label>

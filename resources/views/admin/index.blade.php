@@ -5,6 +5,7 @@
   @if($tutti_gli_apt->isNotEmpty())
     <div class="container">
       <a href="{{ route('admin.apt.create') }}" class="btn btn-success mt-3 mb-3">Aggiungi appartamento</a>
+      <a href='{{ route('admin.message.index') }}' class="btn btn-warning mt-3 mb-3">Vedi i tuoi messaggi</a>
       @foreach ($tutti_gli_apt as $apartament)
         <div class="row">
           <div class="col-lg-6">

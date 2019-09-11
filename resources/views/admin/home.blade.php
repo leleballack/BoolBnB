@@ -15,7 +15,8 @@
                     @endif
 
                     @role("UPRA")
-                    <a href='{{ route('admin.apt.index') }}'>Vedi appartamenti</a>
+                    <a href='{{ route('admin.apt.index') }}'>Vedi i tuoi appartamenti</a>
+                    <a href='{{ route('admin.message.index') }}'>Vedi i tuoi messaggi</a>
                     @endrole
 
                     @role("UPR")
