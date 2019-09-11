@@ -17,11 +17,18 @@
       <li>{{ $message->email }}</li>
       <li>{{ $message->message_content }}</li>
       <li>{{ $message->created_at }}</li>
+
+      <li><a class="btn btn-success" href='{{ route('admin.message.show', $message->id) }}'>Vedi</a></li>
+      <li>    <form action="{{ route('admin.message.destroy', $message->id) }}" method="post">
+            @method('DELETE')
+            @csrf
+            <input class="btn btn-danger mb-10" type="submit" value="Cancella">
+          </form></li>
     @endforeach
 
 
 
-   </div> {{-- fine container --}}
+   </div>
 
 
 

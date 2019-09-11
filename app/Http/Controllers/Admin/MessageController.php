@@ -25,6 +25,24 @@ class MessageController extends Controller
     return view("admin.message_index", compact("apartaments", "messages"));
   }
 
+  public function show($id)
+  {
+
+    $msgToShow = Message::find($id);
+  }
+
+  public function reply($id, $email)
+  {
+    
+  }
+
+  public function destroy($id)
+  {
+      $msgToDelete = Message::find($id)->delete();
+
+      return redirect()->route('admin.message.index');
+  }
+
 
 
 
