@@ -1,4 +1,9 @@
 .homepage {
+    &__title-container {
+        text-align: center;
+        padding: 1rem;
+    }
+
     &__heading {
         background-image: linear-gradient(
             to right,
@@ -6,6 +11,9 @@
             lighten($color: $main-blue-color, $amount: 50)
         );
         margin: 8rem 0 5rem;
+        @include respond(phone) {
+            margin: 4rem 0 2.5rem;
+        }
     }
 
     &__grid {
@@ -48,14 +56,15 @@
         }
 
         &--sponsored {
+            font-size: 1.4rem;
             position: absolute;
             top: 0;
             right: 0;
             padding: 0.5rem 1rem;
             // background-color: $main-blue-color;
-            // color: $main-white-color;
+            color: $main-white-color;
 
-            animation: changeColor 2s linear infinite;
+            animation: colorchange 2s linear infinite;
         }
     }
 }

@@ -10,6 +10,10 @@ $font-size-base: 1.6rem;
 
 html {
     font-size: 62.5%; //1rem = 10px;
+
+    @include respond(tablet) {
+        font-size: 50%; // 1rem = 8px;
+    }
 }
 
 .navbar,

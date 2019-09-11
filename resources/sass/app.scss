@@ -1,11 +1,12 @@
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Nunito");
+// Abstracts folder
+@import "abstracts/variables";
+@import "abstracts/mixins";
 
-// Variables
-@import "base/variables";
+// Base folder
 @import "base/base";
 @import "base/animations";
 
+// Components folder
 @import "components/heading";
 @import "components/mappa";
 @import "components/button";
