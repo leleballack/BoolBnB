@@ -34,11 +34,11 @@
                     </span>
                 @endif
                     <div class="homepage__apartament--image-container" style="background-image: url( {{ asset('storage/' . $apartament->image_url) }} )"></div>
-                    <div class="homepage__apartament--title-container">
+                    <div class="homepage__apartament--title-container"> 
                         <span class="homepage__apartament--title">
                             {{ $apartament->title }}
                         </span>
-                    </div>
+                    </div> 
                 </a>
                 @endforeach
             </div>

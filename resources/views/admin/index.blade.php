@@ -2,10 +2,10 @@
 
 @section ('content')
 
-  @if($apartaments->isNotEmpty())
+  @if($tutti_gli_apt->isNotEmpty())
     <div class="container">
       <a href="{{ route('admin.apt.create') }}" class="btn btn-success mt-3 mb-3">Aggiungi appartamento</a>
-      @foreach ($apartaments as $apartament)
+      @foreach ($tutti_gli_apt as $apartament)
         <div class="row">
           <div class="col-lg-6">
             <h2>{{$apartament->title}}</h2>
@@ -37,7 +37,9 @@
         </div>
 
       @endforeach
-
+      <div class="pagination">
+          {{ $tutti_gli_apt->links() }}
+      </div>
     </div>
   @else
     <a href="{{ route('admin.apt.create') }}" class="btn btn-primary">Registra appartamento</a>

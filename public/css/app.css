@@ -392,6 +392,12 @@ main {
   margin: 8rem 0 5rem;
 }
 
+@media (max-width: 970px) {
+  .homepage__heading {
+    margin: 6rem 0 3.5rem;
+  }
+}
+
 @media (max-width: 767px) {
   .homepage__heading {
     margin: 4rem 0 2.5rem;

@@ -11,6 +11,9 @@
             lighten($color: $main-blue-color, $amount: 50)
         );
         margin: 8rem 0 5rem;
+        @include respond(tablet) {
+            margin: 6rem 0 3.5rem;
+        }
         @include respond(phone) {
             margin: 4rem 0 2.5rem;
         }

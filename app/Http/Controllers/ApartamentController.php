@@ -143,8 +143,9 @@ class ApartamentController extends Controller
       $messages = Message::where('apartament_id' , $apartament->id)->get();
 
       foreach ($mesi as $key => $value) {
-        
+        $totale_messaggi = 0;
         foreach ($messages as $message) {
+          $totale_messaggi++;
           $created = (Carbon::parse($message['created_at'])); 
           if ($key == $created->month) {
             $value++;
@@ -152,7 +153,10 @@ class ApartamentController extends Controller
         }
         $mesi[$key] = $value;
       }
-      return view('apartaments.showStatistics', compact('apartament','risultati', 'mesi'));
+
+      $total_views_per_apt = views($apartament)->count();
+
+      return view('apartaments.showStatistics', compact('apartament', 'total_views_per_apt', 'totale_messaggi', 'risultati', 'mesi'));
     }
 
 }
