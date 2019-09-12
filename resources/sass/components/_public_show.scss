@@ -1,0 +1,141 @@
+.public-show{
+  background-color:$main-black-color;
+  padding: 6rem 0;
+  color:$main-white-color;
+  $font-size-base:2rem;
+  .container{
+    //Lato sinistro
+    .img_container{
+      width:100%;
+      border:2px solid $main-white-color;
+      border-radius: 0.4rem;
+
+      &:hover{
+        transform: translateY(-3px);
+        box-shadow: 0 1rem 2rem rgba($main-white-color, 0.2);
+        color: $main-white-color;
+      }
+
+      img{
+        width:100%;
+      }
+    }
+
+    .content_container{
+      $font-size-base:2.2rem;
+
+      .description{
+        padding:2rem 0;
+        font-size: $font-size-base;
+
+        @include respond(tablet){
+          font-size:2rem;
+        }
+        @include respond(phone){
+          font-size: 1.6rem;
+        }
+      }
+
+      .features,
+      .services{
+        font-size: 2.8rem;
+
+        @include respond(tablet){
+          font-size:2.4rem;
+        }
+
+        @include respond(phone){
+          font-size:2rem;
+        }
+
+        ul{
+          li{
+            list-style-type: none;
+
+            span{
+              padding:0 0.3rem;
+            }
+          }
+        }
+      }
+    }
+
+    #map{
+      @include respond(tablet){
+      height:35rem;
+    }
+      @include respond(phone){
+        height:25rem;
+      }
+    }
+    .message_send{
+      textarea,
+      input{
+        border-radius:2rem;
+        padding:1rem 0.8rem;
+        font-size: $font-size-base;
+
+        @include respond(phone){
+          width:100%;
+        }
+      }
+    }
+
+
+
+
+    //lato destro Barra fixed per prenotazioni
+    .prenotations{
+      $font-size-base:1.8rem;
+      width:35rem;
+      height:50rem;
+      border:1px solid $green;
+      position:fixed;
+      background-color: transparent;
+      border-radius:2rem;
+      padding:1.5rem;
+      font-size: $font-size-base;
+      color:$main-white-color;
+
+      @include respond(phone){
+        display:none;
+      }
+      @include respond(tablet){
+        display:none;
+      }
+
+      &:hover{
+        transform: translateY(-3px);
+        box-shadow: 0 1rem 2rem rgba($main-white-color, 0.2);
+        color: $main-white-color;
+      }
+      .user_name,
+      .home_recap,
+      .date{
+        border-bottom:1px solid $main-white-color;
+      }
+
+      .user_name{
+        height:12.5rem;
+        padding:2rem 0;
+      }
+      .home_recap{
+        height:11.5rem;
+        li{
+          list-style-type: none;
+        }
+      }
+      .date{
+          height:12rem;
+
+          .btn{
+            padding:0.8rem;
+            font-size: 1.7rem;
+            border-radius:1rem;
+          }
+      }
+    }
+  }
+
+
+}
