@@ -28,10 +28,10 @@ Route::resource('/message', 'MessageController');
     ->prefix('admin')
     ->namespace('Admin')
     ->name('admin.')
-    ->group(function(){
+    ->group(function() {
 
       Route::resource('/apt', 'ApartamentController');
-      Route::get('/', 'PageController@showAdminHomePage')->name('home');
+      Route::get('/', 'PageController@showAdminHomePage');
 
     });
 
