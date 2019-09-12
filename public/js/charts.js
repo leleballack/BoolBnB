@@ -32507,7 +32507,7 @@ var myChart = new Chart(graficoMess, {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/raduschirliu/Desktop/booleanServer/Progetto finale/BoolBnB-grp-4/resources/js/charts.js */"./resources/js/charts.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\Esercizi\boolbnb\BoolBnb-gruppo-4\resources\js\charts.js */"./resources/js/charts.js");
 
 
 /***/ })

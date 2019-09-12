@@ -24,7 +24,7 @@
         }
     }
 
-    Ogni volta che avete bisogno di rendere qualcosa responsive, fate include respond( tablet or phone, quello che vi serve ), e cambiate le proprieta che vanno cambiate! 
+    Ogni volta che avete bisogno di rendere qualcosa responsive, fate include respond( tablet or phone, quello che vi serve ), e cambiate le proprieta che vanno cambiate!
 
 
 
@@ -516,6 +516,199 @@ main {
 
 .cover__cta {
   margin-top: 3rem;
+}
+
+.public-show {
+  background-color: #000b23;
+  padding: 6rem 0;
+  color: #ffffff;
+}
+
+.public-show .container .img_container {
+  width: 100%;
+  border: 2px solid #ffffff;
+  border-radius: 0.4rem;
+}
+
+.public-show .container .img_container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.public-show .container .img_container img {
+  width: 100%;
+}
+
+.public-show .container .content_container .description {
+  padding: 2rem 0;
+  font-size: 2.2rem;
+}
+
+@media (max-width: 970px) {
+  .public-show .container .content_container .description {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .public-show .container .content_container .description {
+    font-size: 1.6rem;
+  }
+}
+
+.public-show .container .content_container .features,
+.public-show .container .content_container .services {
+  font-size: 2.8rem;
+}
+
+@media (max-width: 970px) {
+  .public-show .container .content_container .features,
+  .public-show .container .content_container .services {
+    font-size: 2.4rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .public-show .container .content_container .features,
+  .public-show .container .content_container .services {
+    font-size: 2rem;
+  }
+}
+
+.public-show .container .content_container .features ul li,
+.public-show .container .content_container .services ul li {
+  list-style-type: none;
+}
+
+.public-show .container .content_container .features ul li span,
+.public-show .container .content_container .services ul li span {
+  padding: 0 0.3rem;
+}
+
+@media (max-width: 970px) {
+  .public-show .container #map {
+    height: 35rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .public-show .container #map {
+    height: 25rem;
+  }
+}
+
+.public-show .container .message_send textarea,
+.public-show .container .message_send input {
+  border-radius: 2rem;
+  padding: 1rem 0.8rem;
+  font-size: 2.2rem;
+}
+
+@media (max-width: 767px) {
+  .public-show .container .message_send textarea,
+  .public-show .container .message_send input {
+    width: 100%;
+  }
+}
+
+.public-show .container .prenotations {
+  width: 35rem;
+  height: 50rem;
+  border: 1px solid #38c172;
+  position: fixed;
+  background-color: transparent;
+  border-radius: 2rem;
+  padding: 1.5rem;
+  font-size: 1.8rem;
+  color: #ffffff;
+}
+
+@media (max-width: 767px) {
+  .public-show .container .prenotations {
+    display: none;
+  }
+}
+
+@media (max-width: 970px) {
+  .public-show .container .prenotations {
+    display: none;
+  }
+}
+
+.public-show .container .prenotations:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.public-show .container .prenotations .user_name,
+.public-show .container .prenotations .home_recap,
+.public-show .container .prenotations .date {
+  border-bottom: 1px solid #ffffff;
+}
+
+.public-show .container .prenotations .user_name {
+  height: 12.5rem;
+  padding: 2rem 0;
+}
+
+.public-show .container .prenotations .home_recap {
+  height: 11.5rem;
+}
+
+.public-show .container .prenotations .home_recap li {
+  list-style-type: none;
+}
+
+.public-show .container .prenotations .date {
+  height: 12rem;
+}
+
+.public-show .container .prenotations .date .btn {
+  padding: 0.8rem;
+  font-size: 1.7rem;
+  border-radius: 1rem;
+}
+
+.payment {
+  background-color: #000b23;
+  padding: 5rem;
+  height: 100vh;
+  color: #ffffff;
+  overflow-y: auto;
+}
+
+.payment li {
+  list-style-type: none;
+  font-size: 1.6rem;
+}
+
+.payment .bt-drop-in-wrapper {
+  border-radius: 1.5rem;
+  padding: 1rem;
+  width: 50%;
+}
+
+@media (max-width: 767px) {
+  .payment .bt-drop-in-wrapper {
+    width: 120%;
+    border-radius: 0;
+    padding: 0;
+  }
+}
+
+.payment #bt-dropin {
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .payment #bt-dropin {
+    margin-top: 0.7rem;
+    padding: 0;
+    position: relative;
+    right: 10%;
+  }
 }
 
 /*!

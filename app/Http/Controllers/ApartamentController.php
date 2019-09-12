@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Apartament;
 use App\Service;
 use App\Message;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -52,10 +53,11 @@ class ApartamentController extends Controller
     public function show(Request $request, $id)
     {
         $apartament = Apartament::findOrFail($id);
-        $services  = Service::all();
-        dump(views($apartament)->record());
-        dump(views($apartament)->count());
-        return view('apartaments.show', compact('apartament', 'services'));
+        $user = User::findOrFail($apartament->user_id);
+        $services  = $apartament->services;
+        views($apartament)->record();
+        views($apartament)->count();
+        return view('apartaments.show', compact('apartament', 'services','user'));
     }
 
     /**
@@ -146,7 +148,7 @@ class ApartamentController extends Controller
         $totale_messaggi = 0;
         foreach ($messages as $message) {
           $totale_messaggi++;
-          $created = (Carbon::parse($message['created_at'])); 
+          $created = (Carbon::parse($message['created_at']));
           if ($key == $created->month) {
             $value++;
           }
