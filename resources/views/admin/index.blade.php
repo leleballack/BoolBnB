@@ -25,7 +25,7 @@
                 @foreach ($arr_2 as $a)
                   @if (($a['cur_id'] === $apartament->id) && ($a['cur_date'] > $now))
 
-                    Il tuo appartamento è sposnosrizzato fino al {{$a['cur_date']}}
+                    Il tuo appartamento è sponsorizzato fino al {{$a['cur_date']}}
                   @endif
                 @endforeach
               @else
