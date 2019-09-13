@@ -4,13 +4,8 @@
     <section class="section">
         <div class="cover">
             <div class="cover__text">
-                <h1 class="cover__title">
-                    BoolBnB
-                </h1>
-                <span class="cover__description">
-                    Trova l'appartamento perfetto per te
-                </span>
-                <a class="button button--blue button--animated cover__cta" href="{{ route('search') }}">Cerca</a>
+                <img class="cover__image" src="img/house.png" alt="House">
+                <a class="button button--blue button--animated cover__cta" href="{{ route('search') }}">Cerca appartamenti</a>
             </div>
         </div>
     </section>
