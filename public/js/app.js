@@ -36765,7 +36765,33 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // da spostare in un js a parte, e importare il modulo qua dentro !!!
+
+
+$(document).ready(function () {
+  $(window).on("resize", function () {
+    if ($(window).width() > 767) {
+      $(".phone-menu").removeClass("phone-menu--opened");
+      $(".spaghetti").removeClass("spaghetti--cooked");
+      $(".overlay").removeClass("overlay--active");
+    }
+  });
+  $(".phone-menu, .header").click(function (e) {
+    e.stopPropagation();
+  });
+  $(document).click(function () {
+    $(".phone-menu").removeClass("phone-menu--opened");
+    $(".overlay").removeClass("overlay--active");
+    $(".spaghetti").removeClass("spaghetti--cooked");
+  });
+  $(".spaghetti").click(function (e) {
+    e.stopPropagation();
+    $(".phone-menu").toggleClass("phone-menu--opened");
+    $(".spaghetti").toggleClass("spaghetti--cooked");
+    $(".overlay").toggleClass("overlay--active");
+  });
+}); // import Navmenu from "./partials/Navmenu";
+// let phoneNavMenu = new Navmenu();
 
 /***/ }),
 
@@ -36846,8 +36872,8 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\MAMP\htdocs\Esercizi\boolbnb\BoolBnb-gruppo-4\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\Esercizi\boolbnb\BoolBnb-gruppo-4\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/raduschirliu/Desktop/booleanServer/Progetto finale/BoolBnB-grp-4/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/raduschirliu/Desktop/booleanServer/Progetto finale/BoolBnB-grp-4/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

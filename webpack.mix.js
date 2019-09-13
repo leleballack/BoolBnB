@@ -21,15 +21,15 @@ mix.js("resources/js/app.js", "public/js/app.js")
 
 mix.sass("resources/sass/app.scss", "public/css");
 
-// mix.browserSync({
-//     proxy: "http://127.0.0.1:8000",
-//     open: true,
-//     ui: false,
-//     injectChanges: true,
-//     notify: false,
-//     files: [
-//         "resources/**/*.+(html|php)",
-//         "public/css/app.css",
-//         "public/js/app.js"
-//     ]
-// });
+mix.browserSync({
+    proxy: "http://127.0.0.1:8000",
+    open: true,
+    ui: false,
+    injectChanges: true,
+    notify: false,
+    files: [
+        "resources/**/*.+(html|php)",
+        "public/css/app.css",
+        "public/js/app.js"
+    ]
+});

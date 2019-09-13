@@ -1,0 +1,36 @@
+.header {
+    display: flex;
+    align-items: center;
+    background-color: $main-blue-color;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 2.5rem 0;
+    border-bottom: 2px outset lighten($color: $main-blue-color, $amount: 75%);
+    z-index: 20;
+
+    &__logo {
+        font-size: 2.5rem !important;
+        letter-spacing: 2px;
+    }
+
+    a {
+        font-size: 1.8rem;
+        font-weight: 400;
+        text-decoration: none;
+        color: white;
+        letter-spacing: 1px;
+
+        &:hover {
+            color: white;
+            text-decoration: none;
+        }
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+    }
+}

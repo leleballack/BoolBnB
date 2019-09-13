@@ -18,5 +18,12 @@
 @import "components/cover";
 @import "components/public_show";
 @import "components/payment";
+@import "components/navigation";
+@import "components/phone-menu";
+@import "components/spaghetti";
+
+// Layout folder
+@import "layout/header";
+
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
