@@ -16,6 +16,10 @@ html {
     }
 }
 
+body {
+    overflow-x: hidden;
+}
+
 .navbar,
 .footer {
     background-color: $main-blue-color;
@@ -44,7 +48,7 @@ main {
     height: 100%;
     display: none;
     opacity: 0.6;
-    z-index: 10;
+    z-index: 9998;
 
     &--active {
         display: block;

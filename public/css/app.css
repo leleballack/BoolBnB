@@ -42,10 +42,14 @@ html {
   font-size: 62.5%;
 }
 
-@media (max-width: 970px) {
+@media (max-width: 992px) {
   html {
     font-size: 50%;
   }
+}
+
+body {
+  overflow-x: hidden;
 }
 
 .navbar,
@@ -65,7 +69,7 @@ main {
   margin-top: 92px;
 }
 
-@media (max-width: 970px) {
+@media (max-width: 992px) {
   main {
     margin-top: 74px;
   }
@@ -78,7 +82,7 @@ main {
   height: 100%;
   display: none;
   opacity: 0.6;
-  z-index: 10;
+  z-index: 9998;
 }
 
 .overlay--active {
@@ -224,7 +228,7 @@ main {
   font-weight: 600;
 }
 
-@media (max-width: 970px) {
+@media (max-width: 992px) {
   .heading--secondary {
     font-size: 2.6rem;
   }
@@ -234,6 +238,13 @@ main {
   .heading--secondary {
     font-size: 2.2rem;
   }
+}
+
+.heading--tertiary {
+  font-size: 2.2rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .heading--transparent {
@@ -312,41 +323,6 @@ main {
           animation-fill-mode: backwards;
 }
 
-.intro {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 500px;
-  background-image: linear-gradient(#3838383a, #3838383a), url("https://cdn.pixabay.com/photo/2018/05/02/21/29/travel-3369746_1280.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.intro__text {
-  color: white;
-  font-size: 40px;
-}
-
-.intro__select {
-  width: 400px;
-  display: block;
-  color: darkred;
-  font-size: 16px;
-  align-items: center;
-  margin-top: 40px;
-}
-
-.search {
-  background-color: beige;
-}
-
-.search__container {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  padding: 20px;
-}
-
 .search__checkbox--quad {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -361,23 +337,23 @@ main {
   height: 25px;
   width: 25px;
   transition: all 0.15s ease-out 0s;
-  background: #965c00;
+  background: #002167;
   border: none;
-  color: beige;
+  color: #ffffff;
   cursor: pointer;
   display: inline-block;
   margin-right: 0.5rem;
   outline: none;
   position: relative;
-  z-index: 1000;
+  z-index: 5;
 }
 
 .search__checkbox--quad:hover {
-  background: #a76600;
+  background: #6798ff;
 }
 
 .search__checkbox--quad:checked {
-  background: #965c00;
+  background: #0042cd;
 }
 
 .search__checkbox--quad:checked::before {
@@ -399,10 +375,6 @@ main {
   cursor: pointer;
 }
 
-.search__select {
-  width: 200px;
-}
-
 .homepage__title-container {
   text-align: center;
   padding: 1rem;
@@ -420,7 +392,7 @@ main {
   margin-bottom: 7rem;
 }
 
-@media (max-width: 970px) {
+@media (max-width: 992px) {
   .homepage__heading {
     margin-bottom: 6rem;
   }
@@ -503,38 +475,96 @@ main {
 }
 
 .apartament {
-  border: 1px solid darkred;
-  padding: 10px 20px;
   margin: 15px 0 15px;
   position: relative;
 }
 
+.apartament__image-container {
+  width: 100%;
+  height: 32rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 4px outset #b4ccff;
+}
+
+.apartament__image {
+  width: 100%;
+}
+
+.apartament__features-container {
+  position: relative;
+  padding: 1rem 3rem !important;
+}
+
+@media (max-width: 992px) {
+  .apartament__features-container {
+    box-shadow: 0px 2px 5px -1px #002167;
+  }
+}
+
 .apartament__title {
-  font-size: 30px;
+  text-decoration: none;
+  background-image: linear-gradient(to right, #000b23, #1b64ff);
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 767px) {
+  .apartament__title {
+    margin-top: 1.5rem;
+  }
+}
+
+.apartament__title:hover {
+  text-decoration: none;
+}
+
+.apartament__feature {
+  display: flex;
+  align-items: center;
+}
+
+.apartament__icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+  color: #002167;
 }
 
 .apartament__sponsorization {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
-  top: 0;
-  right: 0;
-  padding: 5px 10px;
-  background-color: red;
+  top: 1rem;
+  left: 1rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  text-transform: uppercase;
   color: white;
+  -webkit-animation: colorchange 2s linear infinite;
+          animation: colorchange 2s linear infinite;
+}
+
+.apartament__link {
+  position: absolute;
+  bottom: 1rem;
+  left: 3rem;
+}
+
+@media (max-width: 992px) {
+  .apartament__link {
+    position: initial;
+    margin-top: 1rem;
+  }
 }
 
 .cover {
   position: relative;
-  height: 90vh;
-  background-image: url(/images/sfondo.png?b27860bb83faf472c18ead926a0a0fb9);
+  height: 85vh;
   background-position: bottom;
   background-size: cover;
   background-repeat: no-repeat;
-}
-
-@media (max-width: 970px) {
-  .cover {
-    margin-top: 9rem;
-  }
 }
 
 .cover__text {
@@ -592,7 +622,7 @@ main {
   font-size: 2.2rem;
 }
 
-@media (max-width: 970px) {
+@media (max-width: 992px) {
   .public-show .container .content_container .description {
     font-size: 2rem;
   }
@@ -609,7 +639,7 @@ main {
   font-size: 2.8rem;
 }
 
-@media (max-width: 970px) {
+@media (max-width: 992px) {
   .public-show .container .content_container .features,
   .public-show .container .content_container .services {
     font-size: 2.4rem;
@@ -633,7 +663,7 @@ main {
   padding: 0 0.3rem;
 }
 
-@media (max-width: 970px) {
+@media (max-width: 992px) {
   .public-show .container #map {
     height: 35rem;
   }
@@ -677,7 +707,7 @@ main {
   }
 }
 
-@media (max-width: 970px) {
+@media (max-width: 992px) {
   .public-show .container .prenotations {
     display: none;
   }
@@ -806,7 +836,7 @@ main {
   border-bottom: 2px inset #000b23;
   transform: translate3d(0, -285px, 0);
   transition: transform 0.3s linear;
-  z-index: 15;
+  z-index: 9999;
 }
 
 .phone-menu--opened {
@@ -916,7 +946,7 @@ main {
   left: 0;
   padding: 2.5rem 0;
   border-bottom: 2px outset #e7eeff;
-  z-index: 20;
+  z-index: 10000;
 }
 
 .header__logo {
@@ -11584,5 +11614,365 @@ a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
+}
+
+.v-select {
+  position: relative;
+  font-family: inherit;
+}
+
+.v-select,
+.v-select * {
+  box-sizing: border-box;
+}
+
+/* KeyFrames */
+
+@-webkit-keyframes vSelectSpinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes vSelectSpinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Dropdown Default Transition */
+
+.vs__fade-enter-active,
+.vs__fade-leave-active {
+  transition: opacity 0.15s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.vs__fade-enter,
+.vs__fade-leave-to {
+  opacity: 0;
+}
+
+/** Component States */
+
+/*
+ * Disabled
+ *
+ * When the component is disabled, all interaction
+ * should be prevented. Here we modify the bg color,
+ * and change the cursor displayed on the interactive
+ * components.
+ */
+
+.vs--disabled .vs__dropdown-toggle,
+.vs--disabled .vs__clear,
+.vs--disabled .vs__search,
+.vs--disabled .vs__selected,
+.vs--disabled .vs__open-indicator {
+  cursor: not-allowed;
+  background-color: #f8f8f8;
+}
+
+/*
+ *  RTL - Right to Left Support
+ *
+ *  Because we're using a flexbox layout, the `dir="rtl"`
+ *  HTML attribute does most of the work for us by
+ *  rearranging the child elements visually.
+ */
+
+.v-select[dir=rtl] .vs__actions {
+  padding: 0 3px 0 6px;
+}
+
+.v-select[dir=rtl] .vs__clear {
+  margin-left: 6px;
+  margin-right: 0;
+}
+
+.v-select[dir=rtl] .vs__deselect {
+  margin-left: 0;
+  margin-right: 2px;
+}
+
+.v-select[dir=rtl] .vs__dropdown-menu {
+  text-align: right;
+}
+
+/**
+    Dropdown Toggle
+
+    The dropdown toggle is the primary wrapper of the component. It
+    has two direct descendants: .vs__selected-options, and .vs__actions.
+
+    .vs__selected-options holds the .vs__selected's as well as the
+    main search input.
+
+    .vs__actions holds the clear button and dropdown toggle.
+ */
+
+.vs__dropdown-toggle {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  display: flex;
+  padding: 0 0 4px 0;
+  background: none;
+  border: 1px solid rgba(60, 60, 60, 0.26);
+  border-radius: 4px;
+  white-space: normal;
+}
+
+.vs__selected-options {
+  display: flex;
+  flex-basis: 100%;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  padding: 0 2px;
+  position: relative;
+}
+
+.vs__actions {
+  display: flex;
+  align-items: center;
+  padding: 4px 6px 0 3px;
+}
+
+/* Dropdown Toggle States */
+
+.vs--searchable .vs__dropdown-toggle {
+  cursor: text;
+}
+
+.vs--unsearchable .vs__dropdown-toggle {
+  cursor: pointer;
+}
+
+.vs--open .vs__dropdown-toggle {
+  border-bottom-color: transparent;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.vs__open-indicator {
+  fill: rgba(60, 60, 60, 0.5);
+  transform: scale(1);
+  transition: transform 150ms cubic-bezier(1, -0.115, 0.975, 0.855);
+  transition-timing-function: cubic-bezier(1, -0.115, 0.975, 0.855);
+}
+
+.vs--open .vs__open-indicator {
+  transform: rotate(180deg) scale(1);
+}
+
+.vs--loading .vs__open-indicator {
+  opacity: 0;
+}
+
+/* Clear Button */
+
+.vs__clear {
+  fill: rgba(60, 60, 60, 0.5);
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+/* Dropdown Menu */
+
+.vs__dropdown-menu {
+  display: block;
+  position: absolute;
+  top: calc(100% - 1px);
+  left: 0;
+  z-index: 1000;
+  padding: 5px 0;
+  margin: 0;
+  width: 100%;
+  max-height: 350px;
+  min-width: 160px;
+  overflow-y: auto;
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(60, 60, 60, 0.26);
+  border-top-style: none;
+  border-radius: 0 0 4px 4px;
+  text-align: left;
+  list-style: none;
+  background: #fff;
+}
+
+.vs__no-options {
+  text-align: center;
+}
+
+/* List Items */
+
+.vs__dropdown-option {
+  line-height: 1.42857143;
+  /* Normalize line height */
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  color: #333;
+  /* Overrides most CSS frameworks */
+  white-space: nowrap;
+}
+
+.vs__dropdown-option:hover {
+  cursor: pointer;
+}
+
+.vs__dropdown-option--highlight {
+  background: #5897fb;
+  color: #fff;
+}
+
+/* Selected Tags */
+
+.vs__selected {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  border: 1px solid rgba(60, 60, 60, 0.26);
+  border-radius: 4px;
+  color: #333;
+  line-height: 1.4;
+  margin: 4px 2px 0px 2px;
+  padding: 0 0.25em;
+}
+
+.vs__deselect {
+  display: inline-flex;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  margin-left: 4px;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  background: none;
+  fill: rgba(60, 60, 60, 0.5);
+  text-shadow: 0 1px 0 #fff;
+}
+
+/* States */
+
+.vs--single .vs__selected {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.vs--single.vs--open .vs__selected {
+  position: absolute;
+  opacity: 0.4;
+}
+
+.vs--single.vs--searching .vs__selected {
+  display: none;
+}
+
+/* Search Input */
+
+.vs__search::-webkit-search-decoration,
+.vs__search::-webkit-search-cancel-button,
+.vs__search::-webkit-search-results-button,
+.vs__search::-webkit-search-results-decoration,
+.vs__search::-ms-clear {
+  display: none;
+}
+
+.vs__search,
+.vs__search:focus {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  line-height: 1.4;
+  font-size: 1em;
+  border: 1px solid transparent;
+  border-left: none;
+  outline: none;
+  margin: 4px 0 0 0;
+  padding: 0 7px;
+  background: none;
+  box-shadow: none;
+  width: 0;
+  max-width: 100%;
+  flex-grow: 1;
+}
+
+.vs__search::-webkit-input-placeholder {
+  color: inherit;
+}
+
+.vs__search::-moz-placeholder {
+  color: inherit;
+}
+
+.vs__search:-ms-input-placeholder {
+  color: inherit;
+}
+
+.vs__search::-ms-input-placeholder {
+  color: inherit;
+}
+
+.vs__search::placeholder {
+  color: inherit;
+}
+
+/**
+    States
+ */
+
+.vs--unsearchable .vs__search {
+  opacity: 1;
+}
+
+.vs--unsearchable .vs__search:hover {
+  cursor: pointer;
+}
+
+.vs--single.vs--searching:not(.vs--open):not(.vs--loading) .vs__search {
+  opacity: 0.2;
+}
+
+/* Loading Spinner */
+
+.vs__spinner {
+  align-self: center;
+  opacity: 0;
+  font-size: 5px;
+  text-indent: -9999em;
+  overflow: hidden;
+  border-top: 0.9em solid rgba(100, 100, 100, 0.1);
+  border-right: 0.9em solid rgba(100, 100, 100, 0.1);
+  border-bottom: 0.9em solid rgba(100, 100, 100, 0.1);
+  border-left: 0.9em solid rgba(60, 60, 60, 0.45);
+  transform: translateZ(0);
+  -webkit-animation: vSelectSpinner 1.1s infinite linear;
+          animation: vSelectSpinner 1.1s infinite linear;
+  transition: opacity 0.1s;
+}
+
+.vs__spinner,
+.vs__spinner:after {
+  border-radius: 50%;
+  width: 5em;
+  height: 5em;
+}
+
+/* Loading Spinner States */
+
+.vs--loading .vs__spinner {
+  opacity: 1;
 }
 

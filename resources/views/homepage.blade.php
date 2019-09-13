@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="section">
-        <div class="cover">
+        <div class="cover" style="background-image: url('img/sfondo.png');">
             <div class="cover__text">
                 <img class="cover__image" src="img/house.png" alt="House">
                 <a class="button button--blue button--animated cover__cta" href="{{ route('search') }}">Cerca appartamenti</a>

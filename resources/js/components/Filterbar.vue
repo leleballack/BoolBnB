@@ -20,50 +20,44 @@
     </div>
 
     <div class="row search__container">
-      <div class="col-lg-auto">
-        <p class="search__select--title">N° min. stanze</p>
-        <select @change="roomsNumberChanged" v-model="selectedRoomsNumber" class="search__select">
-          <option value disabled>-------</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
+      <div class="col-lg-auto search__istance">
+        <p class="search__title">N° min. stanze</p>
+        <v-select
+          @input="roomsNumberChanged"
+          class="search__select"
+          v-model="selectedRoomsNumber"
+          :options="['1', '2', '3', '4', '5']"
+        ></v-select>
       </div>
 
-      <div v-if="selectedCity !== ''" class="col-lg-auto">
-        <p class="search__select--title">Radius</p>
-        <select @change="radiusChanged" v-model="selectedRadius" class="search__select">
-          <option value disabled>-------</option>
-          <option value="20">20km</option>
-          <option value="40">40km</option>
-          <option value="60">60km</option>
-          <option value="80">80km</option>
-          <option value="100">100km</option>
-          <option value="120">120km</option>
-          <option value="200">200km</option>
-          <option value="500">500km</option>
-        </select>
+      <div v-if="selectedCity !== ''" class="col-lg-auto search__istance">
+        <p class="search__title">Radius</p>
+
+        <v-select
+          @input="radiusChanged"
+          class="search__select"
+          v-model="selectedRadius"
+          :options="['20', '40', '60', '80', '100', '120', '200']"
+        ></v-select>
       </div>
 
-      <div class="col-lg-auto">
-        <p class="search__select--title">N° min. posti letto</p>
-        <select @change="bedsNumberChanged" v-model="selectedBedsNumber" class="search__select">
-          <option value disabled>-------</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-        </select>
+      <div class="col-lg-auto col-sm-12 search__istance">
+        <p class="search__title">N° min. posti letto</p>
+
+        <v-select
+          @input="bedsNumberChanged"
+          class="search__select"
+          v-model="selectedBedsNumber"
+          :options="['1', '2', '3', '4', '5', '6', '7', '8']"
+        ></v-select>
       </div>
     </div>
     <div class="container">
-      <div class="row search__resetbtn justify-content-center">
-        <button @click="filterReset" class="btn btn-danger mb-2">Resetta filtri</button>
+      <div class="row search__resetbtn-container justify-content-center">
+        <button
+          @click="filterReset"
+          class="button button--blue button--animated search__resetbtn"
+        >Resetta filtri</button>
       </div>
     </div>
   </div>
@@ -87,6 +81,7 @@ export default {
   created() {
     eventBus.$on("cityWasChanged", data => {
       this.selectedCity = data;
+      if (this.selectedCity === "") this.selectedRadius = "";
     });
 
     this.fetchServices();
@@ -98,14 +93,17 @@ export default {
     },
 
     radiusChanged() {
+      if (this.selectedRadius === null) this.selectedRadius = "";
       eventBus.$emit("radiusChanged", this.selectedRadius);
     },
 
     roomsNumberChanged() {
+      if (this.selectedRoomsNumber === null) this.selectedRoomsNumber = "";
       eventBus.$emit("roomsNumberChanged", this.selectedRoomsNumber);
     },
 
     bedsNumberChanged() {
+      if (this.selectedBedsNumber === null) this.selectedBedsNumber = "";
       eventBus.$emit("bedsNumberChanged", this.selectedBedsNumber);
     },
 
@@ -137,5 +135,64 @@ export default {
 };
 </script>
 
-<style>
+<style lang='scss' scoped>
+@import "../../sass/abstracts/_variables.scss";
+@import "../../sass/abstracts/_mixins.scss";
+
+.search {
+  margin-top: 5rem;
+  @include respond(phone) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px;
+
+    @include respond(phone) {
+      width: 80%;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1.3rem;
+    }
+  }
+
+  &__istance {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &:not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  &__select {
+    background-color: lighten($color: $main-blue-color, $amount: 60);
+    width: 20rem;
+    border: 0.5px outset $main-blue-color;
+
+    @include respond(tablet) {
+      width: 80%;
+    }
+    @include respond(phone) {
+      width: 100%;
+    }
+  }
+
+  &__resetbtn {
+    margin: 3rem 0 7rem;
+  }
+
+  #search_start_point {
+    @include respond(phone) {
+      width: 60%;
+    }
+  }
+}
 </style>

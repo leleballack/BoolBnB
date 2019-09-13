@@ -1,14 +1,9 @@
 .cover {
     position: relative;
-    height: 90vh;
-    // margin-top: 9rem;
-    background-image: url("img/sfondo.png");
+    height: 85vh;
     background-position: bottom;
     background-size: cover;
     background-repeat: no-repeat;
-    @include respond(tablet) {
-        margin-top: 9rem;
-    }
 
     &__text {
         display: flex;
