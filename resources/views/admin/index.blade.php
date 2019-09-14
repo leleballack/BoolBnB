@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section ('content')
-
+  @if (session('success_message'))
+    <div class="alert alert-success">
+      {{ session('success_message') }}
+    </div>
+  @endif
   @if($tutti_gli_apt->isNotEmpty())
     <div class="container">
       <a href="{{ route('admin.apt.create') }}" class="btn btn-primary mt-5 mb-5">Registra un nuovo appartamento</a>
