@@ -30,7 +30,7 @@
             </p>
           @else
             <p>
-              Non hai ricevuto messaggi per questo appartamento.
+              
             </p>
           @endif
         </div>

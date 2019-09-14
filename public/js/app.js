@@ -36767,6 +36767,11 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+$(document).ready(function () {
+  //messaggio avvenuto pagamento che scompare dopo 7s
+  $('.alert').fadeOut(7000);
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
