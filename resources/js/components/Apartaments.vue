@@ -1,31 +1,75 @@
 <template>
   <div class="container">
     <div v-if="(apartamentList.length > 0)">
-      <div class="apartament" v-for="apartament in apartamentList" :key="apartament.id">
-        <span class="apartament__title">{{ apartament.title }}</span>
-        <p>Numero stanze: {{ apartament.total_rooms }}</p>
-        <p>Numero letti: {{ apartament.total_beds }}</p>
-        <p>Numero bagni: {{ apartament.total_baths }}</p>
-        <a class="btn btn-primary" :href="`/apartaments/${apartament.id}`">Dettagli</a>
+      <div class="row apartament" v-for="apartament in apartamentList" :key="apartament.id">
+        <div
+          class="col-lg-4 apartament__image-container"
+          v-bind:style="{ 'background-image': 'url(/storage/' + apartament.image_url + ')' }"
+        ></div>
 
-        <span
-          v-if="sponsored.includes(apartament.id)"
-          class="apartament__sponsorization"
-        >Sponsorizzato</span>
+        <div class="col-lg-8 apartament__features-container">
+          <a
+            :href="`/apartaments/${apartament.id}`"
+            class="apartament__title heading--tertiary heading--transparent"
+          >{{ apartament.title }}</a>
+
+          <div class="row mt-2">
+            <div class="col-lg-6 col-xs-12">
+              <p class="apartament__feature">
+                <i class="fas fa-door-open apartament__icon"></i>
+                Numero stanze: {{ apartament.total_rooms }}
+              </p>
+            </div>
+            <div class="col-lg-6 col-xs-12">
+              <p class="apartament__feature">
+                <i class="fas fa-bed apartament__icon"></i>
+                Numero letti: {{ apartament.total_beds }}
+              </p>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-lg-6 col-xs-12">
+              <p class="apartament__feature">
+                <i class="fas fa-shower apartament__icon"></i>
+                Numero bagni: {{ apartament.total_baths }}
+              </p>
+            </div>
+            <div class="col-lg-6 col-xs-12">
+              <p class="apartament__feature">
+                <i class="fas fa-home apartament__icon"></i>
+                M. quadri: {{ apartament.square_meters }}
+              </p>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-lg-12 col-xs-12">
+              <i class="fas fa-map-marker-alt apartament__icon"></i>
+              {{ apartament.address }}
+            </div>
+          </div>
+          <a
+            class="btn btn-primary apartament__link"
+            :href="`/apartaments/${apartament.id}`"
+          >Dettagli</a>
+        </div>
+
+        <span v-if="sponsored.includes(apartament.id)" class="apartament__sponsorization">s</span>
       </div>
 
       <nav>
-        <ul class="pagination">
+        <ul class="pagination mt-5 mb-5">
           <li :class="[{ disabled: !pagination.prevPage }]" class="page-item">
             <a
               @click="fetchFromDb(pagination.prevPage)"
               class="page-link"
               href="#search_start_point"
               tabindex="-1"
-            >Prec</a>
+            >Precedente</a>
           </li>
           <li class="page-item">
-            <p class="page-link">{{ pagination.currentPage }} di {{ pagination.lastPage }}</p>
+            <span class="page-link">{{ pagination.currentPage }} di {{ pagination.lastPage }}</span>
           </li>
 
           <li :class="[{ disabled: !pagination.nextPage }]" class="page-item">
@@ -33,7 +77,7 @@
               @click="fetchFromDb(pagination.nextPage)"
               class="page-link"
               href="#search_start_point"
-            >Succ</a>
+            >Successiva</a>
           </li>
         </ul>
       </nav>
@@ -120,7 +164,9 @@ export default {
                 lat: this.cur_selected_city_lat,
                 long: this.cur_selected_city_long,
                 radius: this.currentRadius,
-                services: this.selectedServices,
+                ...(this.selectedServices
+                  ? { services: this.selectedServices }
+                  : []),
                 ...(this.bedsNumber ? { beds: this.bedsNumber } : ""),
                 ...(this.roomsNumber ? { rooms: this.roomsNumber } : "")
               }
@@ -189,3 +235,6 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+</style>

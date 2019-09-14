@@ -1,0 +1,54 @@
+.phone-menu {
+    background-color: lighten($color: $main-black-color, $amount: 25%);
+    width: 100%;
+    position: fixed;
+    top: 9rem;
+    left: 0;
+    opacity: 1;
+    padding: 0 5rem;
+    border-bottom: 2px inset $main-black-color;
+    transform: translate3d(0, -285px, 0);
+    transition: transform 0.3s linear;
+    z-index: 9999;
+
+    &--opened {
+        transform: translate3d(0, 0, 0);
+    }
+
+    &__list {
+        list-style-type: none;
+        text-align: center;
+    }
+
+    &__item {
+        &:not(:last-child) {
+            border-bottom: 0.5px outset $main-white-color;
+        }
+    }
+
+    &__link {
+        display: inline-block;
+        padding: 3rem 2.5rem;
+
+        cursor: pointer;
+        color: $main-white-color !important;
+        text-decoration: none;
+        font-size: 1.8rem;
+
+        &::after {
+            display: block;
+            content: "";
+            border-bottom: solid 3px $main-black-color;
+            transform: scaleX(0);
+            transition: transform 150ms ease-in-out;
+        }
+
+        &:hover {
+            text-decoration: none;
+
+            &::after {
+                transform: scaleX(1);
+            }
+        }
+    }
+}
