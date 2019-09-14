@@ -662,19 +662,6 @@ main {
   padding: 0 0.3rem;
 }
 
-
-@media (max-width: 992px) {
-  .public-show .container #map {
-    height: 35rem;
-  }
-}
-
-@media (max-width: 767px) {
-  .public-show .container #map {
-    height: 25rem;
-  }
-}
-
 .public-show .container .message_send textarea,
 .public-show .container .message_send input {
   border-radius: 2rem;
@@ -757,7 +744,7 @@ main {
   max-width: 50%;
 }
 
-@media (max-width: 970px) {
+@media (max-width: 992px) {
   .payment .bt-drop-in-wrapper {
     max-width: 70%;
   }

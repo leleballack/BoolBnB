@@ -36789,12 +36789,8 @@ $(document).ready(function () {
     $(".phone-menu").toggleClass("phone-menu--opened");
     $(".spaghetti").toggleClass("spaghetti--cooked");
     $(".overlay").toggleClass("overlay--active");
-  });
-}); // import Navmenu from "./partials/Navmenu";
-// let phoneNavMenu = new Navmenu();
+  }); //messaggio avvenuto pagamento che scompare dopo 7s
 
-$(document).ready(function () {
-  //messaggio avvenuto pagamento che scompare dopo 7s
   $('.alert').fadeOut(7000);
 });
 
