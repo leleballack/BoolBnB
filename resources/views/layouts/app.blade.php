@@ -37,6 +37,9 @@
                 <nav class="navigation">
                     <ul class="navigation__list">
                         <li class="navigation__item">
+                            <a class="navigation__link"  href="{{ url('/') }}">Home</a>
+                        </li>
+                        <li class="navigation__item">
                             <a class="navigation__link" href="{{ route('search') }}">Ricerca</a>
                         </li>
 
