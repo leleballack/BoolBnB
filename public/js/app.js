@@ -36793,6 +36793,11 @@ $(document).ready(function () {
 }); // import Navmenu from "./partials/Navmenu";
 // let phoneNavMenu = new Navmenu();
 
+$(document).ready(function () {
+  //messaggio avvenuto pagamento che scompare dopo 7s
+  $('.alert').fadeOut(7000);
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

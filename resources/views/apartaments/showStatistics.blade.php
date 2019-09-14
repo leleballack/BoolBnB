@@ -1,25 +1,47 @@
 @extends('layouts.app')
 @section('content')
-
-<div class="container">
-    <div class="row">
-        <div class="col-lg-5">
-            Totale visualizzazzioni: {{ $total_views_per_apt }}
+<div class="statistics">
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-lg-6">
+        <div class="separatore">
+          <h3>
+            Totale visualizzazzioni:
+            <span>
+              {{ $total_views_per_apt }}
+            </span>
+          </h3>
         </div>
-        <div class="col-lg-5">
-            Totale messaggi: {{ $totale_messaggi }}
+        <div class="mt-5">
+          <canvas id="myChart" width="200" height="200" class="mt-5"></canvas>
         </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="separatore">
+          <h3>
+            Totale messaggi:
+            <span>
+              {{ $totale_messaggi }}
+            </span>
+          </h3>
+          @if ($latest_message !== null)
+            <p class="mt-2">
+              Ultimo messaggio inviato da: {{ $latest_message->email }}, controlla i tuoi <a href="#" class="link">messaggi.</a>
+            </p>
+          @else
+            <p>
+              
+            </p>
+          @endif
+        </div>
+        <div class="mt-5">
+          <canvas id="messagesChart" width="200" height="200" class="mt-5"></canvas>
+        </div>
+      </div>
     </div>
-
-    <div class="row">
-        <div class="col-lg-5">
-            <canvas id="myChart" width="200" height="200"></canvas>
-        </div>
-        <div class="col-lg-5">
-            <canvas id="messagesChart" width="=200" height="200"></canvas>
-        </div>
-    </div>
+  </div>
 </div>
+
 
 
 {{-- visualizzazioni --}}
@@ -57,4 +79,3 @@
 <script src="{{ asset('js/charts.js') }}"></script>
 <script src="{{ asset('js/chartsMessage.js') }}"></script>
 @endsection
-

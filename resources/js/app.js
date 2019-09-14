@@ -1,5 +1,6 @@
 require("./bootstrap");
 
+
 // da spostare in un js a parte, e importare il modulo qua dentro !!!
 $(document).ready(function() {
     $(window).on("resize", function() {
@@ -26,8 +27,11 @@ $(document).ready(function() {
         $(".spaghetti").toggleClass("spaghetti--cooked");
         $(".overlay").toggleClass("overlay--active");
     });
+  
+  
+    //messaggio avvenuto pagamento che scompare dopo 7s
+    $('.alert').fadeOut(7000);
+
 });
 
-// import Navmenu from "./partials/Navmenu";
 
-// let phoneNavMenu = new Navmenu();

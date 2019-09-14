@@ -1,18 +1,17 @@
 .public-show{
-  background-color:$main-black-color;
+  background-color:$main-white-color;
   padding: 6rem 0;
-  color:$main-white-color;
+  color: $main-black-color;
   $font-size-base:2rem;
   .container{
     //Lato sinistro
     .img_container{
       width:100%;
-      border:2px solid $main-white-color;
+      border:2px solid  $main-black-color;
       border-radius: 0.4rem;
 
       &:hover{
-        transform: translateY(-3px);
-        box-shadow: 0 1rem 2rem rgba($main-white-color, 0.2);
+        box-shadow: 0 1rem 2rem rgba( $main-black-color, 0.3);
         color: $main-white-color;
       }
 
@@ -60,24 +59,12 @@
       }
     }
 
-    #map{
-      @include respond(tablet){
-      height:35rem;
-    }
-      @include respond(phone){
-        height:25rem;
-      }
-    }
     .message_send{
       textarea,
       input{
         border-radius:2rem;
         padding:1rem 0.8rem;
         font-size: $font-size-base;
-
-        @include respond(phone){
-          width:100%;
-        }
       }
     }
 
@@ -95,7 +82,7 @@
       border-radius:2rem;
       padding:1.5rem;
       font-size: $font-size-base;
-      color:$main-white-color;
+      color:$main-black-color;
 
       @include respond(phone){
         display:none;
@@ -106,31 +93,28 @@
 
       &:hover{
         transform: translateY(-3px);
-        box-shadow: 0 1rem 2rem rgba($main-white-color, 0.2);
-        color: $main-white-color;
+        box-shadow: 0 1rem 2rem rgba($main-black-color, 0.2);
       }
-      .user_name,
-      .home_recap,
-      .date{
-        border-bottom:1px solid $main-white-color;
+
+      .home_recap,{
+        border-bottom:1px solid $main-black-color;
       }
 
       .user_name{
-        height:12.5rem;
+        height:20%;
         padding:2rem 0;
       }
       .home_recap{
-        height:11.5rem;
+        height:25%;
         li{
           list-style-type: none;
         }
       }
       .date{
-          height:12rem;
-
+          height:20%;
           .btn{
-            padding:0.8rem;
-            font-size: 1.7rem;
+            padding:1rem;
+            font-size: 2rem;
             border-radius:1rem;
           }
       }
