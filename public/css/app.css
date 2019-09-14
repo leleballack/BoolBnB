@@ -681,15 +681,15 @@ main {
   }
 }
 
-.admin_edit {
+.admin_form {
   padding: 3rem 4rem;
 }
 
-.admin_edit .button:hover {
+.admin_form .button:hover {
   color: #000b23;
 }
 
-.admin_edit .upload {
+.admin_form .upload {
   cursor: pointer;
   border: 1px solid #38c172;
   padding: 1.5rem 3rem;
@@ -698,15 +698,29 @@ main {
   border-radius: 3rem;
 }
 
-.admin_edit .upload:hover {
+.admin_form .upload:hover {
   box-shadow: 0 1rem 2rem rgba(0, 11, 35, 0.3);
   font-weight: bold;
 }
 
-.admin_edit #upload-photo {
+.admin_form #upload-photo {
   opacity: 0;
   position: absolute;
   z-index: -1;
+}
+
+.statistics {
+  padding: 6rem 4rem;
+}
+
+.statistics .separatore {
+  height: 8rem;
+}
+
+.statistics .separatore p {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 1.4rem;
 }
 
 /*!

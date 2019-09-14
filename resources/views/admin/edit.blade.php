@@ -11,7 +11,7 @@
 @endsection
 
 @section ('content')
-<div class="admin_edit">
+<div class="admin_form">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
@@ -85,7 +85,6 @@
                     $array = ($apartament->services)->pluck('id')->toArray();
                 @endphp
                 <div class="custom-control custom-checkbox">
-
                  <input type="checkbox" class=" custom-control-input"  id="{{ $service['id'] }}"
                  name="services[]"
                  value="{{ $service->id }}"

@@ -17,7 +17,7 @@ var ott = $("#ott").val();
 var nov = $("#nov").val();
 var dic = $("#dic").val();
 var myChart = new Chart(ctx, {
-    type: "bar",
+    type: "line",
     data: {
         labels: [
             "Gennaio",
@@ -56,13 +56,13 @@ var myChart = new Chart(ctx, {
                     "rgba(255, 206, 86, 0.2)",
                     "rgba(75, 192, 192, 0.2)",
                     "rgba(153, 102, 255, 0.2)",
-                    "rgba(255, 159, 64, 0.2)",
-                    "rgba(255, 159, 64, 0.2)",
-                    "rgba(255, 159, 64, 0.2)",
-                    "rgba(255, 159, 64, 0.2)",
-                    "rgba(255, 159, 64, 0.2)",
-                    "rgba(255, 159, 64, 0.2)",
-                    "rgba(255, 159, 64, 0.2)"
+                    // "rgba(255, 159, 64, 0.2)",
+                    // "rgba(255, 159, 64, 0.2)",
+                    // "rgba(255, 159, 64, 0.2)",
+                    // "rgba(255, 159, 64, 0.2)",
+                    // "rgba(255, 159, 64, 0.2)",
+                    // "rgba(255, 159, 64, 0.2)",
+                    // "rgba(255, 159, 64, 0.2)"
                 ],
                 borderColor: [
                     "rgba(255, 99, 132, 1)",
@@ -92,7 +92,6 @@ var myChart = new Chart(ctx, {
 // dati e grafico messaggi singolo apt
 
 var graficoMess = $("#messagesChart");
-var results = [];
 var gennaio = $("#gen_mes").val();
 var febbraio = $("#feb_mes").val();
 var marzo = $("#mar_mes").val();

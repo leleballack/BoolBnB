@@ -149,6 +149,7 @@ class ApartamentController extends Controller
       ];
 
       $messages = Message::where('apartament_id' , $apartament->id)->get();
+      $latest_message =  Message::where('apartament_id' , $apartament->id)->latest()->first();
 
       foreach ($mesi as $key => $value) {
         $totale_messaggi = 0;
@@ -164,7 +165,7 @@ class ApartamentController extends Controller
 
       $total_views_per_apt = views($apartament)->count();
 
-      return view('apartaments.showStatistics', compact('apartament', 'total_views_per_apt', 'totale_messaggi', 'risultati', 'mesi'));
+      return view('apartaments.showStatistics', compact('apartament', 'total_views_per_apt', 'totale_messaggi', 'risultati', 'mesi','latest_message'));
     }
 
 }
