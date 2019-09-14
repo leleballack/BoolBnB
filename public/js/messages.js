@@ -81,105 +81,71 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/charts.js":
-/*!********************************!*\
-  !*** ./resources/js/charts.js ***!
-  \********************************/
+/***/ "./resources/js/messages.js":
+/*!**********************************!*\
+  !*** ./resources/js/messages.js ***!
+  \**********************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-var Chart = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module 'chart.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())); // dati e grafico visualizzazioni singolo apt
+$(function () {
+  $(".fa-paper-plane").click(function () {
+    var text = $(".write_msg").val();
 
-
-var ctx = document.getElementById("myChart");
-var risultati = [];
-var gen = $("#gen").val();
-var feb = $("#feb").val();
-var mar = $("#mar").val();
-var apr = $("#apr").val();
-var mag = $("#mag").val();
-var giu = $("#giu").val();
-var lug = $("#lug").val();
-var ago = $("#ago").val();
-var set = $("#set").val();
-var ott = $("#ott").val();
-var nov = $("#nov").val();
-var dic = $("#dic").val();
-var myChart = new Chart(ctx, {
-  type: "bar",
-  data: {
-    labels: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
-    datasets: [{
-      label: "# of Votes",
-      data: [gen, feb, mar, apr, mag, giu, lug, ago, set, ott, nov, dic],
-      backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 159, 64, 0.2)"],
-      borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)", "rgba(75, 192, 192, 1)", "rgba(153, 102, 255, 1)", "rgba(255, 159, 64, 1)"],
-      borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true
-        }
-      }]
+    if (text) {
+      var new_text = $(".template .outgoing_msg").clone();
+      new_text.find(".content").text(text);
+      new_text.find(".message_time").text();
+      $(".msg_history").append(new_text);
+      $(".msg_history").scrollTop(10000);
     }
-  }
-}); // dati e grafico messaggi singolo apt
 
-var graficoMess = $("#messagesChart");
-var results = [];
-var gennaio = $("#gen_mes").val();
-var febbraio = $("#feb_mes").val();
-var marzo = $("#mar_mes").val();
-var aprile = $("#apr_mes").val();
-var maggio = $("#mag_mes").val();
-var giugno = $("#giu_mes").val();
-var luglio = $("#lug_mes").val();
-var agosto = $("#ago_mes").val();
-var settembre = $("#set_mes").val();
-var ottobre = $("#ott_mes").val();
-var novembre = $("#nov_mes").val();
-var dicembre = $("#dic_mes").val();
-var myChart = new Chart(graficoMess, {
-  type: "line",
-  data: {
-    labels: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
-    datasets: [{
-      label: "Numero messaggi",
-      data: [gennaio, febbraio, marzo, aprile, maggio, giugno, luglio, agosto, settembre, ottobre, novembre, dicembre],
-      backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 159, 64, 0.2)"],
-      borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)", "rgba(75, 192, 192, 1)", "rgba(153, 102, 255, 1)", "rgba(255, 159, 64, 1)"],
-      borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true
-        }
-      }]
+    $(".write_msg").val("");
+  });
+  $(".write_msg").keypress(function (e) {
+    var key = e.which;
+
+    if (key == 13) {
+      $(".fa-paper-plane").click();
+      return false;
     }
-  }
+  });
+  $(".search-bar").keyup(function () {
+    var lookup = $(this).val().toLowerCase();
+    $(".chat_people").each(function () {
+      if ($(this).find(".apt_title, .contacts").text().toLowerCase().includes(lookup)) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  });
+  $(".chat_list").click(function () {
+    var chat = $(this).attr("data-attribute");
+    var chatscreen = $('.msg_history[data-attribute="' + chat + '"]');
+    console.log(chatscreen);
+    $(".msg_history").removeClass("active_chat");
+    $(".chat_list").removeClass("active_chat");
+    chatscreen.addClass("active_chat");
+    $(this).addClass("active_chat");
+  });
 });
 
 /***/ }),
 
-/***/ 5:
-/*!**************************************!*\
-  !*** multi ./resources/js/charts.js ***!
-  \**************************************/
+/***/ 7:
+/*!****************************************!*\
+  !*** multi ./resources/js/messages.js ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Emanuele\Desktop\BoolBnB-Manu\resources\js\charts.js */"./resources/js/charts.js");
+module.exports = __webpack_require__(/*! C:\Users\Emanuele\Desktop\BoolBnB-Manu\resources\js\messages.js */"./resources/js/messages.js");
 
 
 /***/ })

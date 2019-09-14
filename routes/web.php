@@ -21,6 +21,7 @@ Route::get('/search', 'PageController@showSearchPage')->name('search');
 Auth::routes();
 //save public message
 Route::post('/message', 'MessageController@store')->name('save_msg');
+Route::get('/sendmessage', 'MessageController@sendMessage')->name('send_msg');
 
 
 Route::resource('/apartaments', 'ApartamentController');

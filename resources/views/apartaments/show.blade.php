@@ -47,6 +47,7 @@
           <div id='map'></div>
       </div>
 
+    {{-- @if (Auth::user()->id != $apartament->user_id) --}}
       <div class="col-md-6">
         <h4>Per contattare il proprietario manda un messaggio</h4>
         <form class="" action="{{route('save_msg')}}" method="post">
@@ -71,6 +72,7 @@
           <input type="submit" name="" value="Invia Messaggio" class="btn btn-danger">
         </form>
       </div>
+    {{-- @endif --}}
     </div>
   </div>
 @endsection
