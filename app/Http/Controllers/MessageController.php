@@ -28,13 +28,10 @@ class MessageController extends Controller
       return view('apartaments.confirm_msg');
     }
 
-    public function sendMessage(Request $request)
+    public function sendMessage()
     {
 
-      $data = $request->all();
-      $user_email = $data['email'];
-
-      Mail::to($user_email)->send(new InfoMessage($user_email));
+      Mail::to(Auth::id()->email)->send(new InfoMessage(Auth::id()->email));
 
       if (Mail::failures())
       {

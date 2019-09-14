@@ -33,7 +33,7 @@
                     <div class="chat_list" data-attribute={{ $message->id }}>
                       <input type="hidden" value="{{$message->id}}" name="data-name"/>
                         <div class="chat_people">
-                            <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                            <div class="chat_img"> <img src={{asset('storage/' . $message->apartament->image_url)}} alt="sunil"> </div>
                             <div class="chat_ib">
                                 <h5 class="contacts"> {{$message->email}} <span class="chat_date">{{ $message->created_at->format('M d, H:m') }}</span></h5>
                                 <form action="{{ route('admin.message.destroy', $message->id) }}" method="post">
@@ -41,8 +41,12 @@
                                     @csrf
                                     <input value="&#xf2ed;" class="btn btn-danger far fa-trash-alt float-right" type="submit">
                                 </form>
-                                    <p  class="apt_title"><strong>{{ Str::words($message->apartament->title,4) }}</strong> </p>
-                                    <p>{{ Str::words($message->message_content,3) }}</p>
+                                <a type="button" href="#myModal" data-toggle="modal" title="Reply" name="button" class="btn btn-success far fa-edit float-right"></a>
+
+                                {{-- <a href="#myModal" data-toggle="modal"  title="Reply"    class="btn btn-compose "> --}}
+
+                                    <p  class="apt_title"><strong>{{ $message->apartament->title }}</strong> </p>
+                                    <p>{{ $message->message_content }}</p>
                             </div>
                         </div>
                     </div>
@@ -50,79 +54,45 @@
                 </div>
             </div>
 
-            <div class="mesgs">
-
-
-                <div class="msg_history active_chat" data-attribute={{ 1 }}>
-                    <div class="incoming_msg">
-                        <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                        <div class="received_msg">
-                            <div class="received_withd_msg">
-                                <p class="content">{{($message->message_content)}}</p>
-                                <span class="time_date"> {{($message->created_at->format('M d | H:m'))}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="outgoing_msg">
-                        <div class="sent_msg">
-                            <p class="content">Re: {{ $message->email }} <br>
-                              Grazie per il tuo messaggio. Ti risponderò appena possibile</p>
-                            <span class="time_date"> {{now()->format('M d | H:m')}}</span>
-                        </div>
-                    </div>
-
-                    {{-- <div class="incoming_msg">
-              <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-              <div class="received_msg">
-                <div class="received_withd_msg">
-                  <p>Test, which is a new approach to have</p>
-                  <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
-              </div>
-            </div> --}}
-                    {{-- <div class="outgoing_msg">
-              <div class="sent_msg">
-                <p>Apollo University, Delhi, India Test</p>
-                <span class="time_date"> 11:01 AM    |    Today</span> </div>
-            </div> --}}
-                    {{-- <div class="incoming_msg">
-              <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-              <div class="received_msg">
-                <div class="received_withd_msg">
-                  <p>We work directly with our designers and suppliers,
-                    and sell direct to you, which means quality, exclusive
-                    products, at a price anyone can afford.</p>
-                  <span class="time_date"> 11:01 AM    |    Today</span></div>
-              </div>
-            </div> --}}
-
-
-
-                </div>
-                <div class="type_msg">
-                    <div class="input_msg_write">
-                        <input type="text" class="write_msg" placeholder="Type a message" />
-                        <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-                    </div>
-                </div>
+  <!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Messaggio di risposta </h4>
             </div>
-        </div>
-    </div>
+            <div class="modal-body">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Destinatario</label>
+                        <div class="col-lg-10">
+                            <input type="text" placeholder="" id="inputEmail1" class="form-control" value="{{ $message->email  }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Oggetto</label>
+                        <div class="col-lg-10">
+                            <input type="text" placeholder="" id="inputPassword1" value="{{ $message->apartament->title }}" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Message</label>
+                        <div class="col-lg-10">
+                            <textarea rows="10" cols="30" class="form-control" id="" name=""></textarea>
+                        </div>
+                    </div>
 
-
-    <div class="template">
-      <div class="msg_history" data-attribute="">
-       <div class="outgoing_msg">
-          <div class="sent_msg">
-           <p class="content">Re: {{ $message->email }} <br></p>
-           <span class="time_date">{{now()->format('M d | H:m')}}</span>
-          </div>
-       </div>
-   </div>
-
-  </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <button class="btn btn-success" type="submit">Send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 </div>
 
 

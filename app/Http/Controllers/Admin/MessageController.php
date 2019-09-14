@@ -33,10 +33,12 @@ class MessageController extends Controller
   public function show($id)
   {
 
-    $msgToShow = Message::find($id);
+    $message = Message::where('id', $message->id)->first();
+
+
   }
 
-  public function reply($id, $email)
+  public function reply($id)
   {
 
   }
