@@ -54,10 +54,16 @@ class ApartamentController extends Controller
     {
         $apartament = Apartament::findOrFail($id);
         $user = User::findOrFail($apartament->user_id);
+        $apartaments = Apartament::where('user_id', $apartament->user_id)->get();
         $services  = $apartament->services;
-        views($apartament)->record();
+
+        $expiresAt = now()->addHours(24);
+          views($apartament)
+              ->delayInSession($expiresAt)
+              ->record();
+        // views($apartament)->record();
         views($apartament)->count();
-        return view('apartaments.show', compact('apartament', 'services','user'));
+        return view('apartaments.show', compact('apartament', 'services','user','apartaments'));
     }
 
     /**

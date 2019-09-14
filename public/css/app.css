@@ -519,20 +519,19 @@ main {
 }
 
 .public-show {
-  background-color: #000b23;
+  background-color: #ffffff;
   padding: 6rem 0;
-  color: #ffffff;
+  color: #000b23;
 }
 
 .public-show .container .img_container {
   width: 100%;
-  border: 2px solid #ffffff;
+  border: 2px solid #000b23;
   border-radius: 0.4rem;
 }
 
 .public-show .container .img_container:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 1rem 2rem rgba(255, 255, 255, 0.2);
+  box-shadow: 0 1rem 2rem rgba(0, 11, 35, 0.3);
   color: #ffffff;
 }
 
@@ -586,30 +585,11 @@ main {
   padding: 0 0.3rem;
 }
 
-@media (max-width: 970px) {
-  .public-show .container #map {
-    height: 35rem;
-  }
-}
-
-@media (max-width: 767px) {
-  .public-show .container #map {
-    height: 25rem;
-  }
-}
-
 .public-show .container .message_send textarea,
 .public-show .container .message_send input {
   border-radius: 2rem;
   padding: 1rem 0.8rem;
   font-size: 2.2rem;
-}
-
-@media (max-width: 767px) {
-  .public-show .container .message_send textarea,
-  .public-show .container .message_send input {
-    width: 100%;
-  }
 }
 
 .public-show .container .prenotations {
@@ -621,7 +601,7 @@ main {
   border-radius: 2rem;
   padding: 1.5rem;
   font-size: 1.8rem;
-  color: #ffffff;
+  color: #000b23;
 }
 
 @media (max-width: 767px) {
@@ -638,23 +618,20 @@ main {
 
 .public-show .container .prenotations:hover {
   transform: translateY(-3px);
-  box-shadow: 0 1rem 2rem rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  box-shadow: 0 1rem 2rem rgba(0, 11, 35, 0.2);
 }
 
-.public-show .container .prenotations .user_name,
-.public-show .container .prenotations .home_recap,
-.public-show .container .prenotations .date {
-  border-bottom: 1px solid #ffffff;
+.public-show .container .prenotations .home_recap {
+  border-bottom: 1px solid #000b23;
 }
 
 .public-show .container .prenotations .user_name {
-  height: 12.5rem;
+  height: 20%;
   padding: 2rem 0;
 }
 
 .public-show .container .prenotations .home_recap {
-  height: 11.5rem;
+  height: 25%;
 }
 
 .public-show .container .prenotations .home_recap li {
@@ -662,20 +639,20 @@ main {
 }
 
 .public-show .container .prenotations .date {
-  height: 12rem;
+  height: 20%;
 }
 
 .public-show .container .prenotations .date .btn {
-  padding: 0.8rem;
-  font-size: 1.7rem;
+  padding: 1rem;
+  font-size: 2rem;
   border-radius: 1rem;
 }
 
 .payment {
-  background-color: #000b23;
+  background-color: #ffffff;
   padding: 5rem;
   height: 100vh;
-  color: #ffffff;
+  color: #000b23;
   overflow-y: auto;
 }
 
@@ -687,28 +664,49 @@ main {
 .payment .bt-drop-in-wrapper {
   border-radius: 1.5rem;
   padding: 1rem;
-  width: 50%;
+  max-width: 50%;
+}
+
+@media (max-width: 970px) {
+  .payment .bt-drop-in-wrapper {
+    max-width: 70%;
+  }
 }
 
 @media (max-width: 767px) {
   .payment .bt-drop-in-wrapper {
-    width: 120%;
+    max-width: 100%;
     border-radius: 0;
     padding: 0;
   }
 }
 
-.payment #bt-dropin {
-  width: 100%;
+.admin_edit {
+  padding: 3rem 4rem;
 }
 
-@media (max-width: 767px) {
-  .payment #bt-dropin {
-    margin-top: 0.7rem;
-    padding: 0;
-    position: relative;
-    right: 10%;
-  }
+.admin_edit .button:hover {
+  color: #000b23;
+}
+
+.admin_edit .upload {
+  cursor: pointer;
+  border: 1px solid #38c172;
+  padding: 1.5rem 3rem;
+  text-transform: uppercase;
+  color: #002167;
+  border-radius: 3rem;
+}
+
+.admin_edit .upload:hover {
+  box-shadow: 0 1rem 2rem rgba(0, 11, 35, 0.3);
+  font-weight: bold;
+}
+
+.admin_edit #upload-photo {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
 }
 
 /*!

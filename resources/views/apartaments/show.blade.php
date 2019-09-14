@@ -79,13 +79,13 @@
               </div>
             </div>
             <div class="row mt-5 justify-content-between">
-              <div class="col-lg-10 col-sm-8 apt_address">
+              <div class="col-lg-10 col-md-10 col-sm-12 apt_address">
                 <h1>Posizione:</h1>
                 <div id='map' class="mt-4"></div>
               </div>
             </div>
             <div class="row mt-5 justify-content-between">
-              <div class="col-lg-10 col-sm-6">
+              <div class="col-lg-10 col-md-10 col-sm-12">
                 <h3>
                   Per contattare il proprietario manda un messaggio:
                 </h3>
@@ -122,10 +122,10 @@
               </h4>
               <p>
                 Possiede in affitto sulla nostra piattaforma
-                <strong>{{ $apartament->count() }}</strong> appartamenti.
+                <strong>{{ $apartaments->count() }}</strong> appartamenti.
 
-                @if ($apartament->count() === 1)
-                  Possiede in affitto sulla nostra piattaforma <strong>{{ $apartament->count() }}</strong> appartamento.
+                @if ($apartaments->count() === 1)
+                  Possiede in affitto sulla nostra piattaforma <strong>{{ $apartaments->count() }}</strong> appartamento.
                 @endif
               </p>
             </div>
@@ -159,7 +159,7 @@
                 <h6>Data Partenza:</h6>
                 <input class="form-control "type="date" name="" value="">
               </div>
-              <button class="btn btn-danger mt-4" type="button" name="button">
+              <button class="btn btn-primary mt-4" type="button" name="button">
                 Vedi l'Offerta
               </button>
             </div>

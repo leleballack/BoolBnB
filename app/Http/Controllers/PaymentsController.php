@@ -93,20 +93,18 @@ class PaymentsController extends Controller
            $dt = Carbon::create($year,$month,$day,0);
            $new_sponsor->end_date = $dt->addHours($value);
            $new_sponsor->save();
-           return dd($data);
 
+          return redirect()->route('admin.apt.index')->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
+      } else {
+          $errorString = "";
 
-   //        return redirect()->route('admin.apt.index')->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
-   //    } else {
-   //        $errorString = "";
-   //
-   //        foreach ($result->errors->deepAll() as $error) {
-   //            $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
-   //        }
-   //
-   //        // $_SESSION["errors"] = $errorString;
-   //        // header("Location: index.php");
-   //        return back()->withErrors('An error occurred with the message: '.$result->message);
+          foreach ($result->errors->deepAll() as $error) {
+              $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
+          }
+
+          // $_SESSION["errors"] = $errorString;
+          // header("Location: index.php");
+          return back()->withErrors('An error occurred with the message: '.$result->message);
       }
     }
 }

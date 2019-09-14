@@ -1,0 +1,32 @@
+.admin_edit{
+  padding:3rem 4rem;
+
+  .button{
+    &:hover{
+      color:$main-black-color;
+    }
+  }
+
+
+
+
+  //custom input type file
+  .upload {
+   cursor: pointer;
+   border:1px solid $green;
+   padding:1.5rem 3rem;
+   text-transform: uppercase;
+   color:$main-blue-color;
+   border-radius:3rem;
+
+   &:hover{
+     box-shadow: 0 1rem 2rem rgba( $main-black-color, 0.3);
+     font-weight: bold;
+   }
+}
+  #upload-photo {
+     opacity: 0;
+     position: absolute;
+     z-index: -1;
+  }
+}
