@@ -22,6 +22,6 @@ class MessageController extends Controller
       $new_message->message_content = $data['content'];
       $new_message->apartament_id = $data['id'];
       $new_message->save();
-      dd($data);
+      return back()->with('message_send', 'Il messagggio è stato inviato correttamente');
     }
 }

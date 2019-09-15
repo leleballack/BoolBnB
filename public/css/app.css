@@ -595,6 +595,22 @@ main {
   margin-top: 5rem;
 }
 
+.admin__apartament--title {
+  color: #002167;
+}
+
+.admin__apartament--address {
+  color: #002167;
+}
+
+.admin__apartament--delete_form {
+  display: inline-block;
+}
+
+.admin__apartament--button_sponsor_text {
+  color: #002167;
+}
+
 .public-show {
   background-color: #ffffff;
   padding: 6rem 0;
@@ -982,22 +998,6 @@ main {
 .header__right {
   display: flex;
   align-items: center;
-}
-
-.admin__apartament--title {
-  color: #002167;
-}
-
-.admin__apartament--address {
-  color: #002167;
-}
-
-.admin__apartament--delete_form {
-  display: inline-block;
-}
-
-.admin__apartament--button_sponsor_text {
-  color: #002167;
 }
 
 /*!
