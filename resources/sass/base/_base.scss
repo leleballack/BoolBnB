@@ -33,10 +33,11 @@ body {
 }
 
 main {
-    min-height: calc(100vh - 110px);
+    min-height: calc(100vh - 242px);
     margin-top: 92px;
     @include respond(tablet) {
         margin-top: 74px;
+        min-height: calc(100vh - 194px);
     }
 }
 

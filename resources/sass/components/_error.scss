@@ -1,0 +1,43 @@
+.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 80vh;
+    background-color: lighten($color: $main-blue-color, $amount: 60);
+
+    @include respond(tablet) {
+        height: 84vh;
+    }
+
+    &__content {
+        text-align: center;
+        width: 45rem;
+
+        @include respond(phone) {
+            width: auto;
+        }
+    }
+
+    &__image {
+        width: 100%;
+    }
+
+    &__description {
+        margin: 0 0 5rem;
+        color: $main-blue-color;
+        letter-spacing: 2px;
+
+        @include respond(phone) {
+            margin: 0 0 2rem;
+        }
+    }
+
+    &__redirect {
+        margin-top: 5rem;
+        @include respond(phone) {
+            margin-top: 2rem;
+        }
+    }
+}
