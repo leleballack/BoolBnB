@@ -143,12 +143,19 @@
           <a href="https://mdbootstrap.com/education/bootstrap/"> BoolBnB</a>
         </div>
 
-        <hr>
+        <hr class="footer__hr">
 
         <ul class="footer__social-list">
             <li class="footer__social-list--item">
-               
+                <i class="fab fa-facebook-square"></i>
             </li>
+            <li class="footer__social-list--item">
+                <i class="fab fa-twitter-square"></i>
+            </li>
+            <li class="footer__social-list--item">
+                <i class="fab fa-linkedin"></i>
+            </li>
+
         </ul>
       
       </footer>
