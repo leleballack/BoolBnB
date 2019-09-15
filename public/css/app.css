@@ -131,6 +131,26 @@ main {
   box-shadow: 4px 3px 5px 0px #002167;
 }
 
+.old-image-container {
+  height: 18rem;
+  margin-left: auto;
+  margin-right: 2rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 3px outset #cecece;
+}
+
+@media (max-width: 992px) {
+  .old-image-container {
+    height: 30rem;
+    margin-top: 3rem;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 @-webkit-keyframes moveInLeft {
   0% {
     opacity: 0;

@@ -1,6 +1,5 @@
 require("./bootstrap");
 
-
 // da spostare in un js a parte, e importare il modulo qua dentro !!!
 $(document).ready(function() {
     $(window).on("resize", function() {
@@ -28,8 +27,18 @@ $(document).ready(function() {
         $(".overlay").toggleClass("overlay--active");
     });
 
-
     //messaggio avvenuto pagamento che scompare dopo 7s
-    $('.alert').fadeOut(10000);
+    $(".alert").fadeOut(10000);
 
+    // filepicker
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this)
+            .val()
+            .split("\\")
+            .pop();
+        $(this)
+            .siblings(".custom-file-label")
+            .addClass("selected")
+            .html(fileName);
+    });
 });

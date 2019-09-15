@@ -10,6 +10,7 @@
   <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-js/4.47.6/examples/elements.css'/>
   <script src='https://api.tomtom.com/maps-sdk-js/4.47.6/examples/js/form.js'></script>
   <script src='https://api.tomtom.com/maps-sdk-js/4.47.6/examples/sdk/tomtom.min.js'></script>
+
   <script src="{{ asset('js/createAptMap.js') }}" defer></script>
 @endsection
 
@@ -104,20 +105,20 @@
       </div>
 
     </div>
+
     <div class="row mt-3 mb-5">
-      <div class="col-lg-8">
-        <div class="form-group">
-          <label class="upload" for="upload-photo">
-            Carica immagine
-          </label>
-            <input name="apt_pic" type="file" class="form-control-file" name="fileToUpload" id="upload-photo">
-            <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
-            @error('apt_pic')
-              <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
+      <div class="col-lg-12">
+          <div class="custom-file mb-3">
+              <input type="file" class="custom-file-input" id="customFile" name="apt_pic" single>
+              <label class="custom-file-label" for="customFile">Choose file</label>
+          </div>
+          @error('apt_pic')
+            <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
+          <small id="fileHelp" class="form-text text-muted mt-3">L'immagine non può superare i 2MB.</small>
       </div>
     </div>
+
     <div class="row">
       <div class="col-lg-12">
         <div class="form-group">
