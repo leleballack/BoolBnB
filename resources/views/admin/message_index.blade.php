@@ -36,6 +36,7 @@
                 </div>
                 <div class="inbox_chat">
 
+                  @if ($messages->isNotEmpty())
                     @foreach ($messages as $message)
                     <div class="chat_list" data-attribute={{ $message->id }}>
                         <div class="chat_people">
@@ -55,6 +56,11 @@
                         </div>
                     </div>
                     @endforeach
+                    @else
+                      <div class="no_msg col-12 text-center border-inline-style:'dotted;'">
+                        <img src="https://cdn.dribbble.com/users/99954/screenshots/6669081/no_messages_blank_state.png" alt="">
+                      </div>
+                  @endif
                 </div>
             </div>
         </div>

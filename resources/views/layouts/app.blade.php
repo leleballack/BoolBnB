@@ -11,22 +11,23 @@
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
-    
+
     @yield('scripts')
-    
-    
+
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    
+
     <!-- Styles -->
+    <link rel="shortcut icon" href="https://www.booking.com/favicon.ico">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
 
-    <header> 
+    <header>
         <div class="container-fluid header">
             <div class="header__left">
                 <a class="header__logo" href="{{ url('/') }}">
@@ -52,7 +53,7 @@
                                     <a class="navigation__link" href="{{ route('register') }}">{{ __('Registrati') }}</a>
                                 </li>
                             @endif
-                        </ul> 
+                        </ul>
 
                         @else
                             <li class="navigation__item">
@@ -65,12 +66,12 @@
                             <li class="navigation__item">
                                 <a href="{{ route('logout') }}" class="navigation__link" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">Logout</a>
-                                
+
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
                             </li>
-                        </ul> 
+                        </ul>
 
                         @php
                             // taking logged in user initials
@@ -95,7 +96,7 @@
                     <div class="spaghetti">
                         <span class="spaghetti__center"></span>
                     </div>
-                </nav>               
+                </nav>
             </div>
         </div>
 
@@ -129,14 +130,14 @@
                     <li class="phone-menu__item">
                         <a href="{{ route('logout') }}" class="phone-menu__link" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">Logout</a>
-                        
+
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
                     </li>
-                </ul> 
+                </ul>
                 @endguest
-        </div>  
+        </div>
 
 
     </header>
@@ -150,7 +151,7 @@
 
     <footer class="footer">
 
-        <div class="footer-copyright text-center py-3">© 2019 Copyright 
+        <div class="footer-copyright text-center py-3">© 2019 Copyright
           <a href="https://mdbootstrap.com/education/bootstrap/"> BoolBnB</a>
         </div>
 
@@ -168,7 +169,7 @@
             </li>
 
         </ul>
-      
+
       </footer>
 </body>
 </html>
