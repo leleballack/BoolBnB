@@ -15,7 +15,7 @@
         {{ session('message_send') }}
       </div>
     @endif
-<div class="container">
+<div class="container container--margin-top">
   <div class="all_mess">
     <h3 class=" text-center">Messaggi Ricevuti</h3>
     <div class="messaging">

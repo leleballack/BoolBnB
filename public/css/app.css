@@ -75,6 +75,10 @@ main {
   }
 }
 
+.container--margin-top {
+  margin-top: 15rem !important;
+}
+
 .container--mg-sxdx {
   margin: 0 1rem;
 }
@@ -770,13 +774,8 @@ img {
   margin-top: 5rem;
 }
 
-.all_mess {
-  margin-top: 2rem;
-}
-
-.row {
-  margin-top: 5rem;
-  margin-bottom: 5rem;
+.all_mess h3 {
+  margin-top: 5rem !important;
 }
 
 .card,
