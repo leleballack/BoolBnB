@@ -27,11 +27,9 @@ $(document).ready(function() {
         $(".spaghetti").toggleClass("spaghetti--cooked");
         $(".overlay").toggleClass("overlay--active");
     });
-  
-  
+
+
     //messaggio avvenuto pagamento che scompare dopo 7s
-    $('.alert').fadeOut(7000);
+    $('.alert').fadeOut(10000);
 
 });
-
-

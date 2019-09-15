@@ -10,6 +10,11 @@
 @endsection
 
 @section('content')
+  @if (session('message_send'))
+    <div class="alert alert-success">
+      {{ session('message_send') }}
+    </div>
+  @endif
   <div class="public-show">
     <div class="container">
       <div class="row justify-content-around">
