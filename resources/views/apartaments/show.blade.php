@@ -93,7 +93,7 @@
             <div class="row mt-5 justify-content-between">
               <div class="col-lg-10 col-md-10 col-sm-12">
 
-                    @if (Auth::user()->id != $apartament->user_id)
+                {{-- @if ( Auth::user() !== null && Auth::user()->id != $apartament->user_id) --}}
 
                 <h3>
                   Per contattare il proprietario manda un messaggio:
@@ -174,7 +174,7 @@
       </div>
 
 
-    @endif
+    {{-- @endif --}}
 
 
     </div>
