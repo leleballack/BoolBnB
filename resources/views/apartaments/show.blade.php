@@ -117,13 +117,13 @@
                   <div class="form-group">
                     <input type="hidden" name="id" value="{{$apartament->id}}">
                   </div>
-                  <button type="submit" name=""  class="button mt-3">Invia Messaggio</button>
+                  <button type="submit" name=""  class="button button--blue button--animated mt-5">Invia Messaggio</button>
                 </form>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-lg-3 ">
+        <div class="col-lg-4">
           <div class="prenotations">
             <div class="user_name">
               <h4>
@@ -133,9 +133,6 @@
                 Possiede in affitto sulla nostra piattaforma
                 <strong>{{ $apartaments->count() }}</strong> appartamenti.
 
-                @if ($apartaments->count() === 1)
-                  Possiede in affitto sulla nostra piattaforma <strong>{{ $apartaments->count() }}</strong> appartamento.
-                @endif
               </p>
             </div>
             <div class="home_recap mt-5">
@@ -152,9 +149,9 @@
                   @endif
 
                   @if( $apartament->total_rooms == 1 )
-                    {{ $apartament->total_rooms }} stanza,
+                    {{ $apartament->total_rooms }} stanza
                   @else
-                    {{ $apartament->total_rooms }} stanze,
+                    {{ $apartament->total_rooms }} stanze
                   @endif
                 </li>
               </ul>

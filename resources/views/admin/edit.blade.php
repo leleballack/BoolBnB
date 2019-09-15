@@ -29,8 +29,8 @@
           @method('PUT')
           @csrf
           <div class="form-group">
-            <label>Title</label>
-            <input name="title" type="text" value="{{ old('title', $apartament->title) }}" class="form-control" placeholder="Title">
+            <label>Titolo</label>
+            <input name="title" type="text" value="{{ old('title', $apartament->title) }}" class="form-control" placeholder="Titolo">
             @error('title')
               <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -40,8 +40,8 @@
     <div class="row">
       <div class="col-lg-3 col-md-6 col-sm-12">
         <div class="form-group">
-          <label>Rooms</label>
-          <input name="rooms" type="number" class="form-control" placeholder="Rooms" value="{{ old('rooms', $apartament->total_rooms) }}">
+          <label>Stanze</label>
+          <input name="rooms" type="number" class="form-control" placeholder="Stanze" value="{{ old('rooms', $apartament->total_rooms) }}">
           @error('rooms')
             <div class="alert alert-danger">{{ $message }}</div>
           @enderror
@@ -49,8 +49,8 @@
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
         <div class="form-group">
-          <label>Beds</label>
-          <input name="beds" type="number" class="form-control" placeholder="Beds" value="{{ old('beds', $apartament->total_beds) }}">
+          <label>Letti</label>
+          <input name="beds" type="number" class="form-control" placeholder="Letti" value="{{ old('beds', $apartament->total_beds) }}">
           @error('beds')
             <div class="alert alert-danger">{{ $message }}</div>
           @enderror
@@ -58,8 +58,8 @@
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
         <div class="form-group">
-          <label>Baths</label>
-          <input name="baths" type="number" class="form-control" placeholder="Baths" value="{{ old('baths', $apartament->total_baths) }}">
+          <label>Bagni</label>
+          <input name="baths" type="number" class="form-control" placeholder="Bagni" value="{{ old('baths', $apartament->total_baths) }}">
           @error('baths')
             <div class="alert alert-danger">{{ $message }}</div>
           @enderror
@@ -67,8 +67,8 @@
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
         <div class="form-group">
-          <label>Square Mt</label>
-          <input name="square_mt" type="number" class="form-control" placeholder="Square Mt" value="{{ old('square_mt', $apartament->square_meters) }}">
+          <label>Metri quadri</label>
+          <input name="square_mt" type="number" class="form-control" placeholder="Metri quadri" value="{{ old('square_mt', $apartament->square_meters) }}">
           @error('square_mt')
             <div class="alert alert-danger">{{ $message }}</div>
           @enderror
@@ -76,27 +76,28 @@
       </div>
     </div>
     <div class="row mt-5 mb-5">
-      <div class="col-lg-8 col-md-6 col-sm-12">
-        <div class="form-check ">
-          @foreach ($services as $service)
-            <label class="form-check-label" for="{{ $service['id'] }}">
-                @php
-                    $array = ($apartament->services)->pluck('id')->toArray();
-                @endphp
-                <div class="custom-control custom-checkbox">
-                 <input type="checkbox" class=" custom-control-input"  id="{{ $service['id'] }}"
-                 name="services[]"
-                 value="{{ $service->id }}"
-                 {{ ( in_array($service->id, old('services', $array)) ) ? 'checked ' : '' }}>
+      <div class="form-check ">
+        @foreach ($services as $service)
 
-                 <label class="custom-control-label" for="customCheck">
-                   {{ $service['description'] }}
-                 </label>
-               </div>
+        <label
+          for="{{ $service->id }}"
+          class="form-check-label search__checkbox--label mr-3"
+        >
+        @php
+          $array = ($apartament->services)->pluck('id')->toArray();
+        @endphp
+          <input
+            name="services[]"
+            type="checkbox"
+            id="{{ $service->id }}"
+            value="{{ $service->id }}"
+            class="search__checkbox--quad"
+            {{ ( in_array($service->id, old('services', $array)) ) ? 'checked ' : '' }}
+          >
+          {{ $service->description }}
+        </label>
 
-            </label>
-          @endforeach
-        </div>
+        @endforeach
       </div>
     </div>
     <div class="row mt-3 mb-5 ">

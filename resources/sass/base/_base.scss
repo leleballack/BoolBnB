@@ -45,6 +45,10 @@ main {
         margin-top: 15rem !important;
     }
 
+    &--margin-top-25 {
+        margin-top: 25rem !important;
+    }
+
     &--mg-sxdx {
         margin: 0 1rem;
     }
@@ -68,4 +72,30 @@ main {
 // utilities
 .margintop-80 {
     margin-top: 8rem !important;
+}
+
+.message-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__register {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+        height: 12rem;
+        width: 35rem;
+        border-radius: 1rem;
+        background-color: lighten($color: $main-blue-color, $amount: 20);
+        border: 2px outset $main-black-color;
+
+        font-size: 2rem;
+        color: $main-white-color !important;
+        transition: box-shadow 0.2s;
+
+        &:hover {
+            box-shadow: 4px 3px 5px 0px rgba(0, 33, 103, 1);
+        }
+    }
 }

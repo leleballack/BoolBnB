@@ -26,7 +26,7 @@
           </h3>
           @if ($latest_message !== null)
             <p class="mt-2">
-              Ultimo messaggio inviato da: {{ $latest_message->email }}, controlla i tuoi <a href="#" class="link">messaggi.</a>
+            Ultimo messaggio inviato da: {{ $latest_message->email }}, controlla i tuoi <a href="{{ route('admin.message.index') }}" class="link">messaggi.</a>
             </p>
           @else
             <p>

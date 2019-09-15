@@ -1,5 +1,7 @@
 .navigation {
     &__list {
+        margin-bottom: 0;
+        list-style-type: none;
         display: flex;
         align-items: center;
         @include respond(phone) {
@@ -9,8 +11,12 @@
 
     &__item {
         &:not(:last-child) {
-            margin-right: 3rem;
+            margin-right: 1.5rem;
         }
+    }
+
+    &__link {
+        font-size: 1.6rem !important;
     }
 
     &__user {
