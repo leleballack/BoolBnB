@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container container--mg-sxdx">
     <div v-if="(apartamentList.length > 0)">
       <div class="row apartament" v-for="apartament in apartamentList" :key="apartament.id">
         <div
@@ -83,8 +83,9 @@
       </nav>
     </div>
 
-    <div v-else>
-      <h3>Non ci sono risultati per i filtri applicati!</h3>
+    <div v-else class="apartament__no-results-div">
+      <i class="fas fa-search"></i>
+      <h3 class="heading--tertiary">Non ci sono risultati per i filtri applicati!</h3>
     </div>
   </div>
 </template>

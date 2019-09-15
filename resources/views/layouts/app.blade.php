@@ -37,6 +37,9 @@
                 <nav class="navigation">
                     <ul class="navigation__list">
                         <li class="navigation__item">
+                            <a class="navigation__link"  href="{{ url('/') }}">Home</a>
+                        </li>
+                        <li class="navigation__item">
                             <a class="navigation__link" href="{{ route('search') }}">Ricerca</a>
                         </li>
 
@@ -133,11 +136,20 @@
             @yield('content')
         </main>
     </div>
-    <footer class="footer page-footer">
+
+    <footer class="footer">
 
         <div class="footer-copyright text-center py-3">© 2019 Copyright 
           <a href="https://mdbootstrap.com/education/bootstrap/"> BoolBnB</a>
         </div>
+
+        <hr>
+
+        <ul class="footer__social-list">
+            <li class="footer__social-list--item">
+               
+            </li>
+        </ul>
       
       </footer>
 </body>
