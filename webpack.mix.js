@@ -16,8 +16,12 @@ mix.js("resources/js/app.js", "public/js/app.js")
     .js("resources/js/createAptMap.js", "public/js/createAptMap.js")
     .js("resources/js/publicShowAptMap.js", "public/js/publicShowAptMap.js")
     .js("resources/js/aptSearch.js", "public/js/aptSearch.js")
+<<<<<<< HEAD
     .js("resources/js/charts.js", "public/js/charts.js")
     .js("resources/js/messages.js", "public/js/messages.js");
+=======
+    .js("resources/js/charts.js", "public/js/charts.js");
+>>>>>>> 3a7cf282887c994b2f6aa381ba56caa31440c42a
 
 mix.sass("resources/sass/app.scss", "public/css");
 

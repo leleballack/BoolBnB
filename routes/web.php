@@ -29,12 +29,13 @@ Route::resource('/apartaments', 'ApartamentController');
     ->prefix('admin')
     ->namespace('Admin')
     ->name('admin.')
-    ->group(function(){
+    ->group(function() {
 
       Route::resource('/apt', 'ApartamentController');
       Route::resource('/message', 'MessageController');
       Route::post('/message', 'MessageController@sendMessage')->name('send_msg');
       Route::get('/', 'PageController@showAdminHomePage')->name('home');
+      // Route::get('/', 'PageController@showAdminHomePage');
 
     });
 

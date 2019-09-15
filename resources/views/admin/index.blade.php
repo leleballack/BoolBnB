@@ -1,38 +1,86 @@
 @extends('layouts.app')
 
 @section ('content')
-
+  @if (session('success_message'))
+    <div class="alert alert-success">
+      {{ session('success_message') }}
+    </div>
+  @endif
   @if($tutti_gli_apt->isNotEmpty())
     <div class="container">
       <a href="{{ route('admin.apt.create') }}" class="btn btn-success mt-3 mb-3">Aggiungi appartamento</a>
       <a href='{{ route('admin.message.index') }}' class="btn btn-warning mt-3 mb-3">Vedi i tuoi messaggi</a>
+
+      <a href="{{ route('admin.apt.create') }}" class="btn btn-primary mt-5 mb-5">Registra un nuovo appartamento</a>
+
       @foreach ($tutti_gli_apt as $apartament)
-        <div class="row">
-          <div class="col-lg-6">
-            <h2>{{$apartament->title}}</h2>
-            <img src="{{ asset('storage/' . $apartament->image_url) }}" alt="" width="300" height="300">
-          </div>
-          <div class="col-lg-6">
+        <div class="row apartament">
 
-            <a href="{{ route('admin.apt.edit', $apartament->id) }}" class="btn btn-primary">Modifica</a>
+          <div class="col-lg-4 apartament__image-container" style="background-image: url('{{ asset('storage/' . $apartament->image_url) }}');"></div>
 
-            <form action="{{ route('admin.apt.destroy', $apartament->id) }}" method="post">
-              @method('DELETE')
-              @csrf
-              <input class="btn btn-danger mb-10" type="submit" value="Cancella">
-            </form>
+          <div class="col-lg-8 apartament__features-container">
 
-              @if (in_array($apartament->id, $arr))
-                @foreach ($arr_2 as $a)
-                  @if (($a['cur_id'] === $apartament->id) && ($a['cur_date'] > $now))
+            <h3 class="apartament__title heading--tertiary heading--transparent">{{$apartament->title}}</h3>
 
-                    Il tuo appartamento è sposnosrizzato fino al {{$a['cur_date']}}
-                  @endif
-                @endforeach
-              @else
-                 <a class="btn btn-success" href="{{route('paymentOne', $apartament->id)}}">Sponsorizza Appartamento</a>
-                 <a class="btn btn-danger" href="{{route('post.show',$apartament->id)}}">Vedi le richieste</a>
-              @endif
+            <div class="row mt-2">
+                <div class="col-lg-12">
+                  <p class="apartament__feature">
+                      {{$apartament->address}}
+                  </p>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col-lg-12">
+                <span class="apartament__button">
+                  <a href="{{ route('admin.apt.edit', $apartament->id) }}" class="btn btn-primary">Modifica</a>
+                </span>
+
+                <span class="apartament__button">
+                  <a class="btn btn-secondary" href="{{route('post.show',$apartament->id)}}">Statistiche</a>
+                </span>
+
+                <span class="apartament__button">
+                  <form class="apartament__delete-form" action="{{ route('admin.apt.destroy', $apartament->id) }}" method="post">
+                    @method('DELETE')
+                    @csrf
+                    <input class="btn btn-danger mb-10" type="submit" value="Elimina">
+                  </form>
+                </span>
+
+                  @if (in_array($apartament->id, $arr))
+                  @foreach ($arr_2 as $a)
+                    @if (($a['cur_id'] === $apartament->id) && ($a['cur_date'] > $now))
+
+                      <div class="apartament__sponsor-desc--container mt-5">
+                        <span class="apartament__sponsor-desc--text">
+                          Appartamento sponsorizzato fino al {{$a['cur_date']->day . '-' . $a['cur_date']->month . '-' . $a['cur_date']->year}} alle ore
+                          @if ($a['cur_date']->hour == 0)
+                            @php
+                              $hour = $a['cur_date']->hour . '0'
+                            @endphp
+                          @endif
+  
+                          @if ($a['cur_date']->minute == 0)
+                            @php
+                              $minute = $a['cur_date']->minute . '0'
+                            @endphp
+                            {{$hour . ':' . $minute}}
+                          @endif
+                        </span>
+                      </div>
+
+                    @endif
+                  @endforeach
+                @else
+                  <p class="apartament__button mt-5">
+                    <a class="btn btn-success" href="{{route('paymentOne', $apartament->id)}}">Sponsorizza</a>
+                  </p>
+                @endif
+
+              </div>
+            </div>
+
 
           </div>
         </div>
@@ -43,7 +91,68 @@
       </div>
     </div>
   @else
-    <a href="{{ route('admin.apt.create') }}" class="btn btn-primary">Registra appartamento</a>
+    <div class="mt-3">
+      <a href="{{ route('admin.apt.create') }}" class="btn btn-primary">Registra appartamento</a>
+    </div>
+
   @endif
 
 @endsection
+
+
+{{-- <div class="row apartament" v-for="apartament in apartamentList" :key="apartament.id">
+    <div
+      class="col-lg-4 apartament__image-container"
+      v-bind:style="{ 'background-image': 'url(/storage/' + apartament.image_url + ')' }"
+    ></div>
+
+    <div class="col-lg-8 apartament__features-container">
+      <a
+        :href="`/apartaments/${apartament.id}`"
+        class="apartament__title heading--tertiary heading--transparent"
+      >{{ apartament.title }}</a>
+
+      <div class="row mt-2">
+        <div class="col-lg-6 col-xs-12">
+          <p class="apartament__feature">
+            <i class="fas fa-door-open apartament__icon"></i>
+            Numero stanze: {{ apartament.total_rooms }}
+          </p>
+        </div>
+        <div class="col-lg-6 col-xs-12">
+          <p class="apartament__feature">
+            <i class="fas fa-bed apartament__icon"></i>
+            Numero letti: {{ apartament.total_beds }}
+          </p>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-lg-6 col-xs-12">
+          <p class="apartament__feature">
+            <i class="fas fa-shower apartament__icon"></i>
+            Numero bagni: {{ apartament.total_baths }}
+          </p>
+        </div>
+        <div class="col-lg-6 col-xs-12">
+          <p class="apartament__feature">
+            <i class="fas fa-home apartament__icon"></i>
+            M. quadri: {{ apartament.square_meters }}
+          </p>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-lg-12 col-xs-12">
+          <i class="fas fa-map-marker-alt apartament__icon"></i>
+          {{ apartament.address }}
+        </div>
+      </div>
+      <a
+        class="btn btn-primary apartament__link"
+        :href="`/apartaments/${apartament.id}`"
+      >Dettagli</a>
+    </div>
+
+    <span v-if="sponsored.includes(apartament.id)" class="apartament__sponsorization">s</span>
+  </div> --}}

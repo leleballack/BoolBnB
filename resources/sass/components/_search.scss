@@ -1,12 +1,4 @@
 .search {
-    background-color: beige;
-    &__container {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        padding: 20px;
-    }
-
     &__checkbox {
         &--quad {
             -webkit-appearance: none;
@@ -22,22 +14,22 @@
             height: 25px;
             width: 25px;
             transition: all 0.15s ease-out 0s;
-            background: #965c00;
+            background: $main-blue-color;
             border: none;
-            color: beige;
+            color: $main-white-color;
             cursor: pointer;
             display: inline-block;
             margin-right: 0.5rem;
             outline: none;
             position: relative;
-            z-index: 1000;
+            z-index: 5;
 
             &:hover {
-                background: #a76600;
+                background: lighten($color: $main-blue-color, $amount: 50);
             }
 
             &:checked {
-                background: #965c00;
+                background: lighten($color: $main-blue-color, $amount: 20);
             }
 
             &:checked::before {
@@ -59,9 +51,5 @@
                 cursor: pointer;
             }
         }
-    }
-
-    &__select {
-        width: 200px;
     }
 }

@@ -10,13 +10,28 @@
 @import "components/heading";
 @import "components/mappa";
 @import "components/button";
-@import "components/intro";
 @import "components/search";
 @import "components/homepage";
 @import "components/pagination";
 @import "components/apartament";
 @import "components/cover";
 @import "components/message";
+@import "components/public_show";
+@import "components/payment";
+
+@import "components/admin_form";
+@import "components/statistics";
+
+@import "components/navigation";
+@import "components/phone-menu";
+@import "components/spaghetti";
+
+// Layout folder
+@import "layout/header";
+@import "layout/footer";
+
+// Pages folder
 
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
+@import "vue-select/src/scss/vue-select.scss";

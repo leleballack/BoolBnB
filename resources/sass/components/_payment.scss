@@ -1,0 +1,47 @@
+.payment{
+  $font-size-base:2rem;
+  background-color:$main-white-color;
+  padding:5rem ;
+  height:100vh;
+  color: $main-black-color;
+  overflow-y:auto;
+
+  @include respond(tablet){
+    $font-size-base:1.6rem;
+  }
+  @include respond(phone){
+    $font-size-base:1.6rem;
+  }
+
+  li{
+    list-style-type: none;
+    font-size: $font-size-base;
+  }
+  .bt-drop-in-wrapper{
+      border-radius: 1.5rem;
+      padding:1rem;
+      max-width:50%;
+
+      @include respond(tablet){
+        max-width:70%;
+      }
+      @include respond(phone){
+        max-width:100%;
+        border-radius: 0;
+        padding:0;
+      }
+  }
+
+  // #bt-dropin{
+  //   width:100%;
+  //
+  //   // @include respond(phone){
+  //   //   margin-top: 0.7rem;
+  //   //   padding:0;
+  //   //   position:relative;
+  //   //   right:10%;
+  //   // }
+  // }
+
+
+}
