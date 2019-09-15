@@ -93,7 +93,18 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/Users/raduschirliu/Desktop/booleanServer/Progetto finale/BoolBnB-grp-4/resources/js/messages.js'");
+$(function () {
+  $(".search-bar").keyup(function () {
+    var word = $(this).val().toLowerCase();
+    $(".chat_list").each(function () {
+      if ($(this).find(".apt_title, .contacts").text().toLowerCase().includes(word)) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  });
+});
 
 /***/ }),
 

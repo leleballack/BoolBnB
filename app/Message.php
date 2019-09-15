@@ -10,6 +10,6 @@ class Message extends Model
     // relationship
     public function apartament()
     {
-        return $this->belongsTo('Apartament');
+        return $this->belongsTo('App\Apartament');
     }
 }

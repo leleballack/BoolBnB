@@ -22,13 +22,16 @@
                       <span class="show_apt mr-2">
 
                         <a href='{{ route('admin.apt.index') }}'>
-                          <button type="button" class="btn btn-primary">Vedi appartamenti</button> </a>
+                          <button type="button" class="btn btn-primary">Vedi appartamenti</button>
+                        </a>
 
 
                       </span>
                         <span class="show_messagges">
 
-                          <button type="button" class="btn btn-primary">Vedi messaggi</button> 
+                          <a href='{{ route('admin.message.index') }}'>
+                            <button type="button" class="btn btn-primary">Vedi messaggi</button>
+                          </a>
 
                         </span>
                     </div>
@@ -42,9 +45,6 @@
 
                     </div>
                     @endrole
-
-
-
 
                 </div>
             </div>

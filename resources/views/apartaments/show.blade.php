@@ -13,6 +13,7 @@
   @if (session('message_send'))
     <div class="alert alert-success">
       {{ session('message_send') }}
+
     </div>
   @endif
   <div class="public-show">
@@ -91,10 +92,13 @@
             </div>
             <div class="row mt-5 justify-content-between">
               <div class="col-lg-10 col-md-10 col-sm-12">
+
+                    @if (Auth::user()->id != $apartament->user_id)
+
                 <h3>
                   Per contattare il proprietario manda un messaggio:
                 </h3>
-                <form class="message_send" action="{{route('message.store' )}}" method="post">
+                <form class="message_send" action="{{route('save_msg' )}}" method="post">
                   @csrf
                   <div class="form-group">
                     <label for="email">Email:</label>
@@ -171,6 +175,11 @@
           </div>
         </div>
       </div>
+
+
+    @endif
+
+
     </div>
   </div>
 
