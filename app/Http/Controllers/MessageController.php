@@ -25,19 +25,7 @@ class MessageController extends Controller
       $new_message->apartament_id = $data['id'];
       $new_message->save();
       Mail::to($data['email'])->send(new InfoMessage);
-      return view('apartaments.confirm_msg');
+      return back()->with('message_send', 'Il messagggio è stato inviato correttamente');
     }
 
-    public function sendMessage()
-    {
-
-      Mail::to(Auth::id()->email)->send(new InfoMessage(Auth::id()->email));
-
-      if (Mail::failures())
-      {
-        return response()->Fail('Sorry! Please try again latter');
-      } else {
-           return response()->success('Great! Successfully send in your mail');
-        }
-    }
 }

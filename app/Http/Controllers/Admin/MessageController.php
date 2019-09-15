@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\InfoMessage;
 use App\Apartament;
 use App\Message;
 use App\User;
@@ -32,25 +34,25 @@ class MessageController extends Controller
 
   public function show($id)
   {
+    $message = Message::findOrFail($id);
 
-    $message = Message::where('id', $message->id)->first();
-
-
+    return view("admin.message_reply", compact("message"));
   }
 
-  public function reply($id)
+  public function sendMessage(Request $request)
   {
+    $data = $request->all();
 
+    Mail::to($data['email'])->send(new InfoMessage($data['email']));
+
+    $msgToDelete = Message::find($data['id'])->delete();
+      return redirect()->route('admin.message.index');
   }
 
   public function destroy($id)
   {
       $msgToDelete = Message::find($id)->delete();
-
       return redirect()->route('admin.message.index');
   }
-
-
-
 
 }

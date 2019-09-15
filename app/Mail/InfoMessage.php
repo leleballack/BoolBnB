@@ -22,6 +22,6 @@ class InfoMessage extends Mailable
     public function build(Request $request)
     {
       $data = $request->all();
-      return $this->from($data['email'])->view('apartaments.confirm_msg');
+      return $this->from('info@boolbnb.com')->view('apartaments.confirm_msg');
     }
 }

@@ -1,15 +1,15 @@
 $(function() {
   $(".search-bar").keyup(function() {
-    var lookup = $(this)
+    var word = $(this)
       .val()
       .toLowerCase();
-    $(".chat_people").each(function() {
+    $(".chat_list").each(function() {
       if (
         $(this)
           .find(".apt_title, .contacts")
           .text()
           .toLowerCase()
-          .includes(lookup)
+          .includes(word)
       ) {
         $(this).show();
       } else {

@@ -21,7 +21,6 @@ Route::get('/search', 'PageController@showSearchPage')->name('search');
 Auth::routes();
 //save public message
 Route::post('/message', 'MessageController@store')->name('save_msg');
-Route::get('/sendmessage', 'MessageController@sendMessage')->name('send_msg');
 
 
 Route::resource('/apartaments', 'ApartamentController');
@@ -34,6 +33,7 @@ Route::resource('/apartaments', 'ApartamentController');
 
       Route::resource('/apt', 'ApartamentController');
       Route::resource('/message', 'MessageController');
+      Route::post('/message', 'MessageController@sendMessage')->name('send_msg');
       Route::get('/', 'PageController@showAdminHomePage')->name('home');
 
     });
