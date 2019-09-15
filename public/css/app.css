@@ -595,6 +595,22 @@ main {
   margin-top: 5rem;
 }
 
+.admin__apartament--title {
+  color: #002167;
+}
+
+.admin__apartament--address {
+  color: #002167;
+}
+
+.admin__apartament--delete_form {
+  display: inline-block;
+}
+
+.admin__apartament--button_sponsor_text {
+  color: #002167;
+}
+
 .public-show {
   background-color: #ffffff;
   padding: 6rem 0;
@@ -660,19 +676,6 @@ main {
 .public-show .container .content_container .features ul li span,
 .public-show .container .content_container .services ul li span {
   padding: 0 0.3rem;
-}
-
-
-@media (max-width: 992px) {
-  .public-show .container #map {
-    height: 35rem;
-  }
-}
-
-@media (max-width: 767px) {
-  .public-show .container #map {
-    height: 25rem;
-  }
 }
 
 .public-show .container .message_send textarea,
@@ -757,7 +760,7 @@ main {
   max-width: 50%;
 }
 
-@media (max-width: 970px) {
+@media (max-width: 992px) {
   .payment .bt-drop-in-wrapper {
     max-width: 70%;
   }
@@ -995,22 +998,6 @@ main {
 .header__right {
   display: flex;
   align-items: center;
-}
-
-.admin__apartament--title {
-  color: #002167;
-}
-
-.admin__apartament--address {
-  color: #002167;
-}
-
-.admin__apartament--delete_form {
-  display: inline-block;
-}
-
-.admin__apartament--button_sponsor_text {
-  color: #002167;
 }
 
 /*!
