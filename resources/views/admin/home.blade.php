@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container container--margin-top">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    <span>Hai effettuato l'accesso correttamente!</span>
+                    <span class="margintop-80">Hai effettuato l'accesso correttamente!</span>
 
                   @role("UPRA")
 
@@ -28,9 +28,7 @@
                       </span>
                         <span class="show_messagges">
 
-                          <a href=
-                          {{-- '{{ route('admin.apt.message') }}' --}}
-                          > <button type="button" class="btn btn-primary">Vedi messaggi</button> </a>
+                          <button type="button" class="btn btn-primary">Vedi messaggi</button> 
 
                         </span>
                     </div>
@@ -41,8 +39,6 @@
 
                         <a href='{{ route('admin.apt.create') }}'>
                           <button type="button" class="btn btn-primary">Registra appartamento</button> </a>
-
-                        {{-- <a href="{{ route('admin.apt.create') }}" class="button">Registra appartamento</a> --}}
 
                     </div>
                     @endrole

@@ -1,3 +1,40 @@
 .footer {
-    border-bottom: 2px outset lighten($color: $main-blue-color, $amount: 75%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-top: 2px outset lighten($color: $main-blue-color, $amount: 75%);
+
+    &__hr {
+        border: 0;
+        height: 3px;
+        width: 40rem;
+        background-image: linear-gradient(
+            to right,
+            rgba(167, 169, 236, 0),
+            rgba(167, 169, 236, 0.794),
+            rgba(167, 169, 236, 0)
+        );
+    }
+
+    &__social-list {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        list-style-type: none;
+        margin-top: 1rem;
+
+        &--item {
+            font-size: 2.5rem;
+            &:not(:last-child) {
+                margin-right: 1.5rem;
+            }
+            transition: transform 0.2s;
+
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.1);
+            }
+        }
+    }
 }

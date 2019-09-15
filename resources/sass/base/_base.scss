@@ -41,6 +41,9 @@ main {
 }
 
 .container {
+    &--margin-top {
+        margin-top: 15rem !important;
+    }
     &--mg-sxdx {
         margin: 0 1rem;
     }
@@ -59,4 +62,9 @@ main {
     &--active {
         display: block;
     }
+}
+
+// utilities
+.margintop-80 {
+    margin-top: 8rem !important;
 }
