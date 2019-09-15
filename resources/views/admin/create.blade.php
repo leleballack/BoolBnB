@@ -33,9 +33,9 @@
           @csrf
 
           <div class="form-group">
-            <label>Title</label>
+            <label>Titolo</label>
             {{-- <textarea name="title" rows="2" cols="80" class="form-control"></textarea> --}}
-            <input name="title" type="text" value="{{ old('title') }}" class="form-control" placeholder="Title">
+            <input name="title" type="text" value="{{ old('title') }}" class="form-control" placeholder="Titolo">
             @error('title')
               <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -45,8 +45,8 @@
     <div class="row">
       <div class="col-lg-3 col-md-6 col-sm-12">
         <div class="form-group">
-          <label>Rooms</label>
-          <input name="rooms" type="number" value="{{ old('rooms') }}" class="form-control" placeholder="Rooms">
+          <label>Stanze</label>
+          <input name="rooms" type="number" value="{{ old('rooms') }}" class="form-control" placeholder="Stanze">
           @error('rooms')
             <div class="alert alert-danger">{{ $message }}</div>
           @enderror
@@ -54,8 +54,8 @@
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
         <div class="form-group">
-          <label>Beds</label>
-          <input name="beds" type="number" value="{{ old('beds') }}" class="form-control" placeholder="Beds">
+          <label>Letti</label>
+          <input name="beds" type="number" value="{{ old('beds') }}" class="form-control" placeholder="Letti">
           @error('beds')
             <div class="alert alert-danger">{{ $message }}</div>
           @enderror
@@ -63,8 +63,8 @@
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
         <div class="form-group">
-          <label>Baths</label>
-          <input name="baths" type="number" value="{{ old('baths') }}" class="form-control" placeholder="Baths">
+          <label>Bagni</label>
+          <input name="baths" type="number" value="{{ old('baths') }}" class="form-control" placeholder="Bagni">
           @error('baths')
             <div class="alert alert-danger">{{ $message }}</div>
           @enderror
@@ -72,8 +72,8 @@
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
         <div class="form-group">
-          <label>Square Mt</label>
-          <input name="square_mt" type="number" value="{{ old('square_mt') }}" class="form-control" placeholder="Square Mt">
+          <label>Metri quadri</label>
+          <input name="square_mt" type="number" value="{{ old('square_mt') }}" class="form-control" placeholder="Metri quadri">
           @error('square_mt')
             <div class="alert alert-danger">{{ $message }}</div>
           @enderror
@@ -81,24 +81,28 @@
       </div>
     </div>
     <div class="row mt-5 mb-5">
-      <div class="col-lg-8 col-md-6 col-sm-12">
-        <div class="form-check">
-          @foreach ($services as $service)
-            <label class="form-check-label" for="{{ $service['id'] }}">
-              <div class="custom-control custom-checkbox">
-               <input type="checkbox" class=" custom-control-input"  id="{{ $service['id'] }}"
-               name="services[]"
-               value="{{ $service->id }}"
-               {{ ( in_array($service->id, old('services', array())) ) ? 'checked ' : '' }}>
 
-               <label class="custom-control-label" for="customCheck">
-                 {{ $service['description'] }}
-               </label>
-             </div>
-            </label>
-          @endforeach
-        </div>
+      <div class="form-check">
+        @foreach ($services as $service)
+
+        <label
+          for="{{ $service->id }}"
+          class="form-check-label search__checkbox--label mr-3"
+        >
+          <input
+            name="services[]"
+            type="checkbox"
+            id="{{ $service->id }}"
+            value="{{ $service->id }}"
+            class="search__checkbox--quad"
+            {{ ( in_array($service->id, old('services', array())) ) ? 'checked ' : '' }}
+          >
+          {{ $service->description }}
+        </label>
+
+        @endforeach
       </div>
+
     </div>
     <div class="row mt-3 mb-5">
       <div class="col-lg-8">

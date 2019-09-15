@@ -40,7 +40,7 @@
 
               <input id="nonce" name="payment_method_nonce" type="hidden" />
 
-              <button class="button mt-5" type="submit"><span>Test Transaction</span></button>
+              <button class="button button--blue button--animated mt-5" type="submit"><span>Test Transaction</span></button>
             </form>
           </div>
         </div>

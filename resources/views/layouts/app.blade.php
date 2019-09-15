@@ -49,7 +49,7 @@
                             </li>
                             @if (Route::has('register'))
                                 <li class="navigation__item">
-                                    <a class="navigation__link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="navigation__link" href="{{ route('register') }}">{{ __('Registrati') }}</a>
                                 </li>
                             @endif
                         </ul> 
@@ -58,6 +58,10 @@
                             <li class="navigation__item">
                                 <a href="{{ route('admin.apt.index') }}" class="navigation__link">Appartamenti</a>
                             </li>
+                            <li class="navigation__item">
+                                <a href="{{ route('admin.message.index') }}" class="navigation__link">Messaggi</a>
+                            </li>
+
                             <li class="navigation__item">
                                 <a href="{{ route('logout') }}" class="navigation__link" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">Logout</a>
@@ -98,6 +102,9 @@
         <div class="phone-menu">
             <ul class="phone-menu__list">
                 <li class="phone-menu__item">
+                    <a class="phone-menu__link"  href="{{ url('/') }}">Home</a>
+                </li>
+                <li class="phone-menu__item">
                     <a class="phone-menu__link" href="{{ route('search') }}">Ricerca</a>
                 </li>
 
@@ -107,7 +114,7 @@
                     </li>
                     @if (Route::has('register'))
                         <li class="phone-menu__item">
-                            <a class="phone-menu__link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="phone-menu__link" href="{{ route('register') }}">{{ __('Registrati') }}</a>
                         </li>
                     @endif
                 </ul>
@@ -115,6 +122,10 @@
                     <li class="phone-menu__item">
                         <a href="{{ route('admin.apt.index') }}" class="phone-menu__link">Appartamenti</a>
                     </li>
+                    <li class="phone-menu__item">
+                        <a href="{{ route('admin.message.index') }}" class="phone-menu__link">Messaggi</a>
+                    </li>
+
                     <li class="phone-menu__item">
                         <a href="{{ route('logout') }}" class="phone-menu__link" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">Logout</a>

@@ -7,11 +7,11 @@
     </div>
   @endif
   @if($tutti_gli_apt->isNotEmpty())
-    <div class="container">
-      <a href="{{ route('admin.apt.create') }}" class="btn btn-success mt-3 mb-3">Aggiungi appartamento</a>
-      <a href='{{ route('admin.message.index') }}' class="btn btn-warning mt-3 mb-3">Vedi i tuoi messaggi</a>
-
-      <a href="{{ route('admin.apt.create') }}" class="btn btn-primary mt-5 mb-5">Registra un nuovo appartamento</a>
+    <div class="container container--margin-top">
+      <div class="row mb-5">
+        <a href="{{ route('admin.apt.create') }}" class="btn btn-success mb-3 mr-5 ml-2">Aggiungi appartamento</a>
+        <a href='{{ route('admin.message.index') }}' class="btn btn-warning mb-3">Vedi i tuoi messaggi</a>
+      </div>
 
       @foreach ($tutti_gli_apt as $apartament)
         <div class="row apartament">
@@ -91,8 +91,11 @@
       </div>
     </div>
   @else
-    <div class="mt-3">
-      <a href="{{ route('admin.apt.create') }}" class="btn btn-primary">Registra appartamento</a>
+
+    <div class="container container--margin-top-25 message-link">
+      <a class="message-link__register" href="{{ route('admin.apt.create') }}">
+        Registra appartamento</a>
+      </a>
     </div>
 
   @endif
