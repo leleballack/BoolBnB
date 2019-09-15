@@ -46,7 +46,7 @@ class MessageController extends Controller
     Mail::to($data['email'])->send(new InfoMessage($data['email']));
 
     $msgToDelete = Message::find($data['id'])->delete();
-      return redirect()->route('admin.message.index');
+      return redirect()->route('admin.message.index')->with('message_send', 'Il messagggio è stato inviato correttamente');
   }
 
   public function destroy($id)

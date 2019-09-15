@@ -9,6 +9,12 @@
 @endsection
 
 @section('content')
+  @section('content')
+    @if (session('message_send'))
+      <div class="alert alert-success">
+        {{ session('message_send') }}
+      </div>
+    @endif
 <div class="container">
   <div class="all_mess">
     <h3 class=" text-center">Messaggi Ricevuti</h3>
