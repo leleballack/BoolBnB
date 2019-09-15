@@ -40,6 +40,12 @@ main {
     }
 }
 
+.container {
+    &--mg-sxdx {
+        margin: 0 1rem;
+    }
+}
+
 // on opening of the mobile menu, need it just for the opacity
 .overlay {
     background-color: $main-white-color;

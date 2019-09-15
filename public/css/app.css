@@ -75,6 +75,10 @@ main {
   }
 }
 
+.container--mg-sxdx {
+  margin: 0 1rem;
+}
+
 .overlay {
   background-color: #ffffff;
   position: fixed;
@@ -522,6 +526,38 @@ main {
 .apartament__feature {
   display: flex;
   align-items: center;
+}
+
+.apartament__sponsor-desc--container {
+  display: block;
+}
+
+.apartament__sponsor-desc--text {
+  display: inline-block;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-image: linear-gradient(to right, #cecece, #f0f0f0);
+  color: #000b23;
+  border: 1px outset #828282;
+}
+
+.apartament__delete-form {
+  display: inline-block;
+}
+
+.apartament__no-results-div {
+  height: 40rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: -5rem;
+}
+
+.apartament__no-results-div i {
+  font-size: 10rem;
+  color: #002167;
+  margin-bottom: 5rem;
 }
 
 .apartament__icon {
@@ -999,6 +1035,12 @@ main {
   display: flex;
   align-items: center;
 }
+
+
+.footer {
+  border-bottom: 2px outset #e7eeff;
+}
+
 
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)

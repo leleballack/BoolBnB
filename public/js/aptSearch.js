@@ -8639,6 +8639,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -10199,7 +10200,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", { staticClass: "container container--mg-sxdx" }, [
     _vm.apartamentList.length > 0
       ? _c(
           "div",
@@ -10385,8 +10386,12 @@ var render = function() {
           ],
           2
         )
-      : _c("div", [
-          _c("h3", [_vm._v("Non ci sono risultati per i filtri applicati!")])
+      : _c("div", { staticClass: "apartament__no-results-div" }, [
+          _c("i", { staticClass: "fas fa-search" }),
+          _vm._v(" "),
+          _c("h3", { staticClass: "heading--tertiary" }, [
+            _vm._v("Non ci sono risultati per i filtri applicati!")
+          ])
         ])
   ])
 }
