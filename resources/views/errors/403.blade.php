@@ -1,12 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                {{-- <h1>You don't have permission.</h1> --}}
-                <img src="https://cdn3.wpbeginner.com/wp-content/uploads/2016/03/403forbiddenerror.jpg" alt="">
-            </div>
+    <div class="error">
+        <div class="error__content">
+            <img src="{{ asset('img/403.png') }}" alt="Pagina di errore" class="error__image">
+            <h3 class="heading--tertiary error__description">Accesso negato!  </h3>
+            <a href="{{ route('home') }}" class="button button--blue button--animated error__redirect"> Vai alla homepage </a>
         </div>
     </div>
 @endsection

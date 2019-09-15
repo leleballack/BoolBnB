@@ -100,7 +100,44 @@
         @endforeach
       </div>
     </div>
-    <div class="row mt-3 mb-5 ">
+{{-- 
+    <div class="row mt-5 mb-5">
+        <div class="col-lg-9">
+          <div class="input-group">
+            <span class="input-group-btn">
+                <span class="btn btn-primary btn-file">
+                    Browse&hellip; <input type="file" id="upload-photo" name="apt_pic" single>
+                </span>
+              </span>
+              <input type="text" class="form-control" readonly>
+              @error('apt_pic')
+              <div class="alert alert-danger">{{ $message }}</div>
+              @enderror
+          </div>
+          <small id="fileHelp" class="form-text text-muted mt-4">L'immagine non può superare i 2MB.</small>
+        </div>
+
+        <div class="col-lg-3 old-image-container" style="background-image: url('{{ asset('storage/' . $apartament->image_url) }}')"></div>
+    </div> --}}
+
+    <div class="row mt-3 mb-5">
+      <div class="col-lg-8">
+          <div class="custom-file mb-3">
+              <input type="file" class="custom-file-input" id="customFile" name="apt_pic" single>
+              <label class="custom-file-label" for="customFile">Choose file</label>
+          </div>
+          @error('apt_pic')
+            <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
+          <small id="fileHelp" class="form-text text-muted mt-3">L'immagine attualmente scelta è quella sulla destra. Se desidera cambiare immagine ne scelga un'altra!</small>
+          <small id="fileHelp" class="form-text text-muted mt-3">L'immagine non può superare i 2MB.</small>
+      </div>
+      <div class="col-lg-3 col-md-10 old-image-container" style="background-image: url('{{ asset('storage/' . $apartament->image_url) }}')"></div>
+    </div>
+
+
+
+    {{-- <div class="row mt-3 mb-5 ">
       <div class="col-lg-8">
         <div class="form-group">
           <label class="upload" for="upload-photo">
@@ -116,7 +153,7 @@
       <div class="col-lg-4">
         <img src="{{ asset('storage/' . $apartament->image_url) }}" alt="" width="150" height="150">
       </div>
-    </div>
+    </div> --}}
     <div class="row">
       <div class="col-lg-12">
         <div class="form-group">
