@@ -16,6 +16,7 @@ mix.js("resources/js/app.js", "public/js/app.js")
     .js("resources/js/createAptMap.js", "public/js/createAptMap.js")
     .js("resources/js/publicShowAptMap.js", "public/js/publicShowAptMap.js")
     .js("resources/js/aptSearch.js", "public/js/aptSearch.js")
+    .js("resources/js/messages.js", "public/js/messages.js")
     .js("resources/js/charts.js", "public/js/charts.js");
 
 mix.sass("resources/sass/app.scss", "public/css");

@@ -19,7 +19,7 @@ class ApartamentController extends Controller
 
   public function __construct() {
 
-  $this->middleware('role:UPRA', ['only' => ['edit', 'delete']]);
+  $this->middleware('role:UPRA', ['only' => ['edit', 'destroy']]);
   }
 
     public function index()
