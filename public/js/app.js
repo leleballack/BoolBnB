@@ -36765,7 +36765,34 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // da spostare in un js a parte, e importare il modulo qua dentro !!!
+
+
+$(document).ready(function () {
+  $(window).on("resize", function () {
+    if ($(window).width() > 767) {
+      $(".phone-menu").removeClass("phone-menu--opened");
+      $(".spaghetti").removeClass("spaghetti--cooked");
+      $(".overlay").removeClass("overlay--active");
+    }
+  });
+  $(".phone-menu, .header").click(function (e) {
+    e.stopPropagation();
+  });
+  $(document).click(function () {
+    $(".phone-menu").removeClass("phone-menu--opened");
+    $(".overlay").removeClass("overlay--active");
+    $(".spaghetti").removeClass("spaghetti--cooked");
+  });
+  $(".spaghetti").click(function (e) {
+    e.stopPropagation();
+    $(".phone-menu").toggleClass("phone-menu--opened");
+    $(".spaghetti").toggleClass("spaghetti--cooked");
+    $(".overlay").toggleClass("overlay--active");
+  }); //messaggio avvenuto pagamento che scompare dopo 7s
+
+  $('.alert').fadeOut(10000);
+});
 
 /***/ }),
 
@@ -36805,9 +36832,11 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
  */
 // let token = document.head.querySelector('meta[name="csrf-token"]');
 // if (token) {
-//     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+//     window.axios.defaults.headers.common["X-CSRF-TOKEN"] = token.content;
 // } else {
-//     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+//     console.error(
+//         "CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token"
+//     );
 // }
 
 /**

@@ -15,18 +15,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/', 'PageController@showHomePage');
+Route::get('/search', 'PageController@showSearchPage')->name('search');
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 Route::resource('/apartaments', 'ApartamentController');
 Route::resource('/message', 'MessageController');
-Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')->group(function(){
-  // Route::get('/userapt', 'ApartamentController@index')->name('index');
-  // Route::get('/newapt', 'ApartamentController@create')->name('create');
-  // Route::post('/newapt', 'ApartamentController@store')->name('store');
 
-  Route::resource('/apt', 'ApartamentController');
+  Route::middleware('auth')
+    ->prefix('admin')
+    ->namespace('Admin')
+    ->name('admin.')
+    ->group(function() {
 
-  // Route::post('/savepic', 'ApartamentController@savepic')->name('apt_pic');
+      Route::resource('/apt', 'ApartamentController');
+      Route::get('/', 'PageController@showAdminHomePage');
 
-});
+    });
+
+  // Payment manager route
+  Route::middleware('auth')->get('show/{id}/payment', 'PaymentsController@paymentOne')->name('paymentOne');
+  Route::post('/checkout', 'PaymentsController@paymentTwo');
+
+  Route::middleware('auth')->get('/show-statistics/{id}', 'ApartamentController@showView')->name('post.show');
