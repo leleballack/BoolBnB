@@ -121,6 +121,7 @@ function showPositionOnMap() {
   });
 }
 
+
 /***/ }),
 
 /***/ 3:
@@ -131,7 +132,6 @@ function showPositionOnMap() {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! C:\Users\Emanuele\Desktop\BoolBnB-Manu\resources\js\publicShowAptMap.js */"./resources/js/publicShowAptMap.js");
-
 
 /***/ })
 
