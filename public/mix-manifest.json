@@ -5,5 +5,6 @@
     "/js/charts.js": "/js/charts.js",
     "/js/createAptMap.js": "/js/createAptMap.js",
     "/js/editAptMap.js": "/js/editAptMap.js",
+    "/js/messages.js": "/js/messages.js",
     "/js/publicShowAptMap.js": "/js/publicShowAptMap.js"
 }
