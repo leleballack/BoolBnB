@@ -6,12 +6,29 @@
   <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-js/4.47.6/examples/elements.css'/>
   <script src='https://api.tomtom.com/maps-sdk-js/4.47.6/examples/js/form.js'></script>
   <script src='https://api.tomtom.com/maps-sdk-js/4.47.6/examples/sdk/tomtom.min.js'></script>
+  <script src="{{ asset('js/app.js') }}" defer></script>
   <script src="{{ asset('js/editAptMap.js') }}" defer></script>
 @endsection
 
 @section ('content')
 
 <div class="container">
+  @if ($sponsor->isNotEmpty())
+    <a style="display:none;" class="btn btn-success" href="{{route('paymentOne', $apartament->id)}}">Sponsorizza Appartamento</a>
+    @else
+      <a class="btn btn-success" href="{{route('paymentOne', $apartament->id)}}">Sponsorizza Appartamento</a>
+  @endif
+
+  @if ($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+  @endif
+
   <form action="{{ route("admin.apt.update", $apartament->id) }}" method="post" enctype="multipart/form-data">
     @method('PUT')
     @csrf
@@ -19,23 +36,38 @@
     <div class="form-group">
       <label>Title</label>
       <input name="title" type="text" value="{{ old('title', $apartament->title) }}" class="form-control" placeholder="Title">
+      @error('title')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
     <div class="form-group">
       <label>Rooms</label>
       <input name="rooms" type="number" class="form-control" placeholder="Rooms" value="{{ old('rooms', $apartament->total_rooms) }}">
+      @error('rooms')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
     <div class="form-group">
       <label>Beds</label>
       <input name="beds" type="number" class="form-control" placeholder="Beds" value="{{ old('beds', $apartament->total_beds) }}">
+      @error('beds')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
     <div class="form-group">
       <label>Baths</label>
       <input name="baths" type="number" class="form-control" placeholder="Baths" value="{{ old('baths', $apartament->total_baths) }}">
+      @error('baths')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
 
     <div class="form-group">
       <label>Square Mt</label>
       <input name="square_mt" type="number" class="form-control" placeholder="Square Mt" value="{{ old('square_mt', $apartament->square_meters) }}">
+      @error('square_mt')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
 
     <div class="form-check">
@@ -44,15 +76,15 @@
             @php
                 $array = ($apartament->services)->pluck('id')->toArray();
             @endphp
-          <input 
-            id="{{ $service['id'] }}" 
-            name="services[]" 
+          <input
+            id="{{ $service['id'] }}"
+            name="services[]"
             value="{{ $service->id }}"
-            {{ ( in_array($service->id, old('services', $array)) ) ? 'checked ' : '' }} 
-            type="checkbox"> 
-          {{ $service['description'] }} 
+            {{ ( in_array($service->id, old('services', $array)) ) ? 'checked ' : '' }}
+            type="checkbox">
+          {{ $service['description'] }}
         </label>
-      @endforeach 
+      @endforeach
     </div>
 
     <div class="row mt-3 mb-3">
@@ -60,6 +92,9 @@
             <div class="form-group">
                 <input name="apt_pic" type="file" class="form-control-file" name="fileToUpload" id="exampleInputFile">
                 <small id="fileHelp" class="form-text text-muted">L'immagine attuale è quella sulla destra. Se desideri cambiarla, scegli un'altro file (sotto i 2 MB).</small>
+                @error('apt_pic')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
         <div class="col-lg-3">
@@ -69,6 +104,9 @@
 
     <div class="form-group">
       <input class="form-control" type="text" id="address" placeholder="Indirizzo..." name="address" value="{{ old('address', $apartament->address) }}" readonly>
+      @error('address')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
 
     <div>
@@ -78,7 +116,24 @@
     {{-- lat e long hidden --}}
     <input type="hidden" id="lat" name="lat" value="{{ old('lat', $apartament->lat) }}">
     <input type="hidden" id="long" name="long" value="{{ old('long', $apartament->long) }}">
-    {{-- --- --}}
+
+    {{-- visibility --}}
+    <div class="mt-3 mb-3">
+      <p>Vuoi che questo appartamento sia visibile al pubblico?</p>
+      <div class="form-check form-check-inline">
+        <label for="radio1">
+          <input name="visibility" type="radio" id="radio1" value="1" {{($apartament->visible === 1) ? 'checked' : ''}}>
+          Visibile
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <label for="radio2">
+          <input name="visibility" type="radio" id="radio2" value="0" {{($apartament->visible === 0) ? 'checked' : ''}}>
+          Nascosto
+        </label>
+      </div>
+    </div>
+
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>

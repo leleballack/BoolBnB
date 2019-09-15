@@ -7,10 +7,13 @@ use App\Message;
 use App\Address;
 use App\Service;
 use App\Sponsor;
+use CyrildeWit\EloquentViewable\Viewable;
+use CyrildeWit\EloquentViewable\Contracts\Viewable as ViewableContract;
 use Illuminate\Database\Eloquent\Model;
 
-class Apartament extends Model
+class Apartament extends Model implements ViewableContract
 {
+      use Viewable;
     // relationship
     public function user()
     {
@@ -19,13 +22,8 @@ class Apartament extends Model
 
     public function messages()
     {
-        return $this->hasMany('Message');
+        return $this->hasMany('App\Message');
     }
-
-    // public function address()
-    // {
-    //     return $this->hasOne('Address');
-    // }
 
     public function services()
     {
@@ -34,6 +32,6 @@ class Apartament extends Model
 
     public function sponsors()
     {
-        return $this->hasMany('Sponsor');
+        return $this->hasMany('App\Sponsor');
     }
 }

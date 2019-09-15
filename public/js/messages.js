@@ -81,30 +81,41 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/chartsMessage.js":
-/*!***************************************!*\
-  !*** ./resources/js/chartsMessage.js ***!
-  \***************************************/
+/***/ "./resources/js/messages.js":
+/*!**********************************!*\
+  !*** ./resources/js/messages.js ***!
+  \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/Users/raduschirliu/Desktop/booleanServer/Progetto finale/BoolBnB-grp-4/resources/js/chartsMessage.js'");
+$(function () {
+  $(".search-bar").keyup(function () {
+    var word = $(this).val().toLowerCase();
+    $(".chat_list").each(function () {
+      if ($(this).find(".apt_title, .contacts").text().toLowerCase().includes(word)) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  });
+});
 
 /***/ }),
 
-/***/ 6:
-/*!*********************************************!*\
-  !*** multi ./resources/js/chartsMessage.js ***!
-  \*********************************************/
+/***/ 7:
+/*!****************************************!*\
+  !*** multi ./resources/js/messages.js ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/raduschirliu/Desktop/booleanServer/Progetto finale/BoolBnB-grp-4/resources/js/chartsMessage.js */"./resources/js/chartsMessage.js");
+module.exports = __webpack_require__(/*! C:\Users\Emanuele\Desktop\BoolBnB-Manu\resources\js\messages.js */"./resources/js/messages.js");
 
 
 /***/ })

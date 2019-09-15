@@ -93,7 +93,34 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/Users/raduschirliu/Desktop/booleanServer/Progetto finale/BoolBnB-grp-4/resources/js/publicShowAptMap.js'");
+// mappa
+$(document).ready(showPositionOnMap);
+var queryString = $(".apt_address").text();
+
+function showPositionOnMap() {
+  $.ajax({
+    method: "GET",
+    url: "https://api.tomtom.com/search/2/search/".concat(queryString, ".json?countrySet=ITA&key=z4n3yxl4X8bvK1BA6YlSAaYcV7OTbkZc"),
+    success: function success(data) {
+      (function (tomtom, document) {
+        // Setting TomTom keys
+        tomtom.searchKey("z4n3yxl4X8bvK1BA6YlSAaYcV7OTbkZc"); // Creating map
+
+        var HQ = [data.results[0].position.lat, data.results[0].position.lon];
+        var map = tomtom.L.map("map", {
+          key: "z4n3yxl4X8bvK1BA6YlSAaYcV7OTbkZc",
+          source: "vector",
+          basePath: "https://api.tomtom.com/maps-sdk-js/4.47.6/examples/sdk",
+          center: HQ,
+          zoom: 15,
+          language: "it-IT"
+        });
+        var Hqmarker = tomtom.L.marker(HQ).addTo(map);
+      })(tomtom, document);
+    }
+  });
+}
+
 
 /***/ }),
 
@@ -104,8 +131,7 @@ throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/raduschirliu/Desktop/booleanServer/Progetto finale/BoolBnB-grp-4/resources/js/publicShowAptMap.js */"./resources/js/publicShowAptMap.js");
-
+module.exports = __webpack_require__(/*! C:\Users\Emanuele\Desktop\BoolBnB-Manu\resources\js\publicShowAptMap.js */"./resources/js/publicShowAptMap.js");
 
 /***/ })
 

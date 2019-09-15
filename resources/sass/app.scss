@@ -1,9 +1,22 @@
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Nunito");
+// Abstracts folder
+@import "abstracts/variables";
+@import "abstracts/mixins";
 
-// Variables
-@import "variables";
-@import "mappa.scss";
+// Base folder
+@import "base/base";
+@import "base/animations";
+
+// Components folder
+@import "components/heading";
+@import "components/mappa";
+@import "components/button";
+@import "components/intro";
+@import "components/search";
+@import "components/homepage";
+@import "components/pagination";
+@import "components/apartament";
+@import "components/cover";
+@import "components/message";
 
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";

@@ -3,7 +3,6 @@
     "/css/app.css": "/css/app.css",
     "/js/aptSearch.js": "/js/aptSearch.js",
     "/js/charts.js": "/js/charts.js",
-    "/js/chartsMessage.js": "/js/chartsMessage.js",
     "/js/createAptMap.js": "/js/createAptMap.js",
     "/js/editAptMap.js": "/js/editAptMap.js",
     "/js/publicShowAptMap.js": "/js/publicShowAptMap.js"

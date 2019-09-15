@@ -1,0 +1,61 @@
+@keyframes moveInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-10rem);
+    }
+
+    80% {
+        transform: translateX(1rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+@keyframes moveInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(10rem);
+    }
+
+    80% {
+        transform: translateX(-1rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(3rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+@keyframes colorchange {
+    0% {
+        background: $main-blue-color;
+    }
+    25% {
+        background: lighten($color: $main-blue-color, $amount: 20);
+    }
+    50% {
+        background: lighten($color: $main-blue-color, $amount: 35);
+    }
+    75% {
+        background: lighten($color: $main-blue-color, $amount: 20);
+    }
+    100% {
+        background: $main-blue-color;
+    }
+}

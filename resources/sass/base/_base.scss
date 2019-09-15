@@ -1,0 +1,33 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+$font-size-base: 1.6rem;
+
+html {
+    font-size: 62.5%; //1rem = 10px;
+
+    @include respond(tablet) {
+        font-size: 50%; // 1rem = 8px;
+    }
+}
+
+.navbar,
+.footer {
+    background-color: $main-blue-color;
+    color: white !important;
+    padding: 1rem;
+}
+
+.navbar .navbar-nav > li .navbar-item > a .nav-link,
+.navbar .navbar-brand {
+    color: white !important;
+}
+
+main {
+    min-height: calc(100vh - 110px);
+}

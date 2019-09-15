@@ -1,0 +1,44 @@
+// Media query manager
+
+/*
+
+    !!!
+
+    Due break point: 767px & 970px
+
+    Per ogni elemento che va reso responsive, vanno aggiunte sotto alle proprieta da cambiare i mixin, con il breakpoint come variabile!!
+
+    esempio:
+
+    .homepage {
+        &__heading {
+            background-image: linear-gradient(
+                to right,
+                $main-black-color,
+                lighten($color: $main-blue-color, $amount: 50)
+            );
+            margin: 8rem 0 5rem;
+            @include respond(phone) {
+                margin: 5rem 3rem;
+            }
+        }
+    }
+
+    Ogni volta che avete bisogno di rendere qualcosa responsive, fate include respond( tablet or phone, quello che vi serve ), e cambiate le proprieta che vanno cambiate! 
+
+    
+
+*/
+
+@mixin respond($breakpoint) {
+    @if $breakpoint == phone {
+        @media (max-width: 767px) {
+            @content;
+        }
+    }
+    @if $breakpoint == tablet {
+        @media (max-width: 970px) {
+            @content;
+        }
+    }
+}
