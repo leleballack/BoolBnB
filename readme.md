@@ -7,66 +7,54 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Final Boolean Careers course project. 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Web application inspired by Airbnb, formed by:
+   1) Back-end:
+        - Multi-role authentication
+        - Payment provider integration
+        - Api endpoints (for filters)
+        
+   2) Frontend interface
+   
+   
+- HTML, CSS (SCSS, flexbox, css grid, 7-in-1 architecture)
+- Javascript(jQuery), AJAX (axios), Vue.js 
+- PHP, Laravel (MVC)
+- MySql
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+<h3 align="center">Home page<h3>
+    
+![screencapture-localhost-3000-2019-09-16-22_31_37](https://user-images.githubusercontent.com/48323576/64991954-30cdbf00-d8d3-11e9-82b2-6a54a44e092d.jpg)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<h3 align="center">Search and filter page (Vue)<h3>
+<p align="center">Content retrieved from API endpoint and rendered in Vue, each time when filters are activated<p>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1400 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+![screencapture-localhost-3000-search-2019-09-16-22_33_05](https://user-images.githubusercontent.com/48323576/64991963-362b0980-d8d3-11e9-8e71-2ced83a73409.jpg)
 
-## Laravel Sponsors
+<h3 align="center">Admin panel<h3>
+<p align="center">In this page host can add, edit and update apartment. Link also to sponsor page, and sponsor status (if there is already one).<p>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+![screencapture-localhost-3000-admin-apt-2019-09-16-22_32_24](https://user-images.githubusercontent.com/48323576/64991977-3c20ea80-d8d3-11e9-979d-3d80837af490.jpg)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
+<h3 align="center">Messages page<h3>
+<p align="center">In this page host can see all the received messages (required information from other users), and can answer or delete them. <p>
 
-## Contributing
+![screencapture-localhost-3000-admin-message-2019-09-16-22_33_47](https://user-images.githubusercontent.com/48323576/64991996-45aa5280-d8d3-11e9-90cc-f548f4e634f0.jpg)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<h3 align="center">Edit apartment page <h3>
+<p align="center">In this page the host can edit the apartment information, changing also the position of the apartment on the map (Tomtom sdk) <p>
 
-## Security Vulnerabilities
+![screencapture-localhost-3000-admin-apt-31-edit-2019-09-16-22_35_25](https://user-images.githubusercontent.com/48323576/64992001-493dd980-d8d3-11e9-83bb-7197a004a5cd.jpg)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+<h3 align="center">Single apartment page (public) <h3>
+    
+![screencapture-localhost-3000-apartaments-52-2019-09-16-22_36_17](https://user-images.githubusercontent.com/48323576/64992010-4e028d80-d8d3-11e9-89ac-efbdff0f7a68.jpg)
 
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<h3 align="center">Sponsor page <h3>
+<p align="center">In this page host can sponsor his apartment, and it will be placed on the homepage, at the top of the apartment list. <p>
+    
+![screencapture-localhost-3000-show-33-payment-2019-09-16-22_37_34](https://user-images.githubusercontent.com/48323576/64992020-55299b80-d8d3-11e9-85ae-6570bc5d7ec9.jpg)
