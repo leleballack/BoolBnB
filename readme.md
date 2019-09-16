@@ -19,7 +19,7 @@ Web application inspired by Airbnb, formed by:
    2) Frontend interface
    
    
-- HTML, CSS (SCSS, flexbox, css grid, 7-in-1 architecture)
+- HTML(BEM), CSS (SCSS, flexbox, css grid, 7-in-1 architecture)
 - Javascript(jQuery), AJAX (axios), Vue.js 
 - PHP, Laravel (MVC)
 - MySql
