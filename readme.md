@@ -31,7 +31,7 @@ Web application inspired by Airbnb, formed by:
 
 <h3 align="center">Search and filter page (Vue)<h3>
     
-<p align="center">Content retrieved from API endpoint and rendered in Vue, each time when filters are activated<p>
+<h5 align="center">Content retrieved from API endpoint and rendered in Vue, each time when filters are activated <h5>
 
 ![screencapture-localhost-3000-search-2019-09-16-22_33_05](https://user-images.githubusercontent.com/48323576/64991963-362b0980-d8d3-11e9-8e71-2ced83a73409.jpg)
 
